@@ -105,8 +105,10 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .banner{display:block;width:100%;height:auto;border-radius:14px;margin-bottom:16px}
 #plan .stops time{color:var(--day,var(--blue-text))}
 .stops .when{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
-.stops .ic{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--day,var(--blue));color:#fff}
-.stops .ic svg{width:24px;height:24px}
+.stops .ic{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:color-mix(in srgb,var(--day,#2442A8) 12%,var(--surface));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--day,#2442A8) 40%,transparent);color:var(--day,var(--blue-text))}
+.stops .ic svg{width:28px;height:28px}
+.stops .ic svg g{stroke-width:2}
+@media (prefers-color-scheme: dark){.stops .ic{color:color-mix(in srgb,var(--day,#2442A8) 55%,#fff);background:color-mix(in srgb,var(--day,#2442A8) 28%,var(--surface))}}
 .stops li.now .ic{animation:pulse 1.6s ease-in-out infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--day,#2442A8) 60%,transparent)}50%{box-shadow:0 0 0 8px transparent}}
 #plan .dayhead{color:var(--day,var(--ink))}
@@ -646,7 +648,7 @@ details > :not(summary){margin-bottom:16px}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver">Version 6, 17 Oct, 11:15</p>
+  <p id="ver">Version 7, 17 Oct, 11:16</p>
 </div>
 
 </main>
