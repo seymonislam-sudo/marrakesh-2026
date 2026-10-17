@@ -75,20 +75,6 @@ header h1{font-size:clamp(46px,14vw,72px);line-height:.95;color:var(--citron);ma
 header .who{margin:16px 0 0;font-size:16px;color:#DCE2FA;position:relative;max-width:19ch}
 header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;font-variant-numeric:tabular-nums;max-width:13ch;line-height:1.3}
 
-/* ---------- Riad door ---------- */
-(function(){
-  const door = document.getElementById('door');
-  const toggle = () => { const o = door.classList.toggle('open'); door.setAttribute('aria-label', o ? 'Close the riad door' : 'Open the riad door'); };
-  door.addEventListener('click', toggle);
-  door.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
-  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    setTimeout(() => door.classList.add('open'), 900);
-    setTimeout(() => door.classList.remove('open'), 3600);
-  } else {
-    document.querySelectorAll('svg').forEach(s => s.pauseAnimations && s.pauseAnimations());
-  }
-})();
-
 /* ---------- Tabs ---------- */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom)}
 .tabbar .in{display:flex;max-width:640px;margin:0 auto}
@@ -283,6 +269,24 @@ details > :not(summary){margin-bottom:16px}
 @keyframes coin{0%{transform:translate(0,0) scale(.6);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(540deg) scale(1);opacity:0}}
 .bal .v.bump{animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
 @media (prefers-reduced-motion: reduce){.say.pop,.coin,.bal .v.bump{animation:none}.coin{display:none}}
+.homebtn{position:fixed;right:16px;bottom:calc(var(--tabh) + 16px + env(safe-area-inset-bottom));z-index:40;display:flex;align-items:center;gap:8px;border:0;border-radius:99px;padding:10px 16px 10px 12px;background:var(--citron);color:#141B3D;font-weight:800;font-size:15.5px;box-shadow:0 6px 18px -6px rgba(20,27,61,.55);cursor:pointer}
+.homebtn svg{width:22px;height:22px}
+@media (min-width:760px){.homebtn{bottom:24px}}
+.sheet{position:fixed;inset:0;z-index:80;background:#2442A8;color:#fff;overflow-y:auto;padding:calc(env(safe-area-inset-top) + 18px) 0 calc(env(safe-area-inset-bottom) + 24px);animation:rise .35s cubic-bezier(.2,.8,.2,1)}
+.sheet[hidden]{display:none}
+@keyframes rise{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.sheet .x{position:absolute;right:14px;top:calc(env(safe-area-inset-top) + 12px);width:44px;height:44px;border-radius:12px;border:2px solid rgba(255,255,255,.4);background:none;color:#fff;cursor:pointer;display:grid;place-items:center}
+.sheet h2{color:#F4C430;font-size:30px;margin:0 52px 14px 0}
+.driver{background:#fff;color:#141B3D;border-radius:16px;padding:20px 18px;margin-bottom:18px;border-top:8px solid #F4C430}
+.driver .ar{font-size:30px;line-height:1.5;font-weight:700;text-align:right;margin:0}
+.driver .fr{font-family:var(--serif);font-size:24px;line-height:1.25;margin:14px 0 0}
+.driver .en{color:#5A6180;font-size:16px;margin:10px 0 0}
+.sheet .acts{display:grid;gap:10px;margin-bottom:18px}
+.sheet .acts a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;border-radius:12px;font-weight:800;font-size:17px;text-decoration:none;background:#F4C430;color:#141B3D}
+.sheet .acts a.ghost{background:transparent;color:#fff;box-shadow:inset 0 0 0 2px rgba(255,255,255,.55)}
+.sheet .tipsb{font-size:15.5px;color:#DCE2FA;padding-left:18px;margin:0}
+.sheet .tipsb li{margin-bottom:8px}
+.sheet .tipsb b{color:#fff}
 .colophon{color:var(--muted);font-size:14px;padding:8px 0 28px;border-top:1px solid var(--rule);margin-top:8px}
 .colophon p{margin:12px 0 0}
 @media (max-width:370px){.has{columns:1}.wx{grid-template-columns:repeat(2,1fr)}.bal .v{font-size:19px}}
@@ -455,6 +459,12 @@ details > :not(summary){margin-bottom:16px}
   </div>
 
   <div class="block">
+    <h3>Getting back</h3>
+    <p class="plain">Lost, late or three mint teas too many? The yellow <b>Home</b> button on every screen has a card to show the taxi driver in Arabic and French, plus walking directions.</p>
+    <button class="btn" type="button" id="homeBtn2">Get me back to the riad</button>
+  </div>
+
+  <div class="block">
     <h3>House rules worth knowing</h3>
     <ul class="rules">
       <li>Only the three of us can come in. Anyone else has to be cleared with the hosts first.</li>
@@ -610,9 +620,33 @@ details > :not(summary){margin-bottom:16px}
   </div>
 </section>
 
+<button class="homebtn" type="button" id="homeBtn" aria-haspopup="dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 22V10a7 7 0 0 1 14 0v12M3 22h18M15 15v1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Home</button>
+
+<div class="sheet" id="home" role="dialog" aria-modal="true" aria-labelledby="homeT" hidden>
+  <button class="x" type="button" id="homeX" aria-label="Close"><svg width="20" height="20" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg></button>
+  <div class="wrap">
+    <h2 id="homeT">Get me back to the riad</h2>
+    <div class="driver">
+      <p class="ar" lang="ar" dir="rtl">من فضلك، خذني إلى حي سيدي ميمون، قرب فندق المامونية</p>
+      <p class="fr" lang="fr">S'il vous plaît, emmenez-moi à Sidi Mimoun, près de l'hôtel La Mamounia.</p>
+      <p class="en">Show this to the driver: Sidi Mimoun, by La Mamounia hotel. The riad is a short walk from the drop-off.</p>
+    </div>
+    <div class="acts">
+      <a href="https://www.google.com/maps/dir/?api=1&amp;destination=Sidi%20Mimoun%2C%20Marrakesh&amp;travelmode=walking" target="_blank" rel="noopener">Walk me back</a>
+      <a class="ghost" href="https://www.airbnb.co.uk/guest/inbox" target="_blank" rel="noopener">Message Julie and Anas</a>
+    </div>
+    <ul class="tipsb">
+      <li><b>From Jemaa el-Fnaa</b> it's about 15 minutes on foot. Walk towards the Koutoubia minaret; the riad is just beyond it, by La Mamounia.</li>
+      <li><b>Agree the fare before you get in</b>, or insist on the meter. Across the old town should be a short, cheap ride, so don't pay over the odds.</li>
+      <li><b>Lost in the lanes?</b> Ask a shopkeeper for La Mamounia, not a passer-by offering to guide you.</li>
+      <li><b>Emergency:</b> police 19, ambulance 15, or 112 from any mobile.</li>
+    </ul>
+  </div>
+</div>
+
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver">Version 4, 17 Oct, 10:32</p>
+  <p id="ver">Version 5, 17 Oct, 10:42</p>
 </div>
 
 </main>
@@ -635,6 +669,39 @@ window.coinBurst = function(el){
 /* Marrakesh is on GMT in November, same as London */
 const T = (d, hm) => new Date('2026-11-' + d + 'T' + hm + ':00Z');
 const DEPART = T(12, '14:25'), HOME = T(15, '17:00');
+
+/* ---------- Riad door ---------- */
+(function(){
+  const door = document.getElementById('door');
+  const toggle = () => { const o = door.classList.toggle('open'); door.setAttribute('aria-label', o ? 'Close the riad door' : 'Open the riad door'); };
+  door.addEventListener('click', toggle);
+  door.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setTimeout(() => door.classList.add('open'), 900);
+    setTimeout(() => door.classList.remove('open'), 3600);
+  } else {
+    document.querySelectorAll('svg').forEach(s => s.pauseAnimations && s.pauseAnimations());
+  }
+})();
+
+/* ---------- Get me home ---------- */
+(function(){
+  const sheet = document.getElementById('home'); let lock = null, opener = null;
+  async function open(e){
+    opener = e && e.currentTarget; sheet.hidden = false; document.body.style.overflow = 'hidden';
+    document.getElementById('homeX').focus();
+    try { if ('wakeLock' in navigator) lock = await navigator.wakeLock.request('screen'); } catch (err) {}
+  }
+  function close(){
+    sheet.hidden = true; document.body.style.overflow = '';
+    if (lock) { lock.release().catch(() => {}); lock = null; }
+    if (opener) opener.focus();
+  }
+  document.getElementById('homeBtn').addEventListener('click', open);
+  document.getElementById('homeBtn2').addEventListener('click', open);
+  document.getElementById('homeX').addEventListener('click', close);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !sheet.hidden) close(); });
+})();
 
 /* ---------- Tabs ---------- */
 (function(){
