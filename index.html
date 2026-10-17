@@ -58,10 +58,11 @@ button{font:inherit;color:inherit}
 
 /* ---------- Header ---------- */
 header{background:var(--head);color:#fff;padding:calc(env(safe-area-inset-top) + 30px) 0 26px;position:relative;overflow:hidden}
-header .arch{position:absolute;right:-56px;top:calc(env(safe-area-inset-top) + 8px);width:170px;height:230px;opacity:.9}
+header .scene{position:absolute;right:0;bottom:0;height:100%;max-height:330px;width:auto}
+header .wrap{position:relative;min-height:250px}
 header h1{font-size:clamp(46px,14vw,72px);line-height:.95;color:var(--citron);max-width:7ch;position:relative}
-header .who{margin:16px 0 0;font-size:16px;color:#DCE2FA;position:relative;max-width:24ch}
-header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;font-variant-numeric:tabular-nums}
+header .who{margin:16px 0 0;font-size:16px;color:#DCE2FA;position:relative;max-width:19ch}
+header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;font-variant-numeric:tabular-nums;max-width:13ch;line-height:1.3}
 
 /* ---------- Tabs ---------- */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom)}
@@ -89,7 +90,10 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .dayswitch::-webkit-scrollbar{display:none}
 .dayswitch button{flex:1;min-width:70px;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:8px 4px 10px;cursor:pointer;text-align:center;color:var(--muted);font-weight:700;font-size:16px;line-height:1.2}
 .dayswitch button span{display:block;font-weight:400;font-size:13.5px}
-.dayswitch button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--blue-text)}
+.dayswitch button[aria-pressed="true"]{color:var(--day,var(--blue-text));border-bottom-color:var(--day,var(--blue-text))}
+.banner{display:block;width:100%;height:auto;border-radius:14px;margin-bottom:16px}
+#plan .stops time{color:var(--day,var(--blue-text))}
+#plan .dayhead{color:var(--day,var(--ink))}
 .dayhead{font-size:26px;margin-bottom:4px}
 .daynote{color:var(--muted);margin-bottom:18px}
 .stops{list-style:none;margin:0;padding:0}
@@ -106,7 +110,12 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 
 /* ---------- Flights: ticket ---------- */
 .ticket{background:var(--surface);border-radius:14px;position:relative;margin-bottom:18px;overflow:hidden;border:1px solid var(--rule)}
-.ticket .top{padding:16px 18px 14px}
+.ticket .top{padding:16px 18px 14px;background:var(--citron);color:#141B3D}
+.ticket .top .code{color:#2442A8}
+.ticket .top .places,.ticket .top .flt{color:#3D3A2A}
+.ticket .top .flt b{color:#141B3D}
+.ticket .top .line{border-top-color:#2442A8}
+.ticket .top .line svg{color:#2442A8}
 .ticket .route{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:2px 0 4px}
 .ticket .code{font-family:var(--serif);font-size:44px;line-height:1;color:var(--blue-text)}
 .ticket .line{flex:1;border-top:2px dotted var(--rule);position:relative;top:-12px;margin:0 6px}
@@ -228,6 +237,16 @@ details summary::after{content:"+";font-family:var(--sans);font-weight:700;font-
 details[open] summary::after{content:"–"}
 details > :not(summary){margin-bottom:16px}
 
+.stall{background:var(--surface);border:1px solid var(--rule);border-radius:14px;padding:16px;border-top:6px solid var(--rose)}
+.stall .item{margin-bottom:10px}
+.stall .item b{font-weight:800}
+.say{position:relative;background:var(--citron);color:#141B3D;border-radius:14px 14px 14px 4px;padding:10px 14px;font-weight:700;margin:0 0 14px;min-height:46px}
+.amt .btn{flex:none;min-width:84px}
+.hgbtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.hgbtns button{flex:1;min-width:96px;min-height:42px;border-radius:10px;border:1px solid var(--rule);background:var(--paper);font-weight:700;font-size:15px;cursor:pointer}
+.hgbtns button:disabled,.amt .btn:disabled{opacity:.45;cursor:default}
+.res{margin:12px 0 0;font-weight:700;min-height:1.2em}
+.res .good{color:var(--cactus)} .res .bad{color:var(--rose)}
 .colophon{color:var(--muted);font-size:14px;padding:8px 0 28px;border-top:1px solid var(--rule);margin-top:8px}
 .colophon p{margin:12px 0 0}
 @media (max-width:370px){.has{columns:1}.wx{grid-template-columns:repeat(2,1fr)}.bal .v{font-size:19px}}
@@ -240,14 +259,35 @@ details > :not(summary){margin-bottom:16px}
 </defs></svg>
 
 <header>
-  <svg class="arch" viewBox="0 0 170 230" aria-hidden="true">
-    <path d="M20 230V95c0-37 29-67 65-67s65 30 65 67v135" fill="none" stroke="#F4C430" stroke-width="3" opacity=".55"/>
-    <path d="M40 230V100c0-27 20-49 45-49s45 22 45 49v130" fill="#1B3184" opacity=".6"/>
-    <path d="M85 10l4 9 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z" fill="#F4C430" opacity=".8"/>
+  <svg class="scene" viewBox="0 0 190 330" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
+    <path d="M44 330V196A54 54 0 1 1 146 196V330Z" fill="#F4C430"/>
+    <path d="M56 330V198A42 42 0 1 1 134 198V330Z" fill="#0E2163"/>
+    <path d="M64 330V214a31 31 0 0 1 62 0V330Z" fill="#1F6B5C"/>
+    <path d="M95 184V330" stroke="#0E2163" stroke-width="2.5"/>
+    <g fill="#F4C430">
+      <circle cx="78" cy="232" r="2"/><circle cx="78" cy="256" r="2"/><circle cx="78" cy="280" r="2"/><circle cx="78" cy="304" r="2"/>
+      <circle cx="112" cy="232" r="2"/><circle cx="112" cy="256" r="2"/><circle cx="112" cy="280" r="2"/><circle cx="112" cy="304" r="2"/>
+      <circle cx="103" cy="268" r="4" fill="none" stroke="#F4C430" stroke-width="2"/>
+    </g>
+    <path d="M95 104V128" stroke="#F4C430" stroke-width="1.5"/>
+    <circle cx="95" cy="150" r="26" fill="#F4C430" opacity=".22"/>
+    <path d="M86 132h18l-3 6H89z" fill="#C2552E"/>
+    <path d="M88 138h14c4 6 4 18 0 24H88c-4-6-4-18 0-24z" fill="#F4C430"/>
+    <g fill="#C2552E"><circle cx="95" cy="146" r="1.6"/><circle cx="91" cy="152" r="1.4"/><circle cx="99" cy="152" r="1.4"/><circle cx="95" cy="157" r="1.4"/></g>
+    <path d="M89 162h12l-6 7z" fill="#C2552E"/>
+    <path d="M0 322h190v8H0z" fill="#162E80"/>
+    <g fill="#2E8B5F">
+      <path d="M18 292V226a7 7 0 0 1 14 0V292z"/>
+      <path d="M18 262h-6a6 6 0 0 1-6-6v-16a4 4 0 0 1 8 0v12h4z"/>
+      <path d="M32 250h5v-14a4 4 0 0 1 8 0v18a6 6 0 0 1-6 6h-7z"/>
+    </g>
+    <path d="M6 288h38l-5 34H11z" fill="#C2552E"/><path d="M4 284h42v7H4z" fill="#A8442A"/>
+    <g fill="#3A9B6B"><path d="M168 300l-14-34 18 30z"/><path d="M170 300l2-40 4 40z"/><path d="M172 300l14-30-8 32z"/><path d="M166 302l-18-14 20 10z"/></g>
+    <path d="M154 300h32l-4 22h-24z" fill="#2442A8" stroke="#F4C430" stroke-width="2"/>
   </svg>
   <div class="wrap">
     <h1>Lost in the Souks</h1>
-    <p class="who">Marrakesh, Thursday 12 to Sunday 15 November. Seymon, Neil and Martin.</p>
+    <p class="who">Marrakesh, 12 to 15 November. Seymon, Neil and Martin.</p>
     <p class="count" id="count" aria-live="off">&nbsp;</p>
   </div>
 </header>
@@ -268,6 +308,7 @@ details > :not(summary){margin-bottom:16px}
 <section class="panel" id="plan" role="tabpanel" aria-labelledby="t-plan">
   <div class="nextup" id="nextup">&nbsp;</div>
   <div class="dayswitch" id="dayswitch" role="group" aria-label="Day"></div>
+  <div id="banner"></div>
   <h2 class="dayhead" id="dayhead"></h2>
   <p class="daynote" id="daynote"></p>
   <ol class="stops" id="stops"></ol>
@@ -364,8 +405,7 @@ details > :not(summary){margin-bottom:16px}
       <tr><td>Koutoubia Mosque and gardens</td><td>5–10 min walk</td></tr>
       <tr><td>Jemaa el-Fnaa</td><td>15 min walk</td></tr>
       <tr><td>The souks</td><td>20 min walk</td></tr>
-      <tr><td>Jardin Majorelle</td><td>15 min taxi</td></tr>
-      <tr><td>Airport</td><td>20 min drive</td></tr>
+            <tr><td>Airport</td><td>20 min drive</td></tr>
       <tr><td>Agafay Desert</td><td>45 min drive</td></tr>
     </table>
     <p class="small">Roughly. The medina has its own idea of distance.</p>
@@ -432,6 +472,26 @@ details > :not(summary){margin-bottom:16px}
     <p class="plain">Take cash out at an ATM in arrivals. Dirhams can't leave the country, so spend them down before Sunday.</p>
   </div>
 
+  <div class="block haggle">
+    <h3>Haggling practice</h3>
+    <p class="plain">Rehearse on Hassan before you try it in the souks. He's had a slow morning and he likes the look of you.</p>
+    <div class="stall">
+      <p class="item">He's selling a <b id="hgItem"></b>. Asking <b id="hgAsk"></b>.</p>
+      <p class="say" id="hgSay"></p>
+      <div class="amt">
+        <input class="inp" id="hgOffer" inputmode="numeric" placeholder="Your offer in MAD" autocomplete="off" aria-label="Your offer in dirhams">
+        <button class="btn" type="button" id="hgGo">Offer</button>
+      </div>
+      <div class="hgbtns">
+        <button type="button" id="hgTake">Pay his price</button>
+        <button type="button" id="hgWalk">Walk away</button>
+        <button type="button" id="hgNew">Next stall</button>
+      </div>
+      <p class="res" id="hgRes" role="status"></p>
+    </div>
+    <p class="small">Hassan's prices are invented for the game, not a price guide.</p>
+  </div>
+
   <div class="block">
     <h3>Weather</h3>
     <ul class="wx" id="wx"></ul>
@@ -487,7 +547,7 @@ details > :not(summary){margin-bottom:16px}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver">Version 2, 17 Oct, 10:21</p>
+  <p id="ver">Version 3, 17 Oct, 10:25</p>
 </div>
 
 </main>
@@ -555,10 +615,9 @@ const DAYS = [
     ['17:00', 'Hammam and massage at the riad', 'There\'s a hammam and massage room in the house. Book times with the hosts.', 'book'],
     ['20:30', 'Dinner at Dar Yacout', 'The full Moroccan feast in a grand old riad, drinks on the roof first. Go hungry.', 'book']
   ]},
-  { d: 14, short: 'Sat', title: 'Saturday, garden and desert', note: 'Majorelle first thing, the Agafay for sunset.', stops: [
-    ['08:15', 'Taxi to Jardin Majorelle', 'Book the first slot on the official website: there\'s no ticket desk. The combined ticket with the YSL Museum is worth it. About 170 MAD for the garden alone.', 'book'],
-    ['10:30', 'Late breakfast by the pool', 'Back before breakfast closes at 11:30.', ''],
-    ['12:00', 'Nothing at all', 'Pool, roof, book, nap.', ''],
+  { d: 14, short: 'Sat', title: 'Saturday, pool and desert', note: 'A lie-in, the roof, then the Agafay for sunset.', stops: [
+    ['09:30', 'Lie-in, then breakfast', 'No alarms. Breakfast runs until 11:30.', ''],
+    ['11:00', 'Nothing at all', 'Pool, roof, book, nap. Or a second go at the souks if anyone found something on Friday they can\'t stop thinking about.', ''],
     ['14:30', 'Pick-up for the Agafay Desert', 'About 45 minutes out. Quads or buggies over the stony desert, then sunset around 17:35.', 'book'],
     ['18:00', 'Dinner at a desert camp', 'Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', 'book'],
     ['22:30', 'Jemaa el-Fnaa after dark', 'Only if anyone is still upright. The square is at its maddest at night.', '']
@@ -571,6 +630,14 @@ const DAYS = [
     ['17:00', 'Land at Luton', 'Back to work on Monday, looking well rested.', 'ok']
   ]}
 ];
+
+const BANNERS = {
+  Thu: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="A plane over the Atlas mountains at dusk"><defs><linearGradient id="bThu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B3184"/><stop offset=".65" stop-color="#7A5FB0"/><stop offset="1" stop-color="#F09A6B"/></linearGradient></defs><rect width="360" height="130" fill="url(#bThu)"/><g fill="#fff" opacity=".8"><circle cx="40" cy="20" r="1.2"/><circle cx="90" cy="34" r="1"/><circle cx="150" cy="14" r="1.3"/><circle cx="230" cy="28" r="1"/><circle cx="300" cy="12" r="1.2"/><circle cx="330" cy="40" r="1"/></g><path d="M312 22a12 12 0 1 0 9 20 10 10 0 1 1-9-20z" fill="#FFE7A3"/><path d="M0 130V96l40-30 30 18 46-44 40 34 34-22 52 40 30-20 50 36 38-26v74z" fill="#2A2160"/><path d="M116 40l-12 12 10-4 6 6 6-6 6 4zM190 52l-10 8 8-2 4 4 6-4zM46 66l-8 6 7-1 5 3z" fill="#fff" opacity=".9"/><path d="M0 130v-14l60-18 70 10 60-16 80 14 90-12v36z" fill="#1A1440"/><path d="M40 92C100 70 170 60 236 52" fill="none" stroke="#F4C430" stroke-width="1.6" stroke-dasharray="3 6" opacity=".9"/><g transform="translate(248 50) rotate(78)"><path d="M10 13v-1.5l-6-3.7V3.5a1 1 0 0 0-2 0v4.3L-4 11.5V13l6-1.9V15l-1.5 1.1V17l2.5-.7 2.5.7v-1.1L4 15v-3.9z" fill="#F4C430" transform="scale(1.6)"/></g></svg>`,
+  Fri: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="Lanterns hanging in the souk"><defs><linearGradient id="bFri" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E2410"/><stop offset="1" stop-color="#C8762A"/></linearGradient><radialGradient id="glow"><stop offset="0" stop-color="#FFD873" stop-opacity=".7"/><stop offset="1" stop-color="#FFD873" stop-opacity="0"/></radialGradient></defs><rect width="360" height="130" fill="url(#bFri)"/><g fill="#4A1C0B" opacity=".75"><path d="M0 130V96a22 22 0 0 1 44 0v34zM56 130V96a22 22 0 0 1 44 0v34zM112 130V96a22 22 0 0 1 44 0v34zM168 130V96a22 22 0 0 1 44 0v34zM224 130V96a22 22 0 0 1 44 0v34zM280 130V96a22 22 0 0 1 44 0v34zM336 130V96a22 22 0 0 1 44 0v34z"/></g>${[[44,38,1],[110,58,.8],[180,30,1.15],[250,62,.85],[316,42,1]].map(([x,y,k])=>`<g transform="translate(${x} 0)"><path d="M0 0V${y}" stroke="#F4C430" stroke-opacity=".6"/><g transform="translate(0 ${y}) scale(${k})"><circle cy="20" r="26" fill="url(#glow)"/><path d="M-6 0h12l-3 5h-6z" fill="#F4C430"/><path d="M-9 5h18c5 8 5 22 0 30h-18c-5-8-5-22 0-30z" fill="#F4C430"/><g fill="#8E3B1E"><path d="M0 10l2 4-2 4-2-4z"/><circle cx="-5" cy="22" r="1.4"/><circle cx="5" cy="22" r="1.4"/><path d="M0 24l2 4-2 4-2-4z"/></g><path d="M-6 35h12l-6 7z" fill="#F4C430"/></g></g>`).join('')}</svg>`,
+  Sat: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="A camel crossing the desert at sunset"><defs><linearGradient id="bSat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4C430"/><stop offset=".55" stop-color="#E5783F"/><stop offset="1" stop-color="#B5473F"/></linearGradient></defs><rect width="360" height="130" fill="url(#bSat)"/><circle cx="250" cy="80" r="34" fill="#FFE7A3" opacity=".95"/><path d="M0 130V88c50-14 100-12 150 2s110 6 210-10v50z" fill="#C8762A"/><path d="M0 130v-24c70-18 140 4 200-6s110-14 160 0v30z" fill="#A8532B"/><g transform="translate(96 66) scale(.95)" fill="#3A1A10"><path d="M0 30C2 18 10 14 16 18 20 8 30 8 33 18c3-2 7-4 9-8l4-6c2-2 6-1 6 2l-2 2c-3 4-4 10-6 14v18h-2l-1-14-3 2-1 12h-2l-1-12H18l-2 12h-2V30l-4 10H8l1-12C4 28 1 32 0 30z"/></g><g transform="translate(150 74) scale(.75)" fill="#3A1A10"><path d="M0 30C2 18 10 14 16 18 20 8 30 8 33 18c3-2 7-4 9-8l4-6c2-2 6-1 6 2l-2 2c-3 4-4 10-6 14v18h-2l-1-14-3 2-1 12h-2l-1-12H18l-2 12h-2V30l-4 10H8l1-12C4 28 1 32 0 30z"/></g><path d="M0 130v-10c90-12 200 6 360-6v16z" fill="#7A3420"/><g stroke="#3A1A10" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M60 30q5-5 10 0q5-5 10 0"/><path d="M90 20q4-4 8 0q4-4 8 0"/></g></svg>`,
+  Sun: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="The Koutoubia minaret in the morning"><defs><linearGradient id="bSun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD9EE"/><stop offset="1" stop-color="#F6DFC0"/></linearGradient></defs><rect width="360" height="130" fill="url(#bSun)"/><circle cx="70" cy="44" r="18" fill="#F4C430" opacity=".85"/><g fill="#C47A4E"><rect x="196" y="30" width="46" height="100"/><rect x="208" y="12" width="22" height="20"/><g><rect x="196" y="24" width="7" height="7"/><rect x="209" y="24" width="7" height="7"/><rect x="222" y="24" width="7" height="7"/><rect x="235" y="24" width="7" height="7"/></g></g><path d="M219 12V0" stroke="#A85F38" stroke-width="2"/><g fill="#F4C430"><circle cx="219" cy="2" r="2.4"/><circle cx="219" cy="7" r="3"/></g><g fill="#8E4A2A"><path d="M206 64v-8a5 5 0 0 1 10 0v8zM222 64v-8a5 5 0 0 1 10 0v8zM211 96V84a8 8 0 0 1 16 0v12z"/><rect x="200" y="42" width="38" height="3"/></g><g fill="#2E6B4F"><path d="M120 130v-58h4v58z"/><path d="M122 72c-14-8-26-4-32 4 10-6 22-4 32-2zM122 72c4-14 16-20 28-16-12 0-22 8-28 16zM122 72c14-6 28-2 34 8-10-6-22-6-34-8zM122 72c-8-12-20-16-30-10 12-2 22 4 30 10z"/><path d="M296 130v-46h3v46z"/><path d="M297 84c-12-6-22-2-26 4 8-4 18-4 26-4zM297 84c10-8 22-6 28 2-8-4-18-4-28-2zM297 84c-2-12 6-20 16-20-8 4-14 12-16 20z"/></g><path d="M0 130v-12h360v12z" fill="#D9A877"/><g stroke="#5A6180" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M150 30q4-4 8 0q4-4 8 0"/><path d="M270 22q3-3 6 0q3-3 6 0"/></g></svg>`
+};
+const DAYCOL = { Thu: '#2442A8', Fri: '#B8661F', Sat: '#B5473F', Sun: '#2E6B4F' };
 (function(){
   const sw = document.getElementById('dayswitch'), list = document.getElementById('stops');
   const label = { ok: '<span class="st ok">Booked</span>', book: '<span class="st book">Needs booking</span>', '': '' };
@@ -580,6 +647,8 @@ const DAYS = [
     const day = DAYS[i], now = new Date();
     sw.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-pressed', j === i ? 'true' : 'false'));
     document.getElementById('dayhead').textContent = day.title;
+    document.getElementById('banner').innerHTML = BANNERS[day.short];
+    document.getElementById('plan').style.setProperty('--day', DAYCOL[day.short]);
     document.getElementById('daynote').textContent = day.note;
     list.innerHTML = '';
     day.stops.forEach((s, k) => {
@@ -643,6 +712,68 @@ window.souksRateReady = fetch('https://open.er-api.com/v6/latest/GBP')
     calc();
   });
   labels(); presets(); calc();
+})();
+
+
+/* ---------- Haggling practice ---------- */
+(function(){
+  const $ = id => document.getElementById(id);
+  const ITEMS = [['brass lantern', 350], ['leather pouffe', 450], ['pair of babouches', 180], ['small Berber rug', 1600], ['tagine pot', 120], ['silver teapot', 420], ['leather holdall', 750], ['set of tea glasses', 160]];
+  const OPEN = ['For you, my friend, special price.', 'Welcome! Looking is free. Buying is cheap.', 'Very good quality. My uncle made it.', 'English? Lovely jubbly. Good price for you.'];
+  const r10 = n => Math.max(10, Math.round(n / 10) * 10);
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  let item, fair, ask, rounds, done, last = -1;
+  const say = t => { $('hgSay').textContent = t; };
+  const lock = on => ['hgGo', 'hgTake', 'hgWalk', 'hgOffer'].forEach(id => $(id).disabled = on);
+  const showAsk = () => { $('hgAsk').textContent = ask.toLocaleString('en-GB') + ' MAD'; };
+  function fresh(){
+    let i; do { i = Math.floor(Math.random() * ITEMS.length); } while (i === last); last = i;
+    [item, fair] = ITEMS[i]; ask = r10(fair * (2.6 + Math.random() * 1.2)); rounds = 0; done = false;
+    $('hgItem').textContent = item; showAsk(); say(pick(OPEN)); $('hgRes').innerHTML = ''; $('hgOffer').value = ''; lock(false);
+  }
+  function deal(p){
+    done = true; lock(true);
+    const x = p / fair, gbp = (p / window.souksRate.mad).toFixed(2);
+    const v = x <= 0.9 ? ['good', 'Local price. Hassan is quietly impressed.'] : x <= 1.15 ? ['good', 'Fair price. Everyone goes home happy.'] : x <= 1.7 ? ['bad', 'You paid the tourist tax.'] : ['bad', 'Hassan is shutting up shop early to celebrate.'];
+    say(x <= 1.15 ? 'Ah, you are a hard man. OK. Deal!' : 'Deal! Shukran, my friend. Come back tomorrow!');
+    $('hgRes').innerHTML = 'Sold for ' + p.toLocaleString('en-GB') + ' MAD (£' + gbp + '). <span class="' + v[0] + '">' + v[1] + '</span> His fair price was about ' + fair + ' MAD.';
+  }
+  function offer(){
+    if (done) return;
+    const x = Math.round(parseFloat(String($('hgOffer').value).replace(/[^0-9.]/g, '')));
+    if (!(x > 0)) return say('You have to say a number, my friend.');
+    rounds++;
+    if (x >= ask) return deal(x);
+    if (x < fair * 0.45) {
+      say(pick(['Ha! You want me to feed my children with that?', 'My friend, that does not even pay for the tea.', 'You are joking. Very funny. Again.']));
+      if (rounds > 3) { ask = r10(ask * 0.95); showAsk(); }
+      return;
+    }
+    if (x >= fair * 0.9 && Math.random() < 0.45 + rounds * 0.1) return deal(x);
+    let next = r10(ask - (ask - x) * (0.35 + Math.random() * 0.25));
+    next = Math.max(next, r10(fair * 0.9));
+    if (next <= x + 10) return deal(x);
+    ask = next; showAsk();
+    say(rounds >= 6 ? 'Last price. ' + ask + '. I am losing money here.' : pick(['No, no. ' + ask + ', because I like you.', 'You are killing me. ' + ask + '.', 'For you, ' + ask + '. Don\'t tell my brother.', ask + '. This is handmade, look!']));
+    $('hgOffer').value = '';
+  }
+  function walk(){
+    if (done) return;
+    if (ask > fair * 1.05 && Math.random() < 0.7) {
+      ask = r10(Math.max(fair * 0.9, ask * 0.72)); showAsk();
+      say('Wait, wait! Come back! OK, ' + ask + '. Final price.');
+    } else {
+      done = true; lock(true);
+      say('OK, bslama, my friend.');
+      $('hgRes').innerHTML = 'No deal. Sometimes that\'s the right call.';
+    }
+  }
+  $('hgGo').addEventListener('click', offer);
+  $('hgOffer').addEventListener('keydown', e => { if (e.key === 'Enter') offer(); });
+  $('hgTake').addEventListener('click', () => { if (!done) deal(ask); });
+  $('hgWalk').addEventListener('click', walk);
+  $('hgNew').addEventListener('click', fresh);
+  fresh();
 })();
 
 /* ---------- Weather ---------- */
