@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lost in the Souks — Marrakesh, 12–15 November</title>
+<meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="description" content="Three friends, one riad, four days in Marrakesh.">
+<meta name="theme-color" content="#0E4F4F">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Souks">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta property="og:title" content="Lost in the Souks — Marrakesh, 12–15 Nov">
+<meta property="og:description" content="Three friends. One riad. Four days. No map.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E4F4F'/%3E%3Cg transform='translate(32 32)' fill='%23D9AE5F'%3E%3Crect x='-14' y='-14' width='28' height='28'/%3E%3Crect x='-14' y='-14' width='28' height='28' transform='rotate(45)'/%3E%3C/g%3E%3Ccircle cx='32' cy='32' r='7' fill='%23B4532A'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@500;600;700&family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3E8D7;        /* tadelakt plaster */
+  --panel:#FBF5EA;
+  --panel-2:#F0E3CE;
+  --ink:#2A1A12;
+  --muted:#6B5646;
+  --line:rgba(42,26,18,.14);
+  --terra:#B4532A;     /* Marrakesh pink-red walls */
+  --terra-deep:#8F3D1E;
+  --teal:#0E4F4F;      /* zellige teal */
+  --teal-2:#156B69;
+  --brass:#9C6F22;     /* darker brass for text on light */
+  --brass-lit:#D9AE5F;
+  --ok:#2F7A4E;
+  --shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 8px 24px -14px rgba(60,30,10,.35);
+  --radius:18px;
+  --kufi:'Reem Kufi', 'Figtree', system-ui, sans-serif;
+  --sans:'Figtree', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#171110; --panel:#221917; --panel-2:#2B201C; --ink:#F3E6D3; --muted:#BFA994;
+    --line:rgba(243,230,211,.13); --terra:#E07A4C; --terra-deep:#C9643A; --teal:#0B3D3D; --teal-2:#3FA8A2;
+    --brass:#D9AE5F; --brass-lit:#E8C47E; --ok:#6CC08C;
+    --shadow:0 10px 28px -16px rgba(0,0,0,.8); color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#171110; --panel:#221917; --panel-2:#2B201C; --ink:#F3E6D3; --muted:#BFA994;
+  --line:rgba(243,230,211,.13); --terra:#E07A4C; --terra-deep:#C9643A; --teal:#0B3D3D; --teal-2:#3FA8A2;
+  --brass:#D9AE5F; --brass-lit:#E8C47E; --ok:#6CC08C;
+  --shadow:0 10px 28px -16px rgba(0,0,0,.8); color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:64px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--sans);overflow-x:hidden}
+a{color:var(--teal-2)}
+:root:not([data-theme="dark"]) a{color:var(--teal)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) a{color:var(--teal-2)}}
+h1,h2,h3{font-family:var(--kufi);font-weight:700;letter-spacing:.01em;line-height:1.1;margin:0}
+button{font:inherit;color:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- Zellige pattern ---------- */
+.zellige{
+  background-color:var(--teal);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23D9AE5F' stroke-opacity='.38' stroke-width='1.2'%3E%3Cg transform='translate(28 28)'%3E%3Crect x='-12' y='-12' width='24' height='24'/%3E%3Crect x='-12' y='-12' width='24' height='24' transform='rotate(45)'/%3E%3Ccircle r='5'/%3E%3C/g%3E%3Cpath d='M0 0l8 8M56 0l-8 8M0 56l8-8M56 56l-8-8'/%3E%3C/g%3E%3Cg fill='%23B4532A' fill-opacity='.55'%3E%3Ccircle cx='28' cy='28' r='2.2'/%3E%3Ccircle cx='0' cy='0' r='3'/%3E%3Ccircle cx='56' cy='0' r='3'/%3E%3Ccircle cx='0' cy='56' r='3'/%3E%3Ccircle cx='56' cy='56' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:56px 56px;
+}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;color:#F6EBD9;padding:calc(env(safe-area-inset-top) + 28px) 0 0;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:120px;background:linear-gradient(to bottom, transparent, rgba(0,0,0,.25))}
+.arch{position:relative;z-index:1;margin:0 auto;max-width:440px;padding:0 16px}
+.arch-frame{position:relative;background:var(--terra-deep);border-radius:220px 220px 0 0;padding:14px 14px 0;box-shadow:0 0 0 3px var(--brass-lit) inset}
+.arch-in{border-radius:206px 206px 0 0;background:radial-gradient(120% 90% at 50% 0%, #F1B36F 0%, #E07A4C 34%, #9E3F21 70%, #5B2313 100%);padding:52px 22px 28px;text-align:center;position:relative;overflow:hidden;min-height:330px}
+.arch-in .sun{position:absolute;left:50%;top:56%;width:120px;height:120px;margin-left:-60px;border-radius:50%;background:radial-gradient(circle,#FFE2A6 0%,#F7B76A 55%,rgba(247,183,106,0) 72%);opacity:.9}
+.skyline{position:absolute;left:0;right:0;bottom:0;height:120px;display:block}
+.hero .eyebrow{position:relative;font:700 12px/1 var(--sans);letter-spacing:.24em;text-transform:uppercase;color:#FFE9C7;opacity:.9}
+.hero h1{position:relative;font-size:clamp(40px,11vw,60px);margin:12px 0 6px;color:#FFF6E8;text-shadow:0 2px 0 rgba(90,30,10,.35)}
+.hero .sub{position:relative;font-weight:600;font-size:16px;color:#FFE9C7}
+.crew{position:relative;display:flex;justify-content:center;gap:8px;margin-top:14px}
+.crew span{display:inline-flex;align-items:center;gap:6px;background:rgba(40,12,4,.32);border:1px solid rgba(255,233,199,.35);padding:4px 10px 4px 4px;border-radius:99px;font-weight:700;font-size:13.5px}
+.mono{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;font:700 13px/1 var(--kufi);color:#FFF6E8;flex:none;transform:rotate(0deg)}
+.mono.s{background:#B4532A}.mono.n{background:#156B69}.mono.m{background:#9C6F22}
+.mono.lg{width:34px;height:34px;border-radius:10px;font-size:17px}
+
+.count{position:relative;z-index:1;background:var(--panel);color:var(--ink);max-width:440px;margin:0 auto;border-radius:0 0 var(--radius) var(--radius);box-shadow:0 0 0 3px var(--brass-lit) inset, var(--shadow);padding:16px 16px 18px;text-align:center}
+.count .lbl{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.digits{display:flex;justify-content:center;gap:8px;margin-top:8px}
+.digits div{min-width:66px;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:8px 4px 6px}
+.digits b{display:block;font:700 28px/1.1 var(--kufi);font-variant-numeric:tabular-nums;color:var(--terra)}
+.digits small{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.count .msg{margin-top:10px;font-weight:600;font-size:15px}
+.hero-pad{height:28px}
+
+/* ---------- Nav ---------- */
+nav.tabs{position:sticky;top:0;z-index:20;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-top:10px;padding-bottom:10px}
+nav.tabs .wrap::-webkit-scrollbar{display:none}
+nav.tabs a{flex:none;text-decoration:none;color:var(--ink);font-weight:700;font-size:14px;padding:7px 13px;border-radius:99px;border:1px solid var(--line);background:var(--panel)}
+nav.tabs a.on{background:var(--teal);border-color:var(--teal);color:#F6EBD9}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) nav.tabs a.on{background:var(--teal-2);border-color:var(--teal-2);color:#10201F}}
+:root[data-theme="dark"] nav.tabs a.on{background:var(--teal-2);border-color:var(--teal-2);color:#10201F}
+
+/* ---------- Sections ---------- */
+section{padding:34px 0 8px}
+.sh{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.sh .star{width:30px;height:30px;flex:none;color:var(--terra)}
+.sh h2{font-size:28px}
+.lede{color:var(--muted);margin:0 0 16px;font-size:15.5px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+.card + .card{margin-top:12px}
+.card h3{font-size:19px;margin-bottom:6px}
+.badge{display:inline-block;font:700 11px/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;padding:4px 7px;border-radius:6px;vertical-align:2px;margin-left:6px;white-space:nowrap}
+.badge.book{background:color-mix(in srgb, var(--terra) 16%, transparent);color:var(--terra)}
+.badge.ok{background:color-mix(in srgb, var(--ok) 16%, transparent);color:var(--ok)}
+.badge.idea{background:color-mix(in srgb, var(--brass) 18%, transparent);color:var(--brass)}
+
+/* Next up */
+.next{display:flex;gap:14px;align-items:center;background:linear-gradient(120deg,var(--teal),#0A3B3B);color:#F6EBD9;border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-top:8px}
+.next .when{flex:none;text-align:center;min-width:64px;border-right:1px solid rgba(246,235,217,.25);padding-right:14px}
+.next .when b{display:block;font:700 22px/1 var(--kufi)}
+.next .when small{font-size:12px;opacity:.8;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.next .what small{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--brass-lit)}
+.next .what strong{font-size:17px;line-height:1.25;display:block}
+
+/* Day picker + timeline */
+.days{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:18px 0 14px}
+.days button{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:8px 4px;cursor:pointer;text-align:center}
+.days button b{display:block;font:700 18px/1.1 var(--kufi)}
+.days button small{font-size:12px;color:var(--muted);font-weight:600}
+.days button[aria-pressed="true"]{background:var(--terra);border-color:var(--terra);color:#FFF6E8}
+.days button[aria-pressed="true"] small{color:#FFE9C7}
+.daytitle{font:700 20px/1.2 var(--kufi);margin:0 0 4px}
+.daynote{color:var(--muted);font-size:15px;margin:0 0 12px}
+.tl{position:relative;margin:0;padding:0;list-style:none}
+.tl::before{content:"";position:absolute;left:62px;top:8px;bottom:8px;width:2px;background:repeating-linear-gradient(to bottom,var(--brass-lit) 0 6px,transparent 6px 11px);opacity:.7}
+.stop{display:grid;grid-template-columns:52px 1fr;gap:20px;padding:10px 0}
+.stop .t{font:700 15px/1.3 var(--kufi);color:var(--terra);text-align:right;font-variant-numeric:tabular-nums;padding-top:2px}
+.stop .b{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.stop .b::before{content:"";position:absolute;left:-15px;top:14px;width:10px;height:10px;transform:rotate(45deg);background:var(--brass-lit);border:2px solid var(--bg)}
+.stop.past .b{opacity:.55}
+.stop.now .b{border-color:var(--teal-2);box-shadow:0 0 0 2px color-mix(in srgb,var(--teal-2) 35%,transparent)}
+.stop strong{font-size:16px;line-height:1.3}
+.stop p{margin:4px 0 0;font-size:14.5px;color:var(--muted)}
+.stop p b{color:var(--ink)}
+
+/* Flights */
+.pass{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:6px;margin:4px 0 12px}
+.pass .ap b{display:block;font:700 34px/1 var(--kufi);color:var(--teal)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .pass .ap b{color:var(--teal-2)}}
+:root[data-theme="dark"] .pass .ap b{color:var(--teal-2)}
+.pass .ap small{font-size:13px;color:var(--muted);font-weight:600}
+.pass .ap.r{text-align:right}
+.pass .mid{text-align:center;color:var(--terra);font-size:12px;font-weight:700}
+.pass .mid svg{display:block;margin:0 auto 2px}
+.kv{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:0}
+.kv div{background:var(--panel-2);border-radius:12px;padding:8px 10px}
+.kv dt{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kv dd{margin:2px 0 0;font-weight:700;font-variant-numeric:tabular-nums}
+.tear{border:0;border-top:2px dashed var(--line);margin:14px -16px}
+.pax{display:flex;flex-wrap:wrap;gap:8px}
+.pax span{display:inline-flex;align-items:center;gap:7px;font-weight:700;font-size:14.5px;background:var(--panel-2);border-radius:99px;padding:4px 12px 4px 4px}
+.note{font-size:14.5px;color:var(--muted);margin:10px 0 0}
+.note b{color:var(--ink)}
+.warn{display:flex;gap:10px;align-items:flex-start;background:color-mix(in srgb,var(--terra) 10%,var(--panel));border:1px solid color-mix(in srgb,var(--terra) 30%,transparent);border-radius:14px;padding:12px 14px;font-size:14.5px;margin-top:12px}
+.warn svg{flex:none;color:var(--terra);margin-top:2px}
+
+/* Riad */
+.riad-top{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.riad-top .door{flex:none;width:64px;height:84px}
+.riad-top h3{font-size:24px}
+.riad-top p{margin:2px 0 0;color:var(--muted);font-size:14.5px}
+.amen{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:12px 0}
+.amen div{display:flex;gap:10px;align-items:center;background:var(--panel-2);border-radius:12px;padding:10px;font-size:14.5px;font-weight:600;line-height:1.25}
+.amen svg{flex:none;color:var(--teal-2)}
+.near{list-style:none;margin:0;padding:0}
+.near li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-top:1px solid var(--line);font-size:15px}
+.near li:first-child{border-top:0}
+.near li span:last-child{color:var(--muted);font-weight:600;white-space:nowrap}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:14.5px;padding:10px 14px;border-radius:12px;background:var(--teal);color:#F6EBD9 !important;border:0;cursor:pointer}
+.btn.alt{background:var(--panel-2);color:var(--ink) !important;border:1px solid var(--line)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn:not(.alt){background:var(--teal-2);color:#10201F !important}}
+:root[data-theme="dark"] .btn:not(.alt){background:var(--teal-2);color:#10201F !important}
+ul.rules{margin:8px 0 0;padding-left:18px;font-size:14.5px;color:var(--muted)}
+ul.rules li{margin:3px 0}
+ul.rules b{color:var(--ink)}
+
+/* Kitty */
+#kitty [hidden]{display:none!important}
+.bal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.bal > div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 8px;text-align:center}
+.bal .nm{font-weight:700;font-size:14px;margin-top:6px}
+.bal .v{font:700 18px/1.2 var(--kufi);font-variant-numeric:tabular-nums;margin-top:2px}
+.bal .v small{display:block;font:700 10.5px/1.2 var(--sans);letter-spacing:.08em;text-transform:uppercase}
+.up{color:var(--ok)} .down{color:var(--terra)} .even{color:var(--muted)}
+.settle{margin-top:12px;background:linear-gradient(120deg,var(--terra-deep),#5B2313);color:#FFF1DE;border-radius:16px;padding:12px 16px}
+.settle h4{margin:0 0 6px;font:700 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#FFD9A8}
+.settle ul{list-style:none;margin:0;padding:0}
+.settle li{display:flex;align-items:center;gap:8px;padding:5px 0;font-weight:600}
+.settle li b{margin-left:auto;font-variant-numeric:tabular-nums}
+.settle .arr{opacity:.8;font-size:13px}
+.kform{margin-top:14px}
+.kform label.l{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:12px 0 6px}
+.kform label.l:first-child{margin-top:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--panel-2);border-radius:99px;padding:4px 12px 4px 4px;font-weight:700;font-size:14.5px;cursor:pointer}
+.chips button[aria-pressed="true"]{border-color:var(--teal-2);background:color-mix(in srgb,var(--teal-2) 18%,var(--panel));box-shadow:0 0 0 1px var(--teal-2) inset}
+.chips button[aria-pressed="false"] .mono{filter:grayscale(.8);opacity:.55}
+.row{display:flex;gap:8px}
+.inp{width:100%;min-width:0;font:600 16px var(--sans);color:var(--ink);background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:11px 12px}
+.inp:focus{outline:2px solid var(--teal-2);outline-offset:1px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;flex:none}
+.seg button{border:0;background:var(--panel-2);padding:0 14px;font-weight:800;cursor:pointer;min-height:44px}
+.seg button[aria-pressed="true"]{background:var(--terra);color:#FFF6E8}
+.add{width:100%;margin-top:14px;justify-content:center;min-height:48px;font-size:16px}
+.kmsg{font-size:14px;color:var(--muted);margin:8px 0 0;min-height:1.2em}
+.kmsg.err{color:var(--terra)}
+.ledger{list-style:none;margin:14px 0 0;padding:0}
+.ledger li{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.ledger .w{flex:1;min-width:0}
+.ledger .w strong{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ledger .w small{color:var(--muted);font-size:12.5px}
+.ledger .a{text-align:right;font-weight:800;font-variant-numeric:tabular-nums}
+.ledger .a small{display:block;font-weight:600;color:var(--muted);font-size:12px}
+.ledger .x{border:0;background:none;color:var(--muted);cursor:pointer;padding:8px;margin:-8px -6px -8px 0;border-radius:8px}
+.ledger .x:hover{color:var(--terra)}
+.empty{color:var(--muted);font-size:14.5px;text-align:center;padding:14px 0 4px}
+.foot-note{font-size:12.5px;color:var(--muted);margin-top:8px}
+
+/* Toolkit */
+.conv{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:end}
+.conv label{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.conv .swap{border:1px solid var(--line);background:var(--panel-2);border-radius:12px;width:44px;height:46px;display:grid;place-items:center;cursor:pointer;color:var(--terra)}
+.quick{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.quick button{border:1px solid var(--line);background:var(--panel-2);border-radius:99px;padding:6px 11px;font-weight:700;font-size:13.5px;cursor:pointer;font-variant-numeric:tabular-nums}
+.ratehint{font-size:12.5px;color:var(--muted);margin-top:8px}
+.wx{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.wx div{background:var(--panel-2);border-radius:12px;padding:10px 6px;text-align:center}
+.wx b{display:block;font:700 13px/1.2 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.wx .ic{font-size:24px;line-height:1.3}
+.wx .tt{font:700 17px/1.2 var(--kufi);font-variant-numeric:tabular-nums}
+.wx .tt span{color:var(--muted);font-weight:500;font-size:14px}
+.phr{display:grid;gap:0;margin:0}
+.phr div{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.phr div:first-child{border-top:0}
+.phr dt{font-weight:800;color:var(--terra)}
+.phr dt small{display:block;font-weight:500;color:var(--muted);font-size:12.5px}
+.phr dd{margin:0;font-size:14.5px}
+.pack{list-style:none;margin:0;padding:0}
+.pack li{border-top:1px solid var(--line)}
+.pack li:first-child{border-top:0}
+.pack label{display:flex;align-items:flex-start;gap:12px;padding:10px 0;cursor:pointer;font-size:15px}
+.pack input{appearance:none;-webkit-appearance:none;flex:none;width:22px;height:22px;margin:1px 0 0;border:2px solid var(--brass);border-radius:6px;display:grid;place-items:center;cursor:pointer;background:var(--panel)}
+.pack input:checked{background:var(--teal-2);border-color:var(--teal-2)}
+.pack input:checked::after{content:"";width:10px;height:6px;border:solid #fff;border-width:0 0 2.5px 2.5px;transform:rotate(-45deg) translate(1px,-1px)}
+.pack input:checked + span{text-decoration:line-through;color:var(--muted)}
+.pack span small{display:block;color:var(--muted);font-size:13px}
+.tips{list-style:none;margin:0;padding:0}
+.tips li{padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.tips li:first-child{border-top:0}
+.tips b{color:var(--terra)}
+.sos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.sos a{display:block;text-decoration:none;text-align:center;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px 4px;color:var(--ink) !important}
+.sos a b{display:block;font:700 26px/1.1 var(--kufi);color:var(--terra)}
+.sos a small{font-size:12.5px;font-weight:700;color:var(--muted)}
+details.card summary{cursor:pointer;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px}
+details.card summary::-webkit-details-marker{display:none}
+details.card summary h3{margin:0}
+details.card summary::after{content:"";width:9px;height:9px;border:solid var(--brass);border-width:0 2.5px 2.5px 0;transform:rotate(45deg);margin:-4px 4px 0 0;transition:transform .2s}
+details.card[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+details.card[open] summary{margin-bottom:10px}
+
+footer{margin-top:40px;padding:28px 16px calc(28px + env(safe-area-inset-bottom));text-align:center;color:#F6EBD9;font-size:14px}
+footer p{margin:4px 0;position:relative}
+footer .ver{display:inline-block;margin-top:8px;font-size:12.5px;font-weight:700;letter-spacing:.06em;background:rgba(0,0,0,.28);border-radius:99px;padding:4px 12px}
+.theme-t{position:absolute;right:12px;top:calc(env(safe-area-inset-top) + 12px);z-index:5;width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,233,199,.35);background:rgba(40,12,4,.32);color:#FFE9C7;display:grid;place-items:center;cursor:pointer}
+@media (max-width:380px){.digits div{min-width:58px}.digits b{font-size:24px}.amen{grid-template-columns:1fr}.wx{grid-template-columns:repeat(2,1fr)}}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-star" viewBox="0 0 32 32"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="7" y="7" width="18" height="18"/><rect x="7" y="7" width="18" height="18" transform="rotate(45 16 16)"/></g><circle cx="16" cy="16" r="3.4" fill="currentColor"/></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z" fill="currentColor"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 2 20h20z"/><path d="M12 10v4M12 17.5v.01"/></g></symbol>
+  </defs>
+</svg>
+
+<header class="hero zellige">
+  <button class="theme-t" id="themeT" type="button" aria-label="Switch light or dark mode">
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z" fill="currentColor"/></svg>
+  </button>
+  <div class="arch">
+    <div class="arch-frame">
+      <div class="arch-in">
+        <div class="sun" aria-hidden="true"></div>
+        <div class="eyebrow">Marrakesh · 12–15 Nov 2026</div>
+        <h1>Lost in<br>the Souks</h1>
+        <div class="sub">One riad. Four days. No map.</div>
+        <div class="crew">
+          <span><i class="mono s">S</i>Seymon</span>
+          <span><i class="mono n">N</i>Neil</span>
+          <span><i class="mono m">M</i>Martin</span>
+        </div>
+        <svg class="skyline" viewBox="0 0 400 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+          <path d="M0 120V92l18-6v-8h10v8l22 4V70h14v-6h6v6h6v26l26-4V82l16-8 16 8v12l30 2V60l-4-4h4V30h4v-8h4v8h4v26h4l-4 4v44l22-2V86h40v-6l8-6 8 6v6h14v14l30 2V84l12-8 12 8v14l26-2v24z" fill="#4A1B0D" opacity=".85"/>
+          <path d="M0 120v-12l40-6 50 4 60-6 70 4 80-6 100 6v16z" fill="#2E0F06"/>
+          <g fill="#FFD27A" opacity=".85"><rect x="150" y="66" width="3" height="5" rx="1.5"/><rect x="156" y="66" width="3" height="5" rx="1.5"/><rect x="102" y="88" width="3" height="5" rx="1.5"/><rect x="262" y="90" width="3" height="5" rx="1.5"/><rect x="322" y="92" width="3" height="5" rx="1.5"/></g>
+        </svg>
+      </div>
+    </div>
+    <div class="count" aria-live="polite">
+      <div class="lbl" id="cLbl">Wheels up from Luton in</div>
+      <div class="digits" id="cDigits">
+        <div><b id="cD">--</b><small>Days</small></div>
+        <div><b id="cH">--</b><small>Hrs</small></div>
+        <div><b id="cM">--</b><small>Mins</small></div>
+        <div><b id="cS">--</b><small>Secs</small></div>
+      </div>
+      <div class="msg" id="cMsg">EZY2623 · Thu 12 Nov · 14:25</div>
+    </div>
+  </div>
+  <div class="hero-pad"></div>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap">
+    <a href="#plan">Plan</a>
+    <a href="#flights">Flights</a>
+    <a href="#riad">Riad</a>
+    <a href="#kitty">Kitty</a>
+    <a href="#toolkit">Toolkit</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ================= PLAN ================= -->
+<section id="plan">
+  <div class="sh"><svg class="star"><use href="#i-star"/></svg><h2>The plan</h2></div>
+  <p class="lede">A first draft: big on food, roof time and one night under desert stars. Anything marked <span class="badge book" style="margin:0">To book</span> needs sorting before we go.</p>
+
+  <div class="next" id="nextUp">
+    <div class="when"><b id="nuT">—</b><small id="nuD">—</small></div>
+    <div class="what"><small id="nuL">First up</small><strong id="nuW">—</strong></div>
+  </div>
+
+  <div class="days" role="group" aria-label="Choose a day" id="dayBtns"></div>
+  <h3 class="daytitle" id="dayTitle"></h3>
+  <p class="daynote" id="dayNote"></p>
+  <ol class="tl" id="dayList"></ol>
+</section>
+
+<!-- ================= FLIGHTS ================= -->
+<section id="flights">
+  <div class="sh"><svg class="star"><use href="#i-star"/></svg><h2>Flights</h2></div>
+  <p class="lede">easyJet, both ways. Marrakesh switched back to GMT in September, so there's no time difference: every time on this site works on either clock.</p>
+
+  <div class="card">
+    <h3>Out <span class="badge ok">Booked</span></h3>
+    <div class="pass">
+      <div class="ap"><b>LTN</b><small>London Luton</small></div>
+      <div class="mid"><svg width="26" height="26" style="transform:rotate(90deg)"><use href="#i-plane"/></svg>EZY2623</div>
+      <div class="ap r"><b>RAK</b><small>Marrakesh Menara</small></div>
+    </div>
+    <dl class="kv">
+      <div><dt>Date</dt><dd>Thu 12 Nov</dd></div>
+      <div><dt>Departs → lands</dt><dd>14:25 → 18:10</dd></div>
+      <div><dt>Bag drop</dt><dd>11:25 – 13:25</dd></div>
+      <div><dt>Check-in closes</dt><dd>13:25</dd></div>
+    </dl>
+    <hr class="tear">
+    <h3>Back <span class="badge ok">Booked</span></h3>
+    <div class="pass">
+      <div class="ap"><b>RAK</b><small>Marrakesh Menara</small></div>
+      <div class="mid"><svg width="26" height="26" style="transform:rotate(90deg)"><use href="#i-plane"/></svg>EZY2624</div>
+      <div class="ap r"><b>LTN</b><small>London Luton</small></div>
+    </div>
+    <dl class="kv">
+      <div><dt>Date</dt><dd>Sun 15 Nov</dd></div>
+      <div><dt>Departs → lands</dt><dd>13:20 → 17:00</dd></div>
+      <div><dt>Bag drop opens</dt><dd>10:20</dd></div>
+      <div><dt>Check-in closes</dt><dd>12:20</dd></div>
+    </dl>
+    <hr class="tear">
+    <div class="pax">
+      <span><i class="mono s">S</i>Seymon</span>
+      <span><i class="mono n">N</i>Neil</span>
+      <span><i class="mono m">M</i>Martin</span>
+    </div>
+    <p class="note">Seats are auto-allocated: add seats in the easyJet app if we want to sit together.</p>
+    <div class="warn"><svg width="20" height="20"><use href="#i-alert"/></svg><div><b>One small under-seat bag each, max 45 × 36 × 20 cm.</b> No overhead locker, no hold bag. Pack like it's a long weekend, because it is. Liquids in 100 ml bottles.</div></div>
+  </div>
+
+  <div class="card">
+    <h3>Getting to Luton</h3>
+    <p class="note" style="margin-top:0">Thameslink to <b>Luton Airport Parkway</b>, then the DART shuttle to the terminal (a few minutes). Aim to meet <b>airside by about 12:45</b>: there's nothing to drop, so check in online and head straight through security.</p>
+  </div>
+</section>
+
+<!-- ================= RIAD ================= -->
+<section id="riad">
+  <div class="sh"><svg class="star"><use href="#i-star"/></svg><h2>The riad</h2></div>
+  <p class="lede">Home for three nights, tucked behind the Koutoubia with La Mamounia for a neighbour.</p>
+
+  <div class="card">
+    <div class="riad-top">
+      <svg class="door" viewBox="0 0 64 84" aria-hidden="true">
+        <path d="M4 84V30a28 28 0 0 1 56 0v54z" fill="var(--terra)"/>
+        <path d="M11 84V31a21 21 0 0 1 42 0v53z" fill="var(--teal-2)"/>
+        <g fill="var(--brass-lit)"><circle cx="20" cy="40" r="1.6"/><circle cx="32" cy="40" r="1.6"/><circle cx="44" cy="40" r="1.6"/><circle cx="20" cy="56" r="1.6"/><circle cx="32" cy="56" r="1.6"/><circle cx="44" cy="56" r="1.6"/><circle cx="20" cy="72" r="1.6"/><circle cx="32" cy="72" r="1.6"/><circle cx="44" cy="72" r="1.6"/><circle cx="40" cy="62" r="3" fill="none" stroke="var(--brass-lit)" stroke-width="1.6"/></g>
+        <path d="M32 10l3 6 6 .5-4.5 4 1.5 6-6-3.5-6 3.5 1.5-6-4.5-4 6-.5z" fill="var(--brass-lit)"/>
+      </svg>
+      <div>
+        <h3>Riad M</h3>
+        <p>Sidi Mimoun, Marrakesh 40000<br>Hosts Julie &amp; Anas (Maison Meurisse)</p>
+      </div>
+    </div>
+    <dl class="kv">
+      <div><dt>Check in</dt><dd>Thu 12 Nov</dd></div>
+      <div><dt>Check out</dt><dd>Sun 15 Nov</dd></div>
+      <div><dt>Rooms</dt><dd>3 bedrooms · 3 baths</dd></div>
+      <div><dt>Breakfast</dt><dd>Daily 08:00–11:30</dd></div>
+    </dl>
+    <div class="amen">
+      <div><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 18c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5M2 21.5c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/><path d="M8 15V5a2 2 0 0 1 4 0M16 15V5a2 2 0 0 1 4 0M8 8h8M8 12h8"/></g></svg>Rooftop pool, open 24 hrs</div>
+      <div><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 4c-1 1.5 1 2.5 0 4M12 3c-1 1.5 1 2.5 0 4M16 4c-1 1.5 1 2.5 0 4"/><path d="M3 12h18v3a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6z"/></g></svg>Hammam &amp; massage room</div>
+      <div><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11h12v3a6 6 0 0 1-12 0z"/><path d="M17 12h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 7c0-1.5 1.5-1.5 1.5-3M12 7c0-1.5 1.5-1.5 1.5-3"/></g></svg>Homemade breakfast by Soumia</div>
+      <div><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21V9M8 21V12M16 21V12"/><path d="M12 9c0-2 1-3 1-5-2 1-3 2-3 4M4 21h16"/><path d="M12 2.5v1"/></g></svg>Terrace views to the Koutoubia</div>
+      <div><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c4-3 7-6 7-10a7 7 0 0 0-14 0c0 4 3 7 7 10z"/><path d="M9 11c0-2 1.5-3 3-3"/></g></svg>Fireplace for chilly nights</div>
+      <div><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a13 13 0 0 1 18 0M6 12.5a8.5 8.5 0 0 1 12 0M9 16a4 4 0 0 1 6 0"/><circle cx="12" cy="19.5" r="1" fill="currentColor"/></g></svg>Wi-Fi, daily cleaning, meals on request</div>
+    </div>
+    <ul class="rules">
+      <li><b>Only the three of us may enter.</b> Anyone else has to be declared and approved by the hosts in advance.</li>
+      <li><b>Keep it down late on.</b> Sound carries round a riad courtyard.</li>
+      <li><b>Check-in time and directions:</b> see the Airbnb app; medina lanes are too narrow for cars, so arrange the airport pick-up with the hosts.</li>
+    </ul>
+    <div class="btns">
+      <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Sidi+Mimoun+Marrakesh" target="_blank" rel="noopener">Open in Maps</a>
+      <a class="btn alt" href="https://www.airbnb.co.uk/rooms/1278845298065597872" target="_blank" rel="noopener">Airbnb listing</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Around the riad</h3>
+    <ul class="near">
+      <li><span>La Mamounia (Churchill Bar)</span><span>~5 min walk</span></li>
+      <li><span>Koutoubia Mosque &amp; gardens</span><span>~5–10 min walk</span></li>
+      <li><span>Jemaa el-Fnaa</span><span>~15 min walk</span></li>
+      <li><span>The souks</span><span>~20 min walk</span></li>
+      <li><span>Jardin Majorelle</span><span>~15 min taxi</span></li>
+      <li><span>Menara Airport (RAK)</span><span>~20 min drive</span></li>
+      <li><span>Agafay Desert</span><span>~45 min drive</span></li>
+    </ul>
+    <p class="foot-note">Rough timings: the medina has its own ideas about distance.</p>
+  </div>
+</section>
+
+<!-- ================= KITTY ================= -->
+<section id="kitty">
+  <div class="sh"><svg class="star"><use href="#i-star"/></svg><h2>The kitty</h2></div>
+  <p class="lede">Log who paid for what, in pounds or dirhams. It works out who owes who, shared live between our three phones.</p>
+
+  <div class="bal" id="kBal"></div>
+  <div class="settle" id="kSettle" hidden>
+    <h4>To square up</h4>
+    <ul id="kSettleList"></ul>
+  </div>
+
+  <div class="card kform">
+    <label class="l" id="lPaid">Who paid?</label>
+    <div class="chips" id="kPaid" role="group" aria-labelledby="lPaid"></div>
+
+    <label class="l" for="kAmt">How much?</label>
+    <div class="row">
+      <input class="inp" id="kAmt" inputmode="decimal" placeholder="0.00" autocomplete="off">
+      <div class="seg" id="kCur" role="group" aria-label="Currency">
+        <button type="button" data-c="MAD" aria-pressed="true">MAD</button>
+        <button type="button" data-c="GBP" aria-pressed="false">£</button>
+      </div>
+    </div>
+
+    <label class="l" for="kWhat">What for?</label>
+    <input class="inp" id="kWhat" maxlength="60" placeholder="Dinner at Nomad, taxi, mint tea…" autocomplete="off">
+
+    <label class="l" id="lSplit">Split between</label>
+    <div class="chips" id="kSplit" role="group" aria-labelledby="lSplit"></div>
+
+    <button class="btn add" type="button" id="kAdd">Add to the kitty</button>
+    <p class="kmsg" id="kMsg" role="status"></p>
+  </div>
+
+  <div class="card">
+    <h3>Ledger</h3>
+    <ul class="ledger" id="kList"></ul>
+    <p class="empty" id="kEmpty">Nothing logged yet. First round's on whoever's quickest.</p>
+    <p class="foot-note" id="kRate"></p>
+  </div>
+</section>
+
+<!-- ================= TOOLKIT ================= -->
+<section id="toolkit">
+  <div class="sh"><svg class="star"><use href="#i-star"/></svg><h2>Toolkit</h2></div>
+  <p class="lede">Money, weather, words and the stuff worth knowing before you're three tea-shops deep.</p>
+
+  <div class="card">
+    <h3>Dirham converter</h3>
+    <div class="conv">
+      <div><label for="cvA" id="cvAL">Dirhams (MAD)</label><input class="inp" id="cvA" inputmode="decimal" value="100"></div>
+      <button class="swap" type="button" id="cvSwap" aria-label="Swap currencies"><svg width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4 3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></g></svg></button>
+      <div><label for="cvB" id="cvBL">Pounds (£)</label><input class="inp" id="cvB" inputmode="decimal"></div>
+    </div>
+    <div class="quick" id="cvQuick"></div>
+    <p class="ratehint" id="cvRate">Loading today's rate…</p>
+    <p class="note"><b>Cash is king</b> in the medina. The dirham can't be taken out of Morocco in any amount, so use an ATM in arrivals and spend it down before Sunday.</p>
+  </div>
+
+  <div class="card">
+    <h3>Weather</h3>
+    <div class="wx" id="wx"></div>
+    <p class="note" id="wxNote">Typical mid-November: low-20s °C and sunny by day, single figures after dark, sunset around 17:35. Bring a proper layer for the desert.</p>
+  </div>
+
+  <details class="card">
+    <summary><h3>Darija for beginners</h3></summary>
+    <dl class="phr">
+      <div><dt>Salam alaykum<small>sa-LAAM a-LAY-kum</small></dt><dd>Hello (the all-purpose greeting)</dd></div>
+      <div><dt>La, shukran<small>LA, shook-RAN</small></dt><dd>No, thank you. Your most-used phrase in the souks</dd></div>
+      <div><dt>Shukran bezzaf<small>shook-RAN bez-ZAF</small></dt><dd>Thank you very much</dd></div>
+      <div><dt>Bshhal?<small>b-SHHAL</small></dt><dd>How much?</dd></div>
+      <div><dt>Ghali bezzaf!<small>GHA-lee bez-ZAF</small></dt><dd>Way too expensive! (start of every haggle)</dd></div>
+      <div><dt>Safi<small>SAA-fee</small></dt><dd>OK / enough / done</dd></div>
+      <div><dt>Mezyan<small>mez-YAN</small></dt><dd>Good, great</dd></div>
+      <div><dt>Wakha<small>WAH-kha</small></dt><dd>Alright, fine, deal</dd></div>
+      <div><dt>Inshallah<small>in-SHAL-lah</small></dt><dd>God willing (also: "probably not on time")</dd></div>
+      <div><dt>Bslama<small>b-SLAA-ma</small></dt><dd>Goodbye</dd></div>
+    </dl>
+    <p class="note">French gets you a long way too. Neil, you're on translation duty.</p>
+  </details>
+
+  <details class="card">
+    <summary><h3>Worth knowing</h3></summary>
+    <ul class="tips">
+      <li><b>"That way's closed, follow me."</b> It isn't. Friendly strangers offering directions will want paying; a firm <i>la, shukran</i> and keep walking. Offline Google Maps of the medina helps.</li>
+      <li><b>Haggling</b> is expected in the souks, not in restaurants. Start around a third to a half of the first price and be ready to walk away. Smile throughout.</li>
+      <li><b>Taxis:</b> petit taxis are beige. Insist on the meter or agree the fare before you get in. Easiest of all, get the riad to book airport and desert transfers.</li>
+      <li><b>Tipping:</b> around 10% in restaurants; a few dirhams for small help; and a pooled tip for Soumia and the riad staff when we leave.</li>
+      <li><b>Drinks:</b> alcohol is easy to find in hotels, licensed restaurants and rooftop bars, but not in street cafés. Don't drink in public.</li>
+      <li><b>Fridays:</b> some souk stalls close over midday prayers, roughly 12:30–14:30.</li>
+      <li><b>Photos:</b> ask before snapping people or stallholders. Very on-brand for this crew.</li>
+      <li><b>Plugs:</b> European two-pin (type C/E), 220 V. Bring an adaptor.</li>
+      <li><b>Passports:</b> UK passport holders don't need a visa for a short trip. Keep the passport on you or locked in the riad.</li>
+    </ul>
+  </details>
+
+  <details class="card">
+    <summary><h3>Packing list</h3></summary>
+    <p class="note" style="margin-top:0">Ticks are saved on your own phone only.</p>
+    <ul class="pack" id="pack"></ul>
+  </details>
+
+  <div class="card">
+    <h3>Emergencies</h3>
+    <div class="sos">
+      <a href="tel:19"><b>19</b><small>Police</small></a>
+      <a href="tel:15"><b>15</b><small>Ambulance / fire</small></a>
+      <a href="tel:112"><b>112</b><small>From a mobile</small></a>
+    </div>
+    <p class="note">Tourist police patrol Jemaa el-Fnaa. For lost passports, contact the British Embassy in Rabat via gov.uk.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="zellige">
+  <p><b>Lost in the Souks</b> · Seymon, Neil &amp; Martin</p>
+  <p>No photos of the crew, by request. Hidden from search engines.</p>
+  <span class="ver">Version 1 · 17 Oct · 10:30</span>
+</footer>
+
+<script>
+/* ---------- Theme toggle ---------- */
+(function(){
+  const root = document.documentElement;
+  const get = () => { try { return localStorage.getItem('souks-theme'); } catch(e){ return null; } };
+  const set = v => { try { localStorage.setItem('souks-theme', v); } catch(e){} };
+  const saved = get(); if (saved === 'light' || saved === 'dark') root.dataset.theme = saved;
+  document.getElementById('themeT').addEventListener('click', () => {
+    const cur = root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    const next = cur === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next; set(next);
+  });
+})();
+
+/* ---------- Times (Marrakesh is on GMT in November, same as London) ---------- */
+const T = (d, hm) => new Date('2026-11-' + d + 'T' + hm + ':00Z');
+const DEPART = T(12, '14:25'), HOME = T(15, '17:00');
+
+/* ---------- Countdown ---------- */
+(function(){
+  const $ = id => document.getElementById(id);
+  const pad = n => String(n).padStart(2, '0');
+  function tick(){
+    const now = new Date();
+    let diff = DEPART - now;
+    if (diff > 0) {
+      const s = Math.floor(diff / 1000);
+      $('cD').textContent = Math.floor(s / 86400);
+      $('cH').textContent = pad(Math.floor(s % 86400 / 3600));
+      $('cM').textContent = pad(Math.floor(s % 3600 / 60));
+      $('cS').textContent = pad(s % 60);
+      return;
+    }
+    $('cDigits').hidden = true;
+    if (now < HOME) {
+      const day = Math.min(4, Math.floor((now - T(12, '00:00')) / 86400000) + 1);
+      $('cLbl').textContent = 'We are here';
+      $('cMsg').innerHTML = '<span style="font:700 26px/1.2 var(--kufi);color:var(--terra)">Day ' + day + ' of 4</span><br>Keep hydrated. Keep haggling.';
+    } else {
+      $('cLbl').textContent = 'Back on home soil';
+      $('cMsg').textContent = 'Same again next year? Settle the kitty first.';
+    }
+  }
+  tick(); setInterval(tick, 1000);
+})();
+
+/* ---------- Itinerary ---------- */
+const DAYS = [
+  { d: 12, short: 'Thu', title: 'Thursday: arrival', note: 'Out of the office, into the riad.', stops: [
+    ['12:45', 'Meet airside at Luton', 'Cabin bags only, so check in online and go straight through security. Bag drop closes 13:25.', 'ok'],
+    ['14:25', 'EZY2623 takes off', 'Just under four hours. Last chance for a decent pint for a while.', 'ok'],
+    ['18:10', 'Land at Menara', 'Passport control can take a while. Grab dirhams from an ATM in arrivals before you leave the terminal.', 'ok'],
+    ['19:00', 'Transfer to Riad M', 'About 20 minutes. Ask Julie &amp; Anas to arrange a driver: cars can\'t get down every lane, so someone will meet us and walk us in.', 'book'],
+    ['20:30', 'First dinner: Terrasse des Épices', 'Open-air roof in the heart of the medina, looking toward the Koutoubia. Easy, relaxed, good first-night energy.', 'book'],
+    ['22:30', 'Nightcap at La Mamounia', 'Five minutes from the riad. The Churchill Bar is the move. Smart-ish: no shorts, no trainers.', 'idea']
+  ]},
+  { d: 13, short: 'Fri', title: 'Friday: into the souks', note: 'The proper getting-lost day. Breakfast is served until 11:30.', stops: [
+    ['08:30', 'Breakfast on the roof', 'Soumia\'s homemade spread. Pace yourself.', 'ok'],
+    ['10:00', 'Souks with a licensed guide', 'Half a day through the souks, Ben Youssef Madrasa, Le Jardin Secret and the spice square. Ask the riad to book a proper guide. Some stalls shut over Friday prayers (12:30–14:30).', 'book'],
+    ['13:00', 'Lunch at Nomad', 'Modern Moroccan on a roof above the spice square. Book a terrace table.', 'book'],
+    ['15:00', 'Bahia Palace &amp; the Mellah', 'Palace courtyards and tilework, then a wander through the old Jewish quarter on the way back.', 'idea'],
+    ['17:00', 'Hammam &amp; massage at the riad', 'There\'s a hammam and massage room on site. Book slots with the hosts in advance.', 'book'],
+    ['20:30', 'Big night: Dar Yacout', 'The full multi-course Moroccan feast in a grand old riad, with drinks on the roof first. Arrive hungry.', 'book']
+  ]},
+  { d: 14, short: 'Sat', title: 'Saturday: gardens & desert', note: 'Blue gardens in the morning, rocky desert by sunset.', stops: [
+    ['08:15', 'Taxi to Jardin Majorelle', 'Book the first slot on the official website only (no ticket desk on the day). Combo ticket with the YSL Museum is worth it. About 170 MAD for the garden.', 'book'],
+    ['10:30', 'Late breakfast by the pool', 'Back before breakfast closes at 11:30.', 'idea'],
+    ['12:00', 'Pool and roof time', 'Nothing. Do nothing. That\'s the activity.', 'idea'],
+    ['14:30', 'Pick-up for Agafay Desert', 'About 45 minutes out of town. Quad bikes or buggies across the stony desert, then sunset (around 17:35).', 'book'],
+    ['18:00', 'Dinner at a desert camp', 'Fire pits, lanterns, a lot of tagine and a big sky. It gets cold fast, so bring a jumper. Back around 22:00.', 'book'],
+    ['22:30', 'Jemaa el-Fnaa after dark', 'Optional, if anyone\'s still standing: the square is at its maddest at night.', 'idea']
+  ]},
+  { d: 15, short: 'Sun', title: 'Sunday: home', note: 'Gentle start, early exit.', stops: [
+    ['08:00', 'Last breakfast', 'Settle the kitty and leave the tip for Soumia and the team.', 'idea'],
+    ['09:00', 'Koutoubia &amp; the square by day', 'Short walk from the riad. Last orange juice from the stalls on Jemaa el-Fnaa.', 'idea'],
+    ['10:30', 'Leave for the airport', 'About 20 minutes. Aim to arrive two hours before: Menara has multiple security and passport checks.', 'book'],
+    ['13:20', 'EZY2624 home', 'Check-in closes 12:20.', 'ok'],
+    ['17:00', 'Land at Luton', 'Pretend to be fine at work on Monday.', 'ok']
+  ]}
+];
+const BADGE = { ok: ['ok', 'Booked'], book: ['book', 'To book'], idea: ['idea', 'Idea'] };
+(function(){
+  const btns = document.getElementById('dayBtns'), list = document.getElementById('dayList');
+  const all = [];
+  DAYS.forEach((day, i) => day.stops.forEach(s => all.push({ i, at: T(day.d, s[0]), s })));
+  function show(i){
+    const day = DAYS[i], now = new Date();
+    btns.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-pressed', j === i ? 'true' : 'false'));
+    document.getElementById('dayTitle').textContent = day.title;
+    document.getElementById('dayNote').textContent = day.note;
+    list.innerHTML = '';
+    day.stops.forEach((s, k) => {
+      const at = T(day.d, s[0]), nextAt = k + 1 < day.stops.length ? T(day.d, day.stops[k + 1][0]) : null;
+      const li = document.createElement('li'); li.className = 'stop';
+      if (nextAt && now >= nextAt) li.classList.add('past');
+      else if (now >= at && (!nextAt || now < nextAt) && now < HOME) li.classList.add('now');
+      const b = BADGE[s[3]];
+      li.innerHTML = '<div class="t">' + s[0] + '</div><div class="b"><strong>' + s[1] + '</strong><span class="badge ' + b[0] + '">' + b[1] + '</span><p>' + s[2] + '</p></div>';
+      list.appendChild(li);
+    });
+  }
+  DAYS.forEach((day, i) => {
+    const b = document.createElement('button'); b.type = 'button';
+    b.innerHTML = '<b>' + day.short + '</b><small>' + day.d + ' Nov</small>';
+    b.addEventListener('click', () => show(i));
+    btns.appendChild(b);
+  });
+  // Pick today's day during the trip, otherwise Thursday
+  const now = new Date(); let start = 0;
+  DAYS.forEach((day, i) => { if (now >= T(day.d, '00:00')) start = i; });
+  if (now >= HOME) start = 0;
+  show(start);
+
+  // Next up
+  const nx = all.find(x => x.at > now);
+  const strip = h => { const d = document.createElement('div'); d.innerHTML = h; return d.textContent; };
+  if (nx) {
+    document.getElementById('nuT').textContent = nx.s[0];
+    document.getElementById('nuD').textContent = DAYS[nx.i].short + ' ' + DAYS[nx.i].d;
+    document.getElementById('nuL').textContent = now < DEPART ? 'First up' : 'Next up';
+    document.getElementById('nuW').textContent = strip(nx.s[1]);
+  } else {
+    document.getElementById('nuT').textContent = '✓';
+    document.getElementById('nuD').textContent = 'Done';
+    document.getElementById('nuL').textContent = 'That\'s a wrap';
+    document.getElementById('nuW').textContent = 'Trip complete. Same again next year?';
+  }
+})();
+
+/* ---------- Shared exchange rate ---------- */
+window.souksRate = { mad: 12.97, live: false };
+window.souksRateReady = fetch('https://open.er-api.com/v6/latest/GBP')
+  .then(r => r.ok ? r.json() : null)
+  .then(d => { if (d && d.rates && d.rates.MAD) { window.souksRate = { mad: d.rates.MAD, live: true }; } })
+  .catch(() => {})
+  .then(() => document.dispatchEvent(new Event('souks-rate')));
+
+/* ---------- Converter ---------- */
+(function(){
+  const a = document.getElementById('cvA'), b = document.getElementById('cvB');
+  let madFirst = true;
+  const num = v => parseFloat(String(v).replace(/[^0-9.]/g, '')) || 0;
+  const fmt = (n, cur) => cur === 'GBP' ? n.toFixed(2) : (n >= 100 ? Math.round(n).toString() : n.toFixed(1));
+  function calc(){
+    const r = window.souksRate.mad, x = num(a.value);
+    b.value = madFirst ? fmt(x / r, 'GBP') : fmt(x * r, 'MAD');
+  }
+  function quick(){
+    const q = document.getElementById('cvQuick'); q.innerHTML = '';
+    (madFirst ? [20, 50, 100, 200, 500, 1000] : [5, 10, 20, 50, 100]).forEach(v => {
+      const btn = document.createElement('button'); btn.type = 'button';
+      btn.textContent = madFirst ? v + ' MAD' : '£' + v;
+      btn.addEventListener('click', () => { a.value = v; calc(); });
+      q.appendChild(btn);
+    });
+  }
+  function labels(){
+    document.getElementById('cvAL').textContent = madFirst ? 'Dirhams (MAD)' : 'Pounds (£)';
+    document.getElementById('cvBL').textContent = madFirst ? 'Pounds (£)' : 'Dirhams (MAD)';
+  }
+  a.addEventListener('input', calc);
+  b.addEventListener('input', () => {
+    const r = window.souksRate.mad, x = num(b.value);
+    a.value = madFirst ? fmt(x * r, 'MAD') : fmt(x / r, 'GBP');
+  });
+  document.getElementById('cvSwap').addEventListener('click', () => {
+    madFirst = !madFirst; const t = a.value; a.value = b.value; b.value = t; labels(); quick(); calc();
+  });
+  document.addEventListener('souks-rate', () => {
+    const r = window.souksRate;
+    document.getElementById('cvRate').textContent = '£1 = ' + r.mad.toFixed(2) + ' MAD · ' + (r.live ? 'live mid-market rate' : 'approximate rate (offline)') + '. Cash machines and cards will be a touch worse.';
+    calc();
+  });
+  labels(); quick(); calc();
+})();
+
+/* ---------- Weather (Open-Meteo, only shows once trip days are in forecast range) ---------- */
+(function(){
+  const box = document.getElementById('wx');
+  const icon = c => c === 0 ? '☀️' : c <= 2 ? '🌤️' : c === 3 ? '☁️' : c <= 48 ? '🌫️' : c <= 67 ? '🌧️' : c <= 77 ? '🌨️' : c <= 82 ? '🌦️' : '⛈️';
+  const typical = () => {
+    box.innerHTML = ['Thu', 'Fri', 'Sat', 'Sun'].map(d => '<div><b>' + d + '</b><div class="ic">☀️</div><div class="tt">~22° <span>9°</span></div></div>').join('');
+  };
+  typical();
+  fetch('https://api.open-meteo.com/v1/forecast?latitude=31.62&longitude=-7.99&daily=weathercode,temperature_2m_max,temperature_2m_min&timezone=GMT&start_date=2026-11-12&end_date=2026-11-15')
+    .then(r => r.ok ? r.json() : null)
+    .then(d => {
+      if (!d || !d.daily || !d.daily.time || d.daily.temperature_2m_max.some(v => v == null)) return;
+      const names = ['Thu', 'Fri', 'Sat', 'Sun'];
+      box.innerHTML = d.daily.time.map((t, i) => '<div><b>' + names[i] + '</b><div class="ic">' + icon(d.daily.weathercode[i]) + '</div><div class="tt">' + Math.round(d.daily.temperature_2m_max[i]) + '° <span>' + Math.round(d.daily.temperature_2m_min[i]) + '°</span></div></div>').join('');
+      document.getElementById('wxNote').textContent = 'Live forecast for Marrakesh. Sunset around 17:35, and the desert gets cold after dark.';
+    }).catch(() => {});
+})();
+
+/* ---------- Packing list ---------- */
+(function(){
+  const items = [
+    ['Passport', 'Check it\'s in date. Nothing else matters if this stays home.'],
+    ['Under-seat bag only', 'Max 45 × 36 × 20 cm. Measure it.'],
+    ['Liquids in 100 ml bottles', 'One clear bag at security.'],
+    ['European plug adaptor', 'Type C/E two-pin.'],
+    ['Bank card that\'s good abroad', 'Fee-free withdrawals help. Cash comes from the ATM on arrival.'],
+    ['Sunglasses &amp; sun cream', 'Still strong sun in November.'],
+    ['A warm layer', 'Desert nights and riad roofs get properly cold.'],
+    ['Swimmers', 'Rooftop pool and hammam.'],
+    ['Comfortable shoes', 'Cobbles, dust and a lot of walking.'],
+    ['Something smart-ish', 'For La Mamounia and Dar Yacout.'],
+    ['Offline Google Maps of the medina', 'Download before you fly.'],
+    ['Check roaming', 'Morocco often isn\'t in UK roaming bundles. Check your plan or grab an eSIM.']
+  ];
+  const ul = document.getElementById('pack');
+  const load = () => { try { return JSON.parse(localStorage.getItem('souks-pack') || '[]'); } catch(e){ return []; } };
+  const save = v => { try { localStorage.setItem('souks-pack', JSON.stringify(v)); } catch(e){} };
+  let done = load();
+  items.forEach((it, i) => {
+    const li = document.createElement('li');
+    li.innerHTML = '<label><input type="checkbox"' + (done.includes(i) ? ' checked' : '') + '><span>' + it[0] + '<small>' + it[1] + '</small></span></label>';
+    li.querySelector('input').addEventListener('change', e => {
+      done = e.target.checked ? [...new Set([...done, i])] : done.filter(x => x !== i); save(done);
+    });
+    ul.appendChild(li);
+  });
+})();
+
+/* ---------- Active tab on scroll ---------- */
+(function(){
+  const links = [...document.querySelectorAll('nav.tabs a')];
+  const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id));
+      const on = links.find(a => a.classList.contains('on'));
+      if (on) on.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  secs.forEach(s => s && io.observe(s));
+})();
+</script>
+
+<script type="module">
+/* ---------- Kitty: shared ledger in Firebase Firestore ---------- */
+let initializeApp, getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, serverTimestamp;
+
+const $ = id => document.getElementById(id);
+const P = { s: 'Seymon', n: 'Neil', m: 'Martin' };
+const K = Object.keys(P);
+const mono = (k, lg) => '<i class="mono ' + k + (lg ? ' lg' : '') + '">' + P[k][0] + '</i>';
+const gbp = n => '£' + (Math.round(n * 100) / 100).toLocaleString('en-GB', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const mad = n => Math.round(n).toLocaleString('en-GB') + ' MAD';
+const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+let rows = [], payer = store('souks-payer'), split = K.slice(), cur = 'MAD';
+if (!P[payer]) payer = null;
+
+function chips(box, isOn, tap){
+  box.innerHTML = '';
+  K.forEach(k => {
+    const b = document.createElement('button'); b.type = 'button';
+    b.setAttribute('aria-pressed', isOn(k) ? 'true' : 'false');
+    b.innerHTML = mono(k) + P[k];
+    b.addEventListener('click', () => tap(k));
+    box.appendChild(b);
+  });
+}
+function form(){
+  chips($('kPaid'), k => k === payer, k => { payer = k; store('souks-payer', k); form(); });
+  chips($('kSplit'), k => split.includes(k), k => { split = split.includes(k) ? split.filter(x => x !== k) : K.filter(x => split.includes(x) || x === k); form(); });
+}
+$('kCur').querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+  cur = b.dataset.c; $('kCur').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+}));
+
+function balances(){
+  const net = { s: 0, n: 0, m: 0 };
+  rows.forEach(r => {
+    const sp = (r.split || []).filter(k => P[k]); if (!sp.length || !P[r.by]) return;
+    net[r.by] += r.gbp; sp.forEach(k => { net[k] -= r.gbp / sp.length; });
+  });
+  return net;
+}
+function settle(net){
+  const cr = K.filter(k => net[k] > 0.005).map(k => [k, net[k]]).sort((a, b) => b[1] - a[1]);
+  const dr = K.filter(k => net[k] < -0.005).map(k => [k, -net[k]]).sort((a, b) => b[1] - a[1]);
+  const out = []; let i = 0, j = 0;
+  while (i < dr.length && j < cr.length) {
+    const amt = Math.min(dr[i][1], cr[j][1]);
+    if (amt >= 0.01) out.push([dr[i][0], cr[j][0], amt]);
+    dr[i][1] -= amt; cr[j][1] -= amt;
+    if (dr[i][1] < 0.005) i++; if (cr[j][1] < 0.005) j++;
+  }
+  return out;
+}
+function render(){
+  const net = balances(), r = window.souksRate.mad;
+  $('kBal').innerHTML = K.map(k => {
+    const x = net[k], cls = Math.abs(x) < 0.01 ? 'even' : x > 0 ? 'up' : 'down';
+    const lbl = Math.abs(x) < 0.01 ? 'Square' : x > 0 ? 'Owed' : 'Owes';
+    return '<div>' + mono(k, true) + '<div class="nm">' + P[k] + '</div><div class="v ' + cls + '">' + (Math.abs(x) < 0.01 ? '—' : gbp(Math.abs(x))) + '<small>' + lbl + '</small></div></div>';
+  }).join('');
+  const mv = settle(net);
+  $('kSettle').hidden = !mv.length;
+  $('kSettleList').innerHTML = mv.map(([f, t, a]) => '<li>' + mono(f) + '<span>' + P[f] + '</span><span class="arr">pays</span>' + mono(t) + '<span>' + P[t] + '</span><b>' + gbp(a) + ' <small style="opacity:.75;font-weight:600">≈ ' + mad(a * r) + '</small></b></li>').join('');
+  $('kEmpty').hidden = rows.length > 0;
+  $('kList').innerHTML = '';
+  rows.slice().reverse().forEach(row => {
+    const li = document.createElement('li');
+    const when = row.at && row.at.toDate ? row.at.toDate().toLocaleString('en-GB', { weekday: 'short', hour: '2-digit', minute: '2-digit' }) : 'just now';
+    const sp = (row.split || []).length === 3 ? 'all three' : (row.split || []).map(k => P[k]).join(' & ');
+    const orig = row.cur === 'MAD' ? mad(row.amt) : gbp(row.amt);
+    li.innerHTML = mono(row.by, true) + '<div class="w"><strong>' + esc(row.what || 'Something') + '</strong><small>' + P[row.by] + ' paid · split ' + sp + ' · ' + when + '</small></div><div class="a">' + gbp(row.gbp) + (row.cur === 'MAD' ? '<small>' + orig + '</small>' : '') + '</div>';
+    const x = document.createElement('button'); x.className = 'x'; x.type = 'button'; x.setAttribute('aria-label', 'Delete ' + (row.what || 'entry'));
+    x.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+    x.addEventListener('click', async () => {
+      if (!confirm('Delete "' + (row.what || 'this entry') + '" (' + orig + ')?')) return;
+      try { await deleteDoc(doc(col, row.id)); } catch (e) { msg('Couldn\'t delete. Check your connection.', true); }
+    });
+    li.appendChild(x);
+    $('kList').appendChild(li);
+  });
+  const rr = window.souksRate;
+  $('kRate').textContent = 'Everything settles in pounds. Dirham amounts convert at the rate when they were added (today £1 = ' + rr.mad.toFixed(2) + ' MAD).';
+}
+function msg(t, err){ const m = $('kMsg'); m.textContent = t; m.className = 'kmsg' + (err ? ' err' : ''); }
+function parseAmt(v){
+  v = String(v || '').replace(/[^0-9.,]/g, '');
+  const lc = v.lastIndexOf(','), ld = v.lastIndexOf('.');
+  if (lc > -1 && ld > -1) v = lc > ld ? v.replace(/\./g, '').replace(',', '.') : v.replace(/,/g, '');
+  else if (lc > -1) v = /,\d{3}$/.test(v) ? v.replace(/,/g, '') : v.replace(',', '.');
+  return Math.round(parseFloat(v) * 100) / 100;
+}
+
+form(); render();
+document.addEventListener('souks-rate', render);
+let col = null;
+try {
+  ({ initializeApp } = await import('https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js'));
+  ({ getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy, serverTimestamp } = await import('https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js'));
+} catch (e) { msg('Can\'t reach the shared kitty right now. Check your connection and reload.', true); }
+if (initializeApp) {
+const app = initializeApp({
+  apiKey: 'AIzaSyDW3dNqFia7ks0FXvTr3d0-uf7FgqjZudY',
+  authDomain: 'craic-pack.firebaseapp.com',
+  projectId: 'craic-pack',
+  storageBucket: 'craic-pack.firebasestorage.app',
+  messagingSenderId: '185927616775',
+  appId: '1:185927616775:web:393b7bf1dbdb4961d49da2'
+}, 'souks');
+const db = getFirestore(app);
+col = collection(db, 'souks-kitty');
+onSnapshot(query(col, orderBy('at')), snap => {
+  rows = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  render();
+}, err => { msg('Can\'t reach the shared kitty right now (' + (err.code || 'offline') + ').', true); });
+}
+
+$('kAdd').addEventListener('click', async () => {
+  const amt = parseAmt($('kAmt').value), what = $('kWhat').value.trim();
+  if (!col) return msg('The shared kitty isn\'t connected. Reload and try again.', true);
+  if (!payer) return msg('Tap who paid first.', true);
+  if (!(amt > 0)) return msg('Pop an amount in.', true);
+  if (!split.length) return msg('Pick at least one person to split with.', true);
+  await Promise.race([window.souksRateReady, new Promise(r => setTimeout(r, 3000))]);
+  const rate = window.souksRate.mad;
+  const val = cur === 'MAD' ? Math.round(amt / rate * 100) / 100 : amt;
+  const btn = $('kAdd'); btn.disabled = true; msg('Adding…');
+  try {
+    await addDoc(col, { by: payer, amt, cur, gbp: val, rate, what: what.slice(0, 60), split: split.slice(), at: serverTimestamp() });
+    $('kAmt').value = ''; $('kWhat').value = ''; split = K.slice(); form();
+    msg('Added ' + (cur === 'MAD' ? mad(amt) + ' (' + gbp(val) + ')' : gbp(amt)) + '. Shukran!');
+  } catch (e) { msg('Couldn\'t save (' + (e.code || 'error') + '). Try again in a sec.', true); }
+  btn.disabled = false;
+});
+</script>
+</body>
+</html>
