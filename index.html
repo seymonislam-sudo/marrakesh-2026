@@ -59,10 +59,35 @@ button{font:inherit;color:inherit}
 /* ---------- Header ---------- */
 header{background:var(--head);color:#fff;padding:calc(env(safe-area-inset-top) + 30px) 0 26px;position:relative;overflow:hidden}
 header .scene{position:absolute;right:0;bottom:0;height:100%;max-height:330px;width:auto}
+header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:8px;background:#162E80}
+.door{cursor:pointer;outline:none}
+.door .leaf{transform-box:fill-box;transition:transform 1.1s cubic-bezier(.3,.7,.3,1)}
+.door .leaf.l{transform-origin:left center}
+.door .leaf.r{transform-origin:right center}
+.door.open .leaf.l{transform:perspective(300px) scaleX(.18) skewY(8deg)}
+.door.open .leaf.r{transform:perspective(300px) scaleX(.18) skewY(-8deg)}
+.door:focus-visible .leaf{outline:2px solid #F4C430}
+header .cat{position:absolute;bottom:6px;width:52px;height:30px;z-index:2;left:-70px;animation:prowl 26s linear infinite;animation-delay:3s}
+@keyframes prowl{0%{left:-70px}55%{left:calc(100% + 20px)}100%{left:calc(100% + 20px)}}
+@media (prefers-reduced-motion: reduce){header .cat{display:none}.door .leaf{transition:none}}
 header .wrap{position:relative;min-height:250px}
 header h1{font-size:clamp(46px,14vw,72px);line-height:.95;color:var(--citron);max-width:7ch;position:relative}
 header .who{margin:16px 0 0;font-size:16px;color:#DCE2FA;position:relative;max-width:19ch}
 header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;font-variant-numeric:tabular-nums;max-width:13ch;line-height:1.3}
+
+/* ---------- Riad door ---------- */
+(function(){
+  const door = document.getElementById('door');
+  const toggle = () => { const o = door.classList.toggle('open'); door.setAttribute('aria-label', o ? 'Close the riad door' : 'Open the riad door'); };
+  door.addEventListener('click', toggle);
+  door.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); } });
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    setTimeout(() => door.classList.add('open'), 900);
+    setTimeout(() => door.classList.remove('open'), 3600);
+  } else {
+    document.querySelectorAll('svg').forEach(s => s.pauseAnimations && s.pauseAnimations());
+  }
+})();
 
 /* ---------- Tabs ---------- */
 .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--surface);border-top:1px solid var(--rule);padding-bottom:env(safe-area-inset-bottom)}
@@ -93,6 +118,11 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .dayswitch button[aria-pressed="true"]{color:var(--day,var(--blue-text));border-bottom-color:var(--day,var(--blue-text))}
 .banner{display:block;width:100%;height:auto;border-radius:14px;margin-bottom:16px}
 #plan .stops time{color:var(--day,var(--blue-text))}
+.stops .when{display:flex;flex-direction:column;align-items:flex-start;gap:8px}
+.stops .ic{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--day,var(--blue));color:#fff}
+.stops .ic svg{width:24px;height:24px}
+.stops li.now .ic{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--day,#2442A8) 60%,transparent)}50%{box-shadow:0 0 0 8px transparent}}
 #plan .dayhead{color:var(--day,var(--ink))}
 .dayhead{font-size:26px;margin-bottom:4px}
 .daynote{color:var(--muted);margin-bottom:18px}
@@ -247,6 +277,12 @@ details > :not(summary){margin-bottom:16px}
 .hgbtns button:disabled,.amt .btn:disabled{opacity:.45;cursor:default}
 .res{margin:12px 0 0;font-weight:700;min-height:1.2em}
 .res .good{color:var(--cactus)} .res .bad{color:var(--rose)}
+.say.pop{animation:pop .35s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{0%{transform:scale(.85);opacity:.4}100%{transform:scale(1);opacity:1}}
+.coin{position:fixed;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFE7A3,#F4C430 55%,#B8861F);box-shadow:0 0 0 1.5px #B8861F inset;pointer-events:none;z-index:60;animation:coin 1.1s cubic-bezier(.2,.6,.4,1) forwards}
+@keyframes coin{0%{transform:translate(0,0) scale(.6);opacity:1}100%{transform:translate(var(--dx),var(--dy)) rotate(540deg) scale(1);opacity:0}}
+.bal .v.bump{animation:pop .4s cubic-bezier(.3,1.6,.5,1)}
+@media (prefers-reduced-motion: reduce){.say.pop,.coin,.bal .v.bump{animation:none}.coin{display:none}}
 .colophon{color:var(--muted);font-size:14px;padding:8px 0 28px;border-top:1px solid var(--rule);margin-top:8px}
 .colophon p{margin:12px 0 0}
 @media (max-width:370px){.has{columns:1}.wx{grid-template-columns:repeat(2,1fr)}.bal .v{font-size:19px}}
@@ -262,28 +298,57 @@ details > :not(summary){margin-bottom:16px}
   <svg class="scene" viewBox="0 0 190 330" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
     <path d="M44 330V196A54 54 0 1 1 146 196V330Z" fill="#F4C430"/>
     <path d="M56 330V198A42 42 0 1 1 134 198V330Z" fill="#0E2163"/>
-    <path d="M64 330V214a31 31 0 0 1 62 0V330Z" fill="#1F6B5C"/>
-    <path d="M95 184V330" stroke="#0E2163" stroke-width="2.5"/>
-    <g fill="#F4C430">
-      <circle cx="78" cy="232" r="2"/><circle cx="78" cy="256" r="2"/><circle cx="78" cy="280" r="2"/><circle cx="78" cy="304" r="2"/>
-      <circle cx="112" cy="232" r="2"/><circle cx="112" cy="256" r="2"/><circle cx="112" cy="280" r="2"/><circle cx="112" cy="304" r="2"/>
-      <circle cx="103" cy="268" r="4" fill="none" stroke="#F4C430" stroke-width="2"/>
+    <defs><linearGradient id="court" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD27A"/><stop offset="1" stop-color="#E07A3F"/></linearGradient></defs>
+    <path d="M64 330V214a31 31 0 0 1 62 0V330Z" fill="url(#court)"/>
+    <g fill="#2E6B4F" opacity=".85"><path d="M94 330v-50h3v50z"/><path d="M95 282c-10-6-18-2-22 4 7-4 15-4 22-4zM95 282c8-8 18-6 22 2-7-4-15-4-22-2zM95 282c-1-10 5-16 12-16-6 3-10 9-12 16z"/></g>
+    <rect x="80" y="318" width="30" height="6" rx="3" fill="#2442A8" opacity=".7"/>
+    <g class="door" id="door" role="button" tabindex="0" aria-label="Open the riad door">
+      <g class="leaf l">
+        <path d="M64 330V214a31 31 0 0 1 31-31V330Z" fill="#1F6B5C" stroke="#0E2163" stroke-width="1.2"/>
+        <g fill="#F4C430"><circle cx="78" cy="232" r="2"/><circle cx="78" cy="256" r="2"/><circle cx="78" cy="280" r="2"/><circle cx="78" cy="304" r="2"/></g>
+      </g>
+      <g class="leaf r">
+        <path d="M95 183a31 31 0 0 1 31 31V330H95Z" fill="#1F6B5C" stroke="#0E2163" stroke-width="1.2"/>
+        <g fill="#F4C430"><circle cx="112" cy="232" r="2"/><circle cx="112" cy="256" r="2"/><circle cx="112" cy="280" r="2"/><circle cx="112" cy="304" r="2"/></g>
+        <circle cx="103" cy="268" r="4" fill="none" stroke="#F4C430" stroke-width="2"/>
+      </g>
     </g>
-    <path d="M95 104V128" stroke="#F4C430" stroke-width="1.5"/>
-    <circle cx="95" cy="150" r="26" fill="#F4C430" opacity=".22"/>
-    <path d="M86 132h18l-3 6H89z" fill="#C2552E"/>
-    <path d="M88 138h14c4 6 4 18 0 24H88c-4-6-4-18 0-24z" fill="#F4C430"/>
-    <g fill="#C2552E"><circle cx="95" cy="146" r="1.6"/><circle cx="91" cy="152" r="1.4"/><circle cx="99" cy="152" r="1.4"/><circle cx="95" cy="157" r="1.4"/></g>
-    <path d="M89 162h12l-6 7z" fill="#C2552E"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" values="-7 95 104;7 95 104;-7 95 104" dur="3.4s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/>
+      <path d="M95 104V128" stroke="#F4C430" stroke-width="1.5"/>
+      <circle cx="95" cy="150" r="26" fill="#F4C430" opacity=".22"><animate attributeName="opacity" values=".18;.32;.22;.36;.18" dur="2.6s" repeatCount="indefinite"/><animate attributeName="r" values="24;28;25;29;24" dur="2.6s" repeatCount="indefinite"/></circle>
+      <path d="M86 132h18l-3 6H89z" fill="#C2552E"/>
+      <path d="M88 138h14c4 6 4 18 0 24H88c-4-6-4-18 0-24z" fill="#F4C430"/>
+      <g fill="#C2552E"><circle cx="95" cy="146" r="1.6"/><circle cx="91" cy="152" r="1.4"/><circle cx="99" cy="152" r="1.4"/><circle cx="95" cy="157" r="1.4"/></g>
+      <path d="M89 162h12l-6 7z" fill="#C2552E"/>
+    </g>
     <path d="M0 322h190v8H0z" fill="#162E80"/>
-    <g fill="#2E8B5F">
+    <g fill="#2E8B5F"><animateTransform attributeName="transform" type="rotate" values="0 25 292;1.6 25 292;0 25 292;-1.2 25 292;0 25 292" dur="6s" repeatCount="indefinite"/>
       <path d="M18 292V226a7 7 0 0 1 14 0V292z"/>
       <path d="M18 262h-6a6 6 0 0 1-6-6v-16a4 4 0 0 1 8 0v12h4z"/>
       <path d="M32 250h5v-14a4 4 0 0 1 8 0v18a6 6 0 0 1-6 6h-7z"/>
     </g>
     <path d="M6 288h38l-5 34H11z" fill="#C2552E"/><path d="M4 284h42v7H4z" fill="#A8442A"/>
-    <g fill="#3A9B6B"><path d="M168 300l-14-34 18 30z"/><path d="M170 300l2-40 4 40z"/><path d="M172 300l14-30-8 32z"/><path d="M166 302l-18-14 20 10z"/></g>
+    <g fill="#3A9B6B"><animateTransform attributeName="transform" type="rotate" values="0 170 300;-3 170 300;0 170 300;2 170 300;0 170 300" dur="5s" repeatCount="indefinite"/><path d="M168 300l-14-34 18 30z"/><path d="M170 300l2-40 4 40z"/><path d="M172 300l14-30-8 32z"/><path d="M166 302l-18-14 20 10z"/></g>
     <path d="M154 300h32l-4 22h-24z" fill="#2442A8" stroke="#F4C430" stroke-width="2"/>
+  </svg>
+  <svg class="cat" viewBox="0 0 60 34" aria-hidden="true">
+    <path d="M10 14c-6-2-9-8-7-12" fill="none" stroke="#E0873F" stroke-width="3.2" stroke-linecap="round"><animate attributeName="d" values="M10 14c-6-2-9-8-7-12;M10 14c-8 0-10-6-10-11;M10 14c-6-2-9-8-7-12" dur="1.6s" repeatCount="indefinite"/></path>
+    <g stroke="#C9682A" stroke-width="3.4" stroke-linecap="round">
+      <path d="M14 22l-2 10"><animateTransform attributeName="transform" type="rotate" values="-18 14 22;18 14 22;-18 14 22" dur=".7s" repeatCount="indefinite"/></path>
+      <path d="M36 22l-2 10"><animateTransform attributeName="transform" type="rotate" values="18 36 22;-18 36 22;18 36 22" dur=".7s" repeatCount="indefinite"/></path>
+    </g>
+    <ellipse cx="25" cy="18" rx="16" ry="7.5" fill="#E0873F"/>
+    <g stroke="#E0873F" stroke-width="3.4" stroke-linecap="round">
+      <path d="M17 22l2 10"><animateTransform attributeName="transform" type="rotate" values="18 17 22;-18 17 22;18 17 22" dur=".7s" repeatCount="indefinite"/></path>
+      <path d="M33 22l2 10"><animateTransform attributeName="transform" type="rotate" values="-18 33 22;18 33 22;-18 33 22" dur=".7s" repeatCount="indefinite"/></path>
+    </g>
+    <g><animateTransform attributeName="transform" type="translate" values="0 0;0 -1;0 0" dur=".35s" repeatCount="indefinite"/>
+      <circle cx="44" cy="12" r="7" fill="#E0873F"/>
+      <path d="M38 8l1-7 5 5zM45 5l5-5 1 7z" fill="#E0873F"/>
+      <circle cx="47" cy="11" r="1.1" fill="#141B3D"/>
+      <g stroke="#C9682A" stroke-width="1.2"><path d="M18 13l3 4M24 12l2 5M30 13l1 4"/></g>
+    </g>
   </svg>
   <div class="wrap">
     <h1>Lost in the Souks</h1>
@@ -547,12 +612,26 @@ details > :not(summary){margin-bottom:16px}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver">Version 3, 17 Oct, 10:25</p>
+  <p id="ver">Version 4, 17 Oct, 10:32</p>
 </div>
 
 </main>
 
 <script>
+/* Coin burst for good moments */
+window.coinBurst = function(el){
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  for (let i = 0; i < 14; i++) {
+    const c = document.createElement('i'); c.className = 'coin';
+    const a = Math.random() * Math.PI * 2, d = 50 + Math.random() * 90;
+    c.style.left = (cx - 8) + 'px'; c.style.top = (cy - 8) + 'px';
+    c.style.setProperty('--dx', Math.cos(a) * d + 'px'); c.style.setProperty('--dy', (Math.sin(a) * d - 40) + 'px');
+    c.style.animationDelay = (Math.random() * .12) + 's';
+    document.body.appendChild(c); setTimeout(() => c.remove(), 1400);
+  }
+};
+
 /* Marrakesh is on GMT in November, same as London */
 const T = (d, hm) => new Date('2026-11-' + d + 'T' + hm + ':00Z');
 const DEPART = T(12, '14:25'), HOME = T(15, '17:00');
@@ -600,42 +679,63 @@ const DEPART = T(12, '14:25'), HOME = T(15, '17:00');
 /* ---------- Itinerary ---------- */
 const DAYS = [
   { d: 12, short: 'Thu', title: 'Thursday, getting there', note: 'Out of the office and into the riad.', stops: [
-    ['12:45', 'Meet airside at Luton', 'Cabin bags only, so check in online and go straight through security. Bag drop closes 13:25.', 'ok'],
-    ['14:25', 'EZY2623 takes off', 'Just under four hours. Last decent pint for a while.', 'ok'],
-    ['18:10', 'Land at Menara', 'Passport control can be slow. Get dirhams from an ATM in arrivals before leaving the terminal.', 'ok'],
-    ['19:00', 'Transfer to the riad', 'About 20 minutes. Julie and Anas can arrange a driver who walks us in from where the car has to stop.', 'book'],
-    ['20:30', 'Dinner at Terrasse des Épices', 'An open-air roof in the middle of the medina, looking toward the Koutoubia. Easy first night.', 'book'],
-    ['22:30', 'Nightcap at La Mamounia', 'Five minutes from the door. The Churchill Bar, and they mean it about no shorts or trainers.', '']
+    ['12:45', 'Meet airside at Luton', 'Cabin bags only, so check in online and go straight through security. Bag drop closes 13:25.', 'ok', 'bag'],
+    ['14:25', 'EZY2623 takes off', 'Just under four hours. Last decent pint for a while.', 'ok', 'takeoff'],
+    ['18:10', 'Land at Menara', 'Passport control can be slow. Get dirhams from an ATM in arrivals before leaving the terminal.', 'ok', 'landing'],
+    ['19:00', 'Transfer to the riad', 'About 20 minutes. Julie and Anas can arrange a driver who walks us in from where the car has to stop.', 'book', 'car'],
+    ['20:30', 'Dinner at Terrasse des Épices', 'An open-air roof in the middle of the medina, looking toward the Koutoubia. Easy first night.', 'book', 'dine'],
+    ['22:30', 'Nightcap at La Mamounia', 'Five minutes from the door. The Churchill Bar, and they mean it about no shorts or trainers.', '', 'cocktail']
   ]},
   { d: 13, short: 'Fri', title: 'Friday, the souks', note: 'The getting-lost day. Breakfast runs until 11:30.', stops: [
-    ['08:30', 'Breakfast on the roof', 'Soumia cooks. Pace yourselves.', 'ok'],
-    ['10:00', 'The souks with a licensed guide', 'Half a day: the souks, Ben Youssef Madrasa, Le Jardin Secret and the spice square. Ask the riad to book a proper guide. Some stalls close for Friday prayers, 12:30 to 14:30.', 'book'],
-    ['13:00', 'Lunch at Nomad', 'Modern Moroccan on a roof above the spice square. Ask for a terrace table.', 'book'],
-    ['15:00', 'Bahia Palace and the Mellah', 'Courtyards and tilework, then back through the old Jewish quarter.', ''],
-    ['17:00', 'Hammam and massage at the riad', 'There\'s a hammam and massage room in the house. Book times with the hosts.', 'book'],
-    ['20:30', 'Dinner at Dar Yacout', 'The full Moroccan feast in a grand old riad, drinks on the roof first. Go hungry.', 'book']
+    ['08:30', 'Breakfast on the roof', 'Soumia cooks. Pace yourselves.', 'ok', 'cup'],
+    ['10:00', 'The souks with a licensed guide', 'Half a day: the souks, Ben Youssef Madrasa, Le Jardin Secret and the spice square. Ask the riad to book a proper guide. Some stalls close for Friday prayers, 12:30 to 14:30.', 'book', 'lantern'],
+    ['13:00', 'Lunch at Nomad', 'Modern Moroccan on a roof above the spice square. Ask for a terrace table.', 'book', 'dine'],
+    ['15:00', 'Bahia Palace and the Mellah', 'Courtyards and tilework, then back through the old Jewish quarter.', '', 'arch'],
+    ['17:00', 'Hammam and massage at the riad', 'There\'s a hammam and massage room in the house. Book times with the hosts.', 'book', 'steam'],
+    ['20:30', 'Dinner at Dar Yacout', 'The full Moroccan feast in a grand old riad, drinks on the roof first. Go hungry.', 'book', 'tagine']
   ]},
   { d: 14, short: 'Sat', title: 'Saturday, pool and desert', note: 'A lie-in, the roof, then the Agafay for sunset.', stops: [
-    ['09:30', 'Lie-in, then breakfast', 'No alarms. Breakfast runs until 11:30.', ''],
-    ['11:00', 'Nothing at all', 'Pool, roof, book, nap. Or a second go at the souks if anyone found something on Friday they can\'t stop thinking about.', ''],
-    ['14:30', 'Pick-up for the Agafay Desert', 'About 45 minutes out. Quads or buggies over the stony desert, then sunset around 17:35.', 'book'],
-    ['18:00', 'Dinner at a desert camp', 'Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', 'book'],
-    ['22:30', 'Jemaa el-Fnaa after dark', 'Only if anyone is still upright. The square is at its maddest at night.', '']
+    ['09:30', 'Lie-in, then breakfast', 'No alarms. Breakfast runs until 11:30.', '', 'bed'],
+    ['11:00', 'Nothing at all', 'Pool, roof, book, nap. Or a second go at the souks if anyone found something on Friday they can\'t stop thinking about.', '', 'pool'],
+    ['14:30', 'Pick-up for the Agafay Desert', 'About 45 minutes out. Quads or buggies over the stony desert, then sunset around 17:35.', 'book', 'jeep'],
+    ['18:00', 'Dinner at a desert camp', 'Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', 'book', 'fire'],
+    ['22:30', 'Jemaa el-Fnaa after dark', 'Only if anyone is still upright. The square is at its maddest at night.', '', 'stars']
   ]},
   { d: 15, short: 'Sun', title: 'Sunday, home', note: 'A slow start and an early exit.', stops: [
-    ['08:00', 'Last breakfast', 'Settle the kitty and leave a tip for Soumia and the team.', ''],
-    ['09:00', 'The Koutoubia and the square by day', 'A short walk. Last orange juice from the stalls.', ''],
-    ['10:30', 'Leave for the airport', 'About 20 minutes. Menara has several security and passport checks, so aim to be there two hours before.', 'book'],
-    ['13:20', 'EZY2624 home', 'Check-in closes at 12:20.', 'ok'],
-    ['17:00', 'Land at Luton', 'Back to work on Monday, looking well rested.', 'ok']
+    ['08:00', 'Last breakfast', 'Settle the kitty and leave a tip for Soumia and the team.', '', 'cup'],
+    ['09:00', 'The Koutoubia and the square by day', 'A short walk. Last orange juice from the stalls.', '', 'tower'],
+    ['10:30', 'Leave for the airport', 'About 20 minutes. Menara has several security and passport checks, so aim to be there two hours before.', 'book', 'car'],
+    ['13:20', 'EZY2624 home', 'Check-in closes at 12:20.', 'ok', 'takeoff'],
+    ['17:00', 'Land at Luton', 'Back to work on Monday, looking well rested.', 'ok', 'home']
   ]}
 ];
 
 const BANNERS = {
-  Thu: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="A plane over the Atlas mountains at dusk"><defs><linearGradient id="bThu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B3184"/><stop offset=".65" stop-color="#7A5FB0"/><stop offset="1" stop-color="#F09A6B"/></linearGradient></defs><rect width="360" height="130" fill="url(#bThu)"/><g fill="#fff" opacity=".8"><circle cx="40" cy="20" r="1.2"/><circle cx="90" cy="34" r="1"/><circle cx="150" cy="14" r="1.3"/><circle cx="230" cy="28" r="1"/><circle cx="300" cy="12" r="1.2"/><circle cx="330" cy="40" r="1"/></g><path d="M312 22a12 12 0 1 0 9 20 10 10 0 1 1-9-20z" fill="#FFE7A3"/><path d="M0 130V96l40-30 30 18 46-44 40 34 34-22 52 40 30-20 50 36 38-26v74z" fill="#2A2160"/><path d="M116 40l-12 12 10-4 6 6 6-6 6 4zM190 52l-10 8 8-2 4 4 6-4zM46 66l-8 6 7-1 5 3z" fill="#fff" opacity=".9"/><path d="M0 130v-14l60-18 70 10 60-16 80 14 90-12v36z" fill="#1A1440"/><path d="M40 92C100 70 170 60 236 52" fill="none" stroke="#F4C430" stroke-width="1.6" stroke-dasharray="3 6" opacity=".9"/><g transform="translate(248 50) rotate(78)"><path d="M10 13v-1.5l-6-3.7V3.5a1 1 0 0 0-2 0v4.3L-4 11.5V13l6-1.9V15l-1.5 1.1V17l2.5-.7 2.5.7v-1.1L4 15v-3.9z" fill="#F4C430" transform="scale(1.6)"/></g></svg>`,
-  Fri: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="Lanterns hanging in the souk"><defs><linearGradient id="bFri" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E2410"/><stop offset="1" stop-color="#C8762A"/></linearGradient><radialGradient id="glow"><stop offset="0" stop-color="#FFD873" stop-opacity=".7"/><stop offset="1" stop-color="#FFD873" stop-opacity="0"/></radialGradient></defs><rect width="360" height="130" fill="url(#bFri)"/><g fill="#4A1C0B" opacity=".75"><path d="M0 130V96a22 22 0 0 1 44 0v34zM56 130V96a22 22 0 0 1 44 0v34zM112 130V96a22 22 0 0 1 44 0v34zM168 130V96a22 22 0 0 1 44 0v34zM224 130V96a22 22 0 0 1 44 0v34zM280 130V96a22 22 0 0 1 44 0v34zM336 130V96a22 22 0 0 1 44 0v34z"/></g>${[[44,38,1],[110,58,.8],[180,30,1.15],[250,62,.85],[316,42,1]].map(([x,y,k])=>`<g transform="translate(${x} 0)"><path d="M0 0V${y}" stroke="#F4C430" stroke-opacity=".6"/><g transform="translate(0 ${y}) scale(${k})"><circle cy="20" r="26" fill="url(#glow)"/><path d="M-6 0h12l-3 5h-6z" fill="#F4C430"/><path d="M-9 5h18c5 8 5 22 0 30h-18c-5-8-5-22 0-30z" fill="#F4C430"/><g fill="#8E3B1E"><path d="M0 10l2 4-2 4-2-4z"/><circle cx="-5" cy="22" r="1.4"/><circle cx="5" cy="22" r="1.4"/><path d="M0 24l2 4-2 4-2-4z"/></g><path d="M-6 35h12l-6 7z" fill="#F4C430"/></g></g>`).join('')}</svg>`,
-  Sat: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="A camel crossing the desert at sunset"><defs><linearGradient id="bSat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4C430"/><stop offset=".55" stop-color="#E5783F"/><stop offset="1" stop-color="#B5473F"/></linearGradient></defs><rect width="360" height="130" fill="url(#bSat)"/><circle cx="250" cy="80" r="34" fill="#FFE7A3" opacity=".95"/><path d="M0 130V88c50-14 100-12 150 2s110 6 210-10v50z" fill="#C8762A"/><path d="M0 130v-24c70-18 140 4 200-6s110-14 160 0v30z" fill="#A8532B"/><g transform="translate(96 66) scale(.95)" fill="#3A1A10"><path d="M0 30C2 18 10 14 16 18 20 8 30 8 33 18c3-2 7-4 9-8l4-6c2-2 6-1 6 2l-2 2c-3 4-4 10-6 14v18h-2l-1-14-3 2-1 12h-2l-1-12H18l-2 12h-2V30l-4 10H8l1-12C4 28 1 32 0 30z"/></g><g transform="translate(150 74) scale(.75)" fill="#3A1A10"><path d="M0 30C2 18 10 14 16 18 20 8 30 8 33 18c3-2 7-4 9-8l4-6c2-2 6-1 6 2l-2 2c-3 4-4 10-6 14v18h-2l-1-14-3 2-1 12h-2l-1-12H18l-2 12h-2V30l-4 10H8l1-12C4 28 1 32 0 30z"/></g><path d="M0 130v-10c90-12 200 6 360-6v16z" fill="#7A3420"/><g stroke="#3A1A10" stroke-width="1.6" fill="none" stroke-linecap="round"><path d="M60 30q5-5 10 0q5-5 10 0"/><path d="M90 20q4-4 8 0q4-4 8 0"/></g></svg>`,
-  Sun: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="The Koutoubia minaret in the morning"><defs><linearGradient id="bSun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD9EE"/><stop offset="1" stop-color="#F6DFC0"/></linearGradient></defs><rect width="360" height="130" fill="url(#bSun)"/><circle cx="70" cy="44" r="18" fill="#F4C430" opacity=".85"/><g fill="#C47A4E"><rect x="196" y="30" width="46" height="100"/><rect x="208" y="12" width="22" height="20"/><g><rect x="196" y="24" width="7" height="7"/><rect x="209" y="24" width="7" height="7"/><rect x="222" y="24" width="7" height="7"/><rect x="235" y="24" width="7" height="7"/></g></g><path d="M219 12V0" stroke="#A85F38" stroke-width="2"/><g fill="#F4C430"><circle cx="219" cy="2" r="2.4"/><circle cx="219" cy="7" r="3"/></g><g fill="#8E4A2A"><path d="M206 64v-8a5 5 0 0 1 10 0v8zM222 64v-8a5 5 0 0 1 10 0v8zM211 96V84a8 8 0 0 1 16 0v12z"/><rect x="200" y="42" width="38" height="3"/></g><g fill="#2E6B4F"><path d="M120 130v-58h4v58z"/><path d="M122 72c-14-8-26-4-32 4 10-6 22-4 32-2zM122 72c4-14 16-20 28-16-12 0-22 8-28 16zM122 72c14-6 28-2 34 8-10-6-22-6-34-8zM122 72c-8-12-20-16-30-10 12-2 22 4 30 10z"/><path d="M296 130v-46h3v46z"/><path d="M297 84c-12-6-22-2-26 4 8-4 18-4 26-4zM297 84c10-8 22-6 28 2-8-4-18-4-28-2zM297 84c-2-12 6-20 16-20-8 4-14 12-16 20z"/></g><path d="M0 130v-12h360v12z" fill="#D9A877"/><g stroke="#5A6180" stroke-width="1.4" fill="none" stroke-linecap="round"><path d="M150 30q4-4 8 0q4-4 8 0"/><path d="M270 22q3-3 6 0q3-3 6 0"/></g></svg>`
+  Thu: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="A plane over the Atlas mountains at dusk"><defs><linearGradient id="bThu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B3184"/><stop offset=".65" stop-color="#7A5FB0"/><stop offset="1" stop-color="#F09A6B"/></linearGradient></defs><rect width="360" height="130" fill="url(#bThu)"/><g fill="#fff">${[[40,20,1.2,0],[90,34,1,.7],[150,14,1.3,1.4],[230,28,1,.3],[300,12,1.2,1.1],[330,40,1,1.9],[190,40,.9,2.4],[268,8,1,.9]].map(([x,y,r,b])=>`<circle cx="${x}" cy="${y}" r="${r}"><animate attributeName="opacity" values=".9;.2;.9" dur="2.4s" begin="${b}s" repeatCount="indefinite"/></circle>`).join('')}</g><path d="M312 22a12 12 0 1 0 9 20 10 10 0 1 1-9-20z" fill="#FFE7A3"/><path d="M0 130V96l40-30 30 18 46-44 40 34 34-22 52 40 30-20 50 36 38-26v74z" fill="#2A2160"/><path d="M116 40l-12 12 10-4 6 6 6-6 6 4zM190 52l-10 8 8-2 4 4 6-4zM46 66l-8 6 7-1 5 3z" fill="#fff" opacity=".9"/><path d="M0 130v-14l60-18 70 10 60-16 80 14 90-12v36z" fill="#1A1440"/><path d="M-20 104C60 80 160 56 380 30" fill="none" stroke="#F4C430" stroke-width="1.6" stroke-dasharray="3 6" opacity=".7"><animate attributeName="stroke-dashoffset" values="0;-36" dur="1.2s" repeatCount="indefinite"/></path><g><path d="M-14 -8l2 0 7 6 10 0a2 2 0 0 1 0 4l-10 0-7 6-2 0 3-6-6 0-3 3-2 0 2-5-2-5 2 0 3 3 6 0z" fill="#F4C430" transform="scale(1.5)"/><animateMotion dur="7s" repeatCount="indefinite" rotate="auto" path="M-20 104C60 80 160 56 380 30"/></g></svg>`,
+  Fri: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="Lanterns hanging in the souk"><defs><linearGradient id="bFri" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5E2410"/><stop offset="1" stop-color="#C8762A"/></linearGradient><radialGradient id="glow"><stop offset="0" stop-color="#FFD873" stop-opacity=".7"/><stop offset="1" stop-color="#FFD873" stop-opacity="0"/></radialGradient></defs><rect width="360" height="130" fill="url(#bFri)"/><g fill="#4A1C0B" opacity=".75"><path d="M0 130V96a22 22 0 0 1 44 0v34zM56 130V96a22 22 0 0 1 44 0v34zM112 130V96a22 22 0 0 1 44 0v34zM168 130V96a22 22 0 0 1 44 0v34zM224 130V96a22 22 0 0 1 44 0v34zM280 130V96a22 22 0 0 1 44 0v34zM336 130V96a22 22 0 0 1 44 0v34z"/></g>${[[44,38,1],[110,58,.8],[180,30,1.15],[250,62,.85],[316,42,1]].map(([x,y,k])=>`<g transform="translate(${x} 0)"><g><animateTransform attributeName="transform" type="rotate" values="-5 0 0;5 0 0;-5 0 0" dur="${3+k}s" begin="-${x/90}s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/><path d="M0 0V${y}" stroke="#F4C430" stroke-opacity=".6"/><g transform="translate(0 ${y}) scale(${k})"><circle cy="20" r="26" fill="url(#glow)"><animate attributeName="opacity" values=".7;1;.75;1;.7" dur="${2+k}s" repeatCount="indefinite"/></circle><path d="M-6 0h12l-3 5h-6z" fill="#F4C430"/><path d="M-9 5h18c5 8 5 22 0 30h-18c-5-8-5-22 0-30z" fill="#F4C430"/><g fill="#8E3B1E"><path d="M0 10l2 4-2 4-2-4z"/><circle cx="-5" cy="22" r="1.4"/><circle cx="5" cy="22" r="1.4"/><path d="M0 24l2 4-2 4-2-4z"/></g><path d="M-6 35h12l-6 7z" fill="#F4C430"/></g></g></g>`).join('')}</svg>`,
+  Sat: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="A camel crossing the desert at sunset"><defs><linearGradient id="bSat" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4C430"/><stop offset=".55" stop-color="#E5783F"/><stop offset="1" stop-color="#B5473F"/></linearGradient></defs><rect width="360" height="130" fill="url(#bSat)"/><circle cx="250" cy="80" r="44" fill="#FFE7A3" opacity=".25"><animate attributeName="r" values="40;48;40" dur="5s" repeatCount="indefinite"/></circle><circle cx="250" cy="80" r="34" fill="#FFE7A3" opacity=".95"/><path d="M0 130V88c50-14 100-12 150 2s110 6 210-10v50z" fill="#C8762A"/><path d="M0 130v-24c70-18 140 4 200-6s110-14 160 0v30z" fill="#A8532B"/><g><animateTransform attributeName="transform" type="translate" values="-140 0;360 0" dur="38s" repeatCount="indefinite"/><g transform="translate(96 66) scale(.95)" fill="#3A1A10"><g><animateTransform attributeName="transform" type="translate" values="0 0;0 -1.5;0 0" dur=".9s" repeatCount="indefinite"/><path d="M0 30C2 18 10 14 16 18 20 8 30 8 33 18c3-2 7-4 9-8l4-6c2-2 6-1 6 2l-2 2c-3 4-4 10-6 14v18h-2l-1-14-3 2-1 12h-2l-1-12H18l-2 12h-2V30l-4 10H8l1-12C4 28 1 32 0 30z"/></g></g><g transform="translate(150 74) scale(.75)" fill="#3A1A10"><g><animateTransform attributeName="transform" type="translate" values="0 -1.5;0 0;0 -1.5" dur=".9s" repeatCount="indefinite"/><path d="M0 30C2 18 10 14 16 18 20 8 30 8 33 18c3-2 7-4 9-8l4-6c2-2 6-1 6 2l-2 2c-3 4-4 10-6 14v18h-2l-1-14-3 2-1 12h-2l-1-12H18l-2 12h-2V30l-4 10H8l1-12C4 28 1 32 0 30z"/></g></g></g><path d="M0 130v-10c90-12 200 6 360-6v16z" fill="#7A3420"/><g stroke="#3A1A10" stroke-width="1.6" fill="none" stroke-linecap="round"><animateTransform attributeName="transform" type="translate" values="-120 10;420 -20" dur="16s" repeatCount="indefinite"/><path d="M60 30q5-5 10 0q5-5 10 0"><animate attributeName="d" values="M60 30q5-5 10 0q5-5 10 0;M60 30q5 2 10 0q5 2 10 0;M60 30q5-5 10 0q5-5 10 0" dur=".6s" repeatCount="indefinite"/></path><path d="M90 20q4-4 8 0q4-4 8 0"><animate attributeName="d" values="M90 20q4 2 8 0q4 2 8 0;M90 20q4-4 8 0q4-4 8 0;M90 20q4 2 8 0q4 2 8 0" dur=".55s" repeatCount="indefinite"/></path></g></svg>`,
+  Sun: `<svg class="banner" viewBox="0 0 360 130" role="img" aria-label="The Koutoubia minaret in the morning"><defs><linearGradient id="bSun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#BFD9EE"/><stop offset="1" stop-color="#F6DFC0"/></linearGradient></defs><rect width="360" height="130" fill="url(#bSun)"/><circle cx="70" cy="44" r="18" fill="#F4C430" opacity=".85"><animate attributeName="cy" values="70;44" dur="4s" fill="freeze"/></circle><g fill="#C47A4E"><rect x="196" y="30" width="46" height="100"/><rect x="208" y="12" width="22" height="20"/><g><rect x="196" y="24" width="7" height="7"/><rect x="209" y="24" width="7" height="7"/><rect x="222" y="24" width="7" height="7"/><rect x="235" y="24" width="7" height="7"/></g></g><path d="M219 12V0" stroke="#A85F38" stroke-width="2"/><g fill="#F4C430"><circle cx="219" cy="2" r="2.4"/><circle cx="219" cy="7" r="3"/></g><g fill="#8E4A2A"><path d="M206 64v-8a5 5 0 0 1 10 0v8zM222 64v-8a5 5 0 0 1 10 0v8zM211 96V84a8 8 0 0 1 16 0v12z"/><rect x="200" y="42" width="38" height="3"/></g><g fill="#2E6B4F"><path d="M120 130v-58h4v58z"/><g><animateTransform attributeName="transform" type="rotate" values="-3 122 72;3 122 72;-3 122 72" dur="4.5s" repeatCount="indefinite"/><path d="M122 72c-14-8-26-4-32 4 10-6 22-4 32-2zM122 72c4-14 16-20 28-16-12 0-22 8-28 16zM122 72c14-6 28-2 34 8-10-6-22-6-34-8zM122 72c-8-12-20-16-30-10 12-2 22 4 30 10z"/></g><path d="M296 130v-46h3v46z"/><g><animateTransform attributeName="transform" type="rotate" values="2 297 84;-3 297 84;2 297 84" dur="5s" repeatCount="indefinite"/><path d="M297 84c-12-6-22-2-26 4 8-4 18-4 26-4zM297 84c10-8 22-6 28 2-8-4-18-4-28-2zM297 84c-2-12 6-20 16-20-8 4-14 12-16 20z"/></g></g><path d="M0 130v-12h360v12z" fill="#D9A877"/><g stroke="#5A6180" stroke-width="1.4" fill="none" stroke-linecap="round"><animateTransform attributeName="transform" type="translate" values="-200 6;260 -10" dur="20s" repeatCount="indefinite"/><path d="M150 30q4-4 8 0q4-4 8 0"><animate attributeName="d" values="M150 30q4-4 8 0q4-4 8 0;M150 30q4 2 8 0q4 2 8 0;M150 30q4-4 8 0q4-4 8 0" dur=".7s" repeatCount="indefinite"/></path><path d="M170 22q3-3 6 0q3-3 6 0"><animate attributeName="d" values="M170 22q3 2 6 0q3 2 6 0;M170 22q3-3 6 0q3-3 6 0;M170 22q3 2 6 0q3 2 6 0" dur=".6s" repeatCount="indefinite"/></path></g></svg>`
+};
+
+const ICONS = {
+  bag: '<rect x="5" y="7" width="14" height="13" rx="2"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M9 11v5M15 11v5"/>',
+  takeoff: '<path d="M3 20h18"/><path d="M4 14.5l3.5 1.2 4-2.4-6-4.3 1.6-.8 8 2.7 3.3-2a2 2 0 0 1 2 3.4L7.5 18.5 3 16.6z"/>',
+  landing: '<path d="M3 20h18"/><path d="M4 9l2-1 3 2 4-.2-3.5-6.3 1.8.1 6 6.1 3.6.8a2 2 0 0 1-.8 3.9L5 13z"/>',
+  car: '<path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v3H3zM5 11h14"/><circle cx="7.5" cy="13.5" r=".8" fill="currentColor"/><circle cx="16.5" cy="13.5" r=".8" fill="currentColor"/>',
+  jeep: '<path d="M3 15V9h11l3 4h4v2"/><path d="M8 9V6h4"/><circle cx="7" cy="16" r="2.5"/><circle cx="17" cy="16" r="2.5"/>',
+  dine: '<path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10"/><path d="M17 21V3c-2 1.5-3 4-3 7v3h3"/>',
+  cocktail: '<path d="M4 4h16l-8 9z"/><path d="M12 13v7M8 20h8M15 4l2-2"/>',
+  cup: '<path d="M4 9h12v4a6 6 0 0 1-12 0z"/><path d="M16 10h1.5a2.5 2.5 0 0 1 0 5H16M8 3c-1 1.5 1 2.5 0 4M12 3c-1 1.5 1 2.5 0 4"/>',
+  lantern: '<path d="M12 2v3M9 5h6l-1 2h-4z"/><path d="M8 7h8c2 4 2 9 0 12H8c-2-3-2-8 0-12z"/><path d="M10 19l2 3 2-3M12 10v6"/>',
+  arch: '<path d="M4 21V11a8 8 0 0 1 16 0v10"/><path d="M8 21v-9a4 4 0 0 1 8 0v9M2 21h20"/>',
+  steam: '<path d="M8 4c-1 1.5 1 2.5 0 4M12 3c-1 1.5 1 2.5 0 4M16 4c-1 1.5 1 2.5 0 4"/><path d="M3 12h18v3a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6z"/>',
+  tagine: '<path d="M12 3v2"/><path d="M12 5c-2 4-6 7-8 10h16c-2-3-6-6-8-10z"/><path d="M2 15h20l-2 4H4z"/>',
+  bed: '<path d="M3 18V8M3 14h18v4M21 14v-2a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11" r="1.6"/>',
+  pool: '<path d="M2 17c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5M2 21c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/><path d="M8 14V5a2 2 0 0 1 4 0M15 14V5a2 2 0 0 1 4 0M8 8h7M8 11.5h7"/>',
+  fire: '<path d="M12 3c1 3 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5 1-8.5z"/><path d="M4 21l16-3M20 21L4 18"/>',
+  stars: '<path d="M12 3l1.8 3.9 4.2.5-3.1 2.9.8 4.2L12 12.4l-3.7 2.1.8-4.2L6 7.4l4.2-.5z"/><path d="M5 18l.8 1.6 1.7.2-1.3 1.1.4 1.7L5 21.8l-1.6.8.4-1.7-1.3-1.1 1.7-.2zM19 16l.7 1.4 1.5.2-1.1 1 .3 1.5-1.4-.8-1.4.8.3-1.5-1.1-1 1.5-.2z"/>',
+  tower: '<path d="M8 21V7h8v14M10 7V4h4v3M12 4V2M6 21h12M10.5 13v-1.5a1.5 1.5 0 0 1 3 0V13M8 9.5h8"/>',
+  home: '<path d="M3 11l9-7 9 7"/><path d="M5 10v11h14V10M10 21v-6h4v6"/>'
 };
 const DAYCOL = { Thu: '#2442A8', Fri: '#B8661F', Sat: '#B5473F', Sun: '#2E6B4F' };
 (function(){
@@ -648,6 +748,7 @@ const DAYCOL = { Thu: '#2442A8', Fri: '#B8661F', Sat: '#B5473F', Sun: '#2E6B4F' 
     sw.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-pressed', j === i ? 'true' : 'false'));
     document.getElementById('dayhead').textContent = day.title;
     document.getElementById('banner').innerHTML = BANNERS[day.short];
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { const b = document.querySelector('#banner svg'); if (b && b.pauseAnimations) b.pauseAnimations(); }
     document.getElementById('plan').style.setProperty('--day', DAYCOL[day.short]);
     document.getElementById('daynote').textContent = day.note;
     list.innerHTML = '';
@@ -656,7 +757,7 @@ const DAYCOL = { Thu: '#2442A8', Fri: '#B8661F', Sat: '#B5473F', Sun: '#2E6B4F' 
       const li = document.createElement('li');
       if (nextAt && now >= nextAt) li.className = 'past';
       else if (now >= at && (!nextAt || now < nextAt) && now < HOME) li.className = 'now';
-      li.innerHTML = '<time>' + s[0] + '</time><div><strong>' + s[1] + '</strong><p>' + s[2] + '</p>' + label[s[3]] + '</div>';
+      li.innerHTML = '<div class="when"><time>' + s[0] + '</time><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[s[4]] || '') + '</g></svg></span></div><div><strong>' + s[1] + '</strong><p>' + s[2] + '</p>' + label[s[3]] + '</div>';
       list.appendChild(li);
     });
   }
@@ -723,7 +824,7 @@ window.souksRateReady = fetch('https://open.er-api.com/v6/latest/GBP')
   const r10 = n => Math.max(10, Math.round(n / 10) * 10);
   const pick = a => a[Math.floor(Math.random() * a.length)];
   let item, fair, ask, rounds, done, last = -1;
-  const say = t => { $('hgSay').textContent = t; };
+  const say = t => { const b = $('hgSay'); b.textContent = t; b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop'); };
   const lock = on => ['hgGo', 'hgTake', 'hgWalk', 'hgOffer'].forEach(id => $(id).disabled = on);
   const showAsk = () => { $('hgAsk').textContent = ask.toLocaleString('en-GB') + ' MAD'; };
   function fresh(){
@@ -736,6 +837,7 @@ window.souksRateReady = fetch('https://open.er-api.com/v6/latest/GBP')
     const x = p / fair, gbp = (p / window.souksRate.mad).toFixed(2);
     const v = x <= 0.9 ? ['good', 'Local price. Hassan is quietly impressed.'] : x <= 1.15 ? ['good', 'Fair price. Everyone goes home happy.'] : x <= 1.7 ? ['bad', 'You paid the tourist tax.'] : ['bad', 'Hassan is shutting up shop early to celebrate.'];
     say(x <= 1.15 ? 'Ah, you are a hard man. OK. Deal!' : 'Deal! Shukran, my friend. Come back tomorrow!');
+    if (x <= 1.15) window.coinBurst($('hgSay'));
     $('hgRes').innerHTML = 'Sold for ' + p.toLocaleString('en-GB') + ' MAD (£' + gbp + '). <span class="' + v[0] + '">' + v[1] + '</span> His fair price was about ' + fair + ' MAD.';
   }
   function offer(){
@@ -924,6 +1026,7 @@ $('kAdd').addEventListener('click', async () => {
   try {
     await fb.addDoc(col, { by: payer, amt, cur, gbp: val, rate, what: what.slice(0, 60), split: split.slice(), at: fb.serverTimestamp() });
     $('kAmt').value = ''; $('kWhat').value = ''; split = K.slice(); form();
+    window.coinBurst(btn);
     msg('Added ' + (cur === 'MAD' ? mad(amt) + ' (' + gbp(val) + ')' : gbp(amt)) + '.');
   } catch (e) { msg('Couldn\'t save (' + (e.code || 'error') + '). Try again.', true); }
   btn.disabled = false;
