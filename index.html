@@ -810,7 +810,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="13">Version 13, 18 Oct, 21:35</p>
+  <p id="ver" data-v="14">Version 14, 18 Oct, 21:45</p>
 </div>
 
 </main>
@@ -1314,10 +1314,12 @@ const FX = (function(){
 
   /* Who turns up, and when */
   const ACTS = { camel, cat, carpet, plane, snake };
+  const live = new Set();
   function play(kind, manual){
-    if (STILL || (busy && !manual)) return Promise.resolve();
-    busy = true;
-    return (ACTS[kind] || camel)(manual).catch(() => {}).then(() => { busy = false; });
+    kind = ACTS[kind] ? kind : 'camel';
+    if (STILL || live.has(kind) || (busy && !manual)) return Promise.resolve();
+    busy = true; live.add(kind);
+    return ACTS[kind](manual).catch(() => {}).then(() => { live.delete(kind); busy = live.size > 0; });
   }
   const roamer = () => { const k = tripDay(NOW()); return k === 'Fri' ? (Math.random() < .5 ? 'cat' : 'camel') : k === 'Sat' ? (Math.random() < .6 ? 'carpet' : 'camel') : 'camel'; };
   if (!STILL) {
@@ -1369,7 +1371,7 @@ const FX = (function(){
       + (btn ? '<button class="tb" type="button"' + (vote && voted ? ' disabled' : '') + '>' + (vote && voted ? CARRIED : c[3]) + '</button>' : '') + '</div>';
     const b = el.querySelector('.tb');
     if (b) b.addEventListener('click', () => {
-      if (!vote) { FX.play(c[4], true); return; }
+      if (!vote) { if (b.disabled) return; b.disabled = true; FX.play(c[4], true).then(() => { b.disabled = false; }); return; }
       voted = true; try { localStorage.setItem('souks-vote', '1'); } catch (e) {}
       b.textContent = CARRIED; b.disabled = true; window.coinBurst(b);
     });
