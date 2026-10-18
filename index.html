@@ -776,7 +776,7 @@ const DEPART = T(12, '14:25'), HOME = T(15, '17:00');
 /* ---------- Itinerary ---------- */
 const DAYS = [
   { d: 12, short: 'Thu', title: 'Thursday, getting there', note: 'Out of the office and into the riad.', stops: [
-    ['11:15', 'Meet at St Pancras International', 'Thameslink to Luton Airport Parkway (about 35 minutes), then the DART shuttle up to the terminal. No need to book: tap in and out with a contactless card or phone, including for the DART.', 'ok', 'train'],
+    ['11:15', 'Meet at St Pancras International', 'Thameslink to Luton Airport Parkway (about 35 minutes), then the DART shuttle up to the terminal. No need to book: tap in and out with a contactless card or phone, including for the DART.', 'tap', 'train'],
     ['12:45', 'Airside at Luton', 'Cabin bags only, so check in online and go straight through security. Bag drop closes 13:25.', 'ok', 'bag'],
     ['14:25', 'EZY2623 takes off', 'Just under four hours. Last decent pint for a while.', 'ok', 'takeoff'],
     ['18:10', 'Land at Menara', 'Passport control can be slow. Get dirhams from an ATM in arrivals before leaving the terminal.', 'ok', 'landing'],
@@ -839,7 +839,7 @@ const ICONS = {
 const DAYCOL = { Thu: '#2442A8', Fri: '#B8661F', Sat: '#B5473F', Sun: '#2E6B4F' };
 (function(){
   const sw = document.getElementById('dayswitch'), list = document.getElementById('stops');
-  const label = { ok: '<span class="st ok">Booked</span>', book: '<span class="st book">Needs booking</span>', '': '' };
+  const label = { ok: '<span class="st ok">Booked</span>', book: '<span class="st book">Needs booking</span>', tap: '<span class="st ok">Tap to pay</span>', '': '' };
   const all = [];
   DAYS.forEach((day, i) => day.stops.forEach(s => all.push({ i, at: T(day.d, s[0]), s })));
   function show(i){
