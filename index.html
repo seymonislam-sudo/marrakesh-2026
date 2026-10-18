@@ -676,7 +676,7 @@ details > :not(summary){margin-bottom:16px}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver">Version 9, 17 Oct, 11:51</p>
+  <p id="ver" data-v="10">Version 10, 18 Oct, 16:40</p>
 </div>
 
 </main>
@@ -1159,6 +1159,13 @@ try {
 </script>
 <script>
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+</script>
+<script>
+(() => {
+  const el = document.getElementById('ver'), d = new Date(document.lastModified);
+  if (!el || isNaN(d) || Date.now() - d < 60000) return;
+  el.textContent = 'Version ' + el.dataset.v + ', ' + d.toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Europe/London' }).replace(' at ', ', ');
+})();
 </script>
 </body>
 </html>
