@@ -2,7 +2,7 @@
 // Site files and the Firebase library are cached on first visit.
 // Exchange rate and weather use the network first, falling back to the last copy.
 // The kitty's own data is handled by Firebase's offline cache, not here.
-const V = 'souks-v3';
+const V = 'souks-v4';
 const CORE = [
   './',
   'index.html',
