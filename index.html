@@ -24,10 +24,15 @@
 <meta name="twitter:image" content="https://seymonislam-sudo.github.io/marrakesh-2026/preview-v2.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232442A8'/%3E%3Cpath d='M18 52V30a14 14 0 0 1 28 0v22' fill='none' stroke='%23F4C430' stroke-width='6'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Karla:ital,wght@0,400;0,500;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/young-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/karla-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+@font-face{font-family:'Karla';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/karla-latin-400-normal.woff2) format('woff2')}
+@font-face{font-family:'Karla';font-style:italic;font-weight:400;font-display:swap;src:url(fonts/karla-latin-400-italic.woff2) format('woff2')}
+@font-face{font-family:'Karla';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/karla-latin-500-normal.woff2) format('woff2')}
+@font-face{font-family:'Karla';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/karla-latin-700-normal.woff2) format('woff2')}
+@font-face{font-family:'Karla';font-style:normal;font-weight:800;font-display:swap;src:url(fonts/karla-latin-800-normal.woff2) format('woff2')}
+@font-face{font-family:'Young Serif';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/young-serif-latin-400-normal.woff2) format('woff2')}
 :root{
   --paper:#F3F4F8;     /* cool lime-wash */
   --surface:#FFFFFF;
@@ -585,6 +590,21 @@ details > :not(summary){margin-bottom:16px}
 
   <div class="block">
     <details>
+      <summary>Food backups</summary>
+      <p class="plain">If a booking falls through or you're hungry between plans. Prices are rough, per head, with a drink.</p>
+      <dl class="phrases">
+        <div><dt>Kabana<i>Next to the Koutoubia · ~£25–35</i></dt><dd>Rooftop tapas and cocktails, a few minutes' walk from the riad. Good first or last drink.</dd></div>
+        <div><dt>Jemaa el-Fna stalls<i>The main square · ~£5–10</i></dt><dd>Grilled meat, harira and snail soup at the numbered stalls after dark. Pick a busy one and agree prices first.</dd></div>
+        <div><dt>Café des Épices<i>Spice square · ~£8–12</i></dt><dd>Cheap and cheerful lunch on a roof above the spice market. No alcohol.</dd></div>
+        <div><dt>Le Jardin<i>Medina, near the souks · ~£20–30</i></dt><dd>Leafy courtyard in an old riad. A calm break from the souks.</dd></div>
+        <div><dt>Naranj<i>Off Riad Zitoun el Jdid · ~£20–30</i></dt><dd>Lebanese, with wine and beer. A change from tagine.</dd></div>
+        <div><dt>Al Fassia<i>Guéliz, short taxi · ~£25–35</i></dt><dd>Classic Moroccan cooking, run by women. Book ahead.</dd></div>
+      </dl>
+    </details>
+  </div>
+
+  <div class="block">
+    <details>
       <summary>Darija to get by</summary>
       <dl class="phrases">
         <div><dt>Salam alaykum<i>sa-laam a-lay-kum</i></dt><dd>Hello</dd></div>
@@ -1101,10 +1121,13 @@ $('kAdd').addEventListener('click', async () => {
   const rate = window.souksRate.mad, val = cur === 'MAD' ? Math.round(amt / rate * 100) / 100 : amt;
   const btn = $('kAdd'); btn.disabled = true; msg('Adding…');
   try {
-    await fb.addDoc(col, { by: payer, amt, cur, gbp: val, rate, what: what.slice(0, 60), split: split.slice(), at: fb.serverTimestamp() });
+    const saving = fb.addDoc(col, { by: payer, amt, cur, gbp: val, rate, what: what.slice(0, 60), split: split.slice(), at: fb.serverTimestamp() });
+    const synced = await Promise.race([saving.then(() => true), new Promise(r => setTimeout(() => r(false), navigator.onLine ? 6000 : 300))]);
     $('kAmt').value = ''; $('kWhat').value = ''; split = K.slice(); form();
     window.coinBurst(btn);
-    msg('Added ' + (cur === 'MAD' ? mad(amt) + ' (' + gbp(val) + ')' : gbp(amt)) + '.');
+    const what2 = cur === 'MAD' ? mad(amt) + ' (' + gbp(val) + ')' : gbp(amt);
+    msg(synced ? 'Added ' + what2 + '.' : 'Saved ' + what2 + ' on this phone. It will sync when you have signal.');
+    if (!synced) saving.then(() => msg('Synced. Everyone can see it now.')).catch(e => msg('Couldn\'t sync that spend (' + (e.code || 'error') + '). Add it again.', true));
   } catch (e) { msg('Couldn\'t save (' + (e.code || 'error') + '). Try again.', true); }
   btn.disabled = false;
 });
@@ -1120,7 +1143,10 @@ try {
     messagingSenderId: '185927616775',
     appId: '1:185927616775:web:393b7bf1dbdb4961d49da2'
   }, 'souks');
-  col = fb.collection(fb.getFirestore(app), 'souks-kitty');
+  let dbi;
+  try { dbi = fb.initializeFirestore(app, { localCache: fb.persistentLocalCache({ tabManager: fb.persistentMultipleTabManager() }) }); }
+  catch (e) { dbi = fb.getFirestore(app); }
+  col = fb.collection(dbi, 'souks-kitty');
   fb.onSnapshot(fb.query(col, fb.orderBy('at')), snap => {
     rows = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     render();
@@ -1128,6 +1154,9 @@ try {
 } catch (e) {
   msg('Can\'t reach the shared kitty. Check your signal and reload.', true);
 }
+</script>
+<script>
+if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
 </script>
 </body>
 </html>
