@@ -108,8 +108,25 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .block:first-of-type{margin-top:0}
 
 /* ---------- Plan ---------- */
-.nextup{background:var(--surface);border-left:4px solid var(--citron);padding:12px 16px;margin-bottom:24px;font-size:16px}
+.nextup{background:var(--surface);border:1px solid var(--rule);border-left:4px solid var(--citron);border-radius:0 12px 12px 0;padding:12px 16px;margin-bottom:24px;font-size:16px}
 .nextup b{font-weight:800}
+.nn-h{margin:0;font-size:12.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.nn-big{margin:2px 0 4px;font-family:var(--serif);font-size:25px;line-height:1.2;font-variant-numeric:tabular-nums}
+.nn-s{margin:0;color:var(--muted);font-size:15px}
+.nn-s b{color:var(--ink)}
+.nn-row{display:grid;grid-template-columns:50px 1fr;gap:10px;align-items:baseline;padding:7px 0}
+.nn-row + .nn-row{border-top:1px solid var(--rule)}
+.nn-tag{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-text);white-space:nowrap}
+.nn-tag.live{color:var(--cactus)}
+.nn-tag.live::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:currentColor;margin-right:5px;vertical-align:1px;animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{50%{opacity:.25}}
+.nn-row b{display:block;line-height:1.3}
+.nn-row span{color:var(--muted);font-size:14.5px;font-variant-numeric:tabular-nums}
+.nn-bar{height:4px;border-radius:2px;background:var(--rule);margin:0 0 4px 60px;overflow:hidden}
+.nn-bar i{display:block;height:100%;width:var(--p,0%);background:var(--citron);transition:width 1s}
+.nn-pray{margin:6px 0 0;padding-top:8px;border-top:1px dashed var(--rule);font-size:14.5px;color:var(--muted)}
+.nn-pray b{color:var(--ink)}
+@media (prefers-reduced-motion: reduce){.nn-tag.live::before{animation:none}}
 .dayswitch{display:flex;gap:4px;border-bottom:1px solid var(--rule);margin-bottom:22px;overflow-x:auto;scrollbar-width:none}
 .dayswitch::-webkit-scrollbar{display:none}
 .dayswitch button{flex:1;min-width:70px;background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-1px;padding:8px 4px 10px;cursor:pointer;text-align:center;color:var(--muted);font-weight:700;font-size:16px;line-height:1.2}
@@ -306,6 +323,95 @@ details > :not(summary){margin-bottom:16px}
 .colophon{color:var(--muted);font-size:14px;padding:8px 0 28px;border-top:1px solid var(--rule);margin-top:8px}
 .colophon p{margin:12px 0 0}
 @media (max-width:370px){.has{columns:1}.wx{grid-template-columns:repeat(2,1fr)}.bal .v{font-size:19px}}
+
+/* ---------- Night: lanterns glow after Marrakesh sunset ---------- */
+header.ready{transition:background-color 1.5s}
+header.night{background:#14256E}
+header .lglow{opacity:.15}
+header.ready .lglow{transition:opacity 1.5s}
+header.night .lglow{opacity:1;animation:flick 3.4s linear infinite}
+header.night .lglow.b{animation-duration:4.1s;animation-delay:-1.2s}
+header.night .lglow.c{animation-duration:2.9s;animation-delay:-.6s}
+@keyframes flick{0%,100%{opacity:1}6%{opacity:.72}8%{opacity:1}31%{opacity:.9}33%{opacity:.66}36%{opacity:1}58%{opacity:.86}79%{opacity:1}82%{opacity:.62}85%{opacity:.95}}
+header .stars{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none}
+header.ready .stars{transition:opacity 2s}
+header.night .stars{opacity:1}
+header .stars circle{animation:twinkle 2.8s ease-in-out infinite alternate}
+header .stars circle:nth-child(3n){animation-delay:-1s;animation-duration:3.6s}
+header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
+@keyframes twinkle{from{opacity:.95}to{opacity:.2}}
+@media (prefers-reduced-motion: reduce){header.night .lglow,header .stars circle{animation:none}}
+
+/* ---------- Today ribbon ---------- */
+.today{background:var(--citron);color:#141B3D}
+.today[hidden]{display:none}
+.today .wrap{display:flex;gap:14px;align-items:center;padding-top:14px;padding-bottom:14px}
+.today .ti{flex:none;width:42px;height:42px}
+.today .tx{flex:1;min-width:0}
+.today .tx b{display:block;font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.15}
+.today .tx span{display:block;font-size:15px;line-height:1.4;margin-top:3px}
+.today .tb{flex:none;border:0;border-radius:99px;padding:9px 14px;font-weight:800;font-size:14.5px;cursor:pointer;background:#141B3D;color:#fff;min-height:40px;max-width:44%;line-height:1.2}
+.today .tb:disabled{cursor:default;opacity:.9}
+.today.thu{background:#FF6600;color:#141B3D}
+.today.fri{background:#141B3D;color:#E7E9F5}.today.fri .tx b{color:#F4C430}.today.fri .tb{background:#F4C430;color:#141B3D}
+.today.sat{background:#B5473F;color:#fff}.today.sat .tx b{color:#FFE7A3}.today.sat .tb{background:#FFE7A3;color:#5E2410}
+.today.sun{background:#2E6B4F;color:#fff}.today.sun .tx b{color:#F4C430}.today.sun .tb{background:#F4C430;color:#141B3D}
+@media (max-width:560px){.today .wrap{flex-wrap:wrap;row-gap:10px}.today .tx{min-width:calc(100% - 56px)}.today .tb{margin-left:56px;max-width:none}}
+
+/* ---------- Call to prayer ---------- */
+.prayers{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.prayers li{background:var(--surface);border:1px solid var(--rule);border-radius:10px;padding:9px 11px;line-height:1.25}
+.prayers b{display:block;font-size:14px;color:var(--muted);font-weight:700}
+.prayers span{font-family:var(--serif);font-size:22px;font-variant-numeric:tabular-nums}
+.prayers i{display:block;font-style:normal;font-size:13px;font-weight:700;color:var(--cactus);min-height:1em}
+.prayers li.next{border-color:var(--citron);box-shadow:inset 0 0 0 1.5px var(--citron)}
+.prayers li.past{opacity:.5}
+
+/* ---------- Visitors: camel, cat, carpet, plane, snake ---------- */
+.fx{position:fixed;left:0;z-index:35;pointer-events:none;will-change:transform;bottom:calc(var(--tabh) + env(safe-area-inset-bottom) - 3px)}
+@media (min-width:760px){.fx{bottom:-3px}}
+.fx.sky{bottom:auto;top:0}
+.fx svg{display:block;overflow:visible}
+.fx .hit{pointer-events:auto;cursor:pointer}
+.bub{position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%) scale(.5);transform-origin:50% 100%;opacity:0;background:#fff;color:#141B3D;font:700 14.5px/1.25 var(--sans);padding:7px 12px;border-radius:12px;white-space:nowrap;box-shadow:0 6px 18px -8px rgba(0,0,0,.55);transition:transform .3s cubic-bezier(.3,1.6,.5,1),opacity .2s}
+.bub::after{content:"";position:absolute;top:100%;left:50%;margin-left:-6px;border:6px solid transparent;border-top-color:#fff}
+.bub.on{opacity:1;transform:translateX(-50%) scale(1)}
+.camel .lg{transform-box:fill-box;transform-origin:50% 0}
+.camel.walk .lg.p1{animation:stride .9s ease-in-out infinite alternate}
+.camel.walk .lg.p2{animation:stride .9s ease-in-out infinite alternate-reverse}
+.camel.walk .bd{animation:bob .45s ease-in-out infinite alternate}
+@keyframes stride{from{transform:rotate(15deg)}to{transform:rotate(-15deg)}}
+@keyframes bob{from{transform:translateY(0)}to{transform:translateY(-1.6px)}}
+.camel .hd{transform-box:view-box;transform-origin:88px 34px;transition:transform .5s ease}
+.camel.look .hd{transform:rotate(-9deg)}
+.camel .eye{transform-box:fill-box;transform-origin:center;animation:wink 4s infinite}
+@keyframes wink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.1)}}
+.camel.wave .lg.wv{animation:wave .32s ease-in-out infinite alternate!important}
+@keyframes wave{from{transform:rotate(-95deg)}to{transform:rotate(-135deg)}}
+.carpet .cm{animation:bob 1.1s ease-in-out infinite alternate}
+.snake{left:50%;margin-left:-70px;transform:translateY(105%);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.snake.in{transform:none}
+.snake .lid{transform-box:view-box;transform-origin:70px 147px;transition:transform .45s cubic-bezier(.3,1.5,.5,1)}
+.snake.open .lid{transform:translate(46px,-20px) rotate(28deg)}
+.snake .sn{transform:translateY(142px);transition:transform 1.7s cubic-bezier(.25,.8,.25,1)}
+.snake.up .sn{transform:none}
+.snake .sw{transform-box:view-box;transform-origin:70px 150px}
+.snake.up .sw{animation:sway 2.6s ease-in-out 1.4s infinite alternate}
+@keyframes sway{from{transform:rotate(-7deg)}to{transform:rotate(7deg)}}
+.snake .hood{transform-box:fill-box;transform-origin:50% 40%;transform:scaleX(.42);transition:transform .45s cubic-bezier(.3,1.6,.5,1) 1.3s}
+.snake.up .hood{transform:none}
+.snake .tg{opacity:0}
+.snake.up .tg{animation:tongue 1.9s 2s infinite}
+@keyframes tongue{0%,70%,100%{opacity:0}74%,82%{opacity:1}78%{opacity:0}}
+.snake .note{position:absolute;left:8px;bottom:40px;width:18px;height:22px;color:#F4C430;filter:drop-shadow(0 1px 1px rgba(0,0,0,.4));animation:float 2.6s ease-out forwards}
+@keyframes float{0%{transform:translate(0,0) rotate(-10deg);opacity:0}15%{opacity:1}100%{transform:translate(var(--nx,-30px),-150px) rotate(14deg);opacity:0}}
+.snake .tune{position:absolute;right:calc(100% - 18px);bottom:118px;pointer-events:auto;border:0;border-radius:99px;padding:7px 12px 7px 9px;background:#141B3D;color:#fff;font:800 13.5px/1.2 var(--sans);white-space:nowrap;display:flex;align-items:center;gap:6px;cursor:pointer;box-shadow:0 6px 16px -8px rgba(0,0,0,.6);opacity:0;transition:opacity .3s}
+.snake.up .tune{opacity:1;transition-delay:1.6s}
+.snake .tune svg{width:16px;height:16px;color:#F4C430}
+.bcat .ceye{transform-box:fill-box;transform-origin:center;transition:transform .3s}
+.bcat.stare .ceye{transform:scale(1.6)}
+.bcat.stare{filter:drop-shadow(0 0 3px rgba(244,196,48,.55))}
+@media (prefers-reduced-motion: reduce){.fx{display:none}}
 </style>
 </head>
 <body>
@@ -315,6 +421,7 @@ details > :not(summary){margin-bottom:16px}
 </defs></svg>
 
 <header>
+  <svg class="stars" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g fill="#fff"><circle cx="22" cy="18" r="1.3"/><circle cx="64" cy="44" r="1"/><circle cx="118" cy="12" r="1.5"/><circle cx="170" cy="36" r="1"/><circle cx="214" cy="16" r="1.2"/><circle cx="262" cy="52" r="1"/><circle cx="300" cy="22" r="1.4"/><circle cx="342" cy="40" r="1"/><circle cx="380" cy="14" r="1.2"/><circle cx="96" cy="70" r=".9"/><circle cx="236" cy="84" r=".9"/><circle cx="12" cy="96" r="1"/><circle cx="150" cy="104" r=".8"/><circle cx="318" cy="96" r=".9"/></g></svg>
   <svg class="scene" viewBox="0 0 190 330" preserveAspectRatio="xMaxYMax meet" aria-hidden="true">
     <path d="M44 330V196A54 54 0 1 1 146 196V330Z" fill="#F4C430"/>
     <path d="M56 330V198A42 42 0 1 1 134 198V330Z" fill="#0E2163"/>
@@ -336,11 +443,27 @@ details > :not(summary){margin-bottom:16px}
     <g>
       <animateTransform attributeName="transform" type="rotate" values="-7 95 104;7 95 104;-7 95 104" dur="3.4s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/>
       <path d="M95 104V128" stroke="#F4C430" stroke-width="1.5"/>
-      <circle cx="95" cy="150" r="26" fill="#F4C430" opacity=".22"><animate attributeName="opacity" values=".18;.32;.22;.36;.18" dur="2.6s" repeatCount="indefinite"/><animate attributeName="r" values="24;28;25;29;24" dur="2.6s" repeatCount="indefinite"/></circle>
+      <g class="lglow"><circle cx="95" cy="150" r="34" fill="#F4C430" opacity=".14"/><circle cx="95" cy="150" r="26" fill="#F4C430" opacity=".22"><animate attributeName="opacity" values=".18;.32;.22;.36;.18" dur="2.6s" repeatCount="indefinite"/><animate attributeName="r" values="24;28;25;29;24" dur="2.6s" repeatCount="indefinite"/></circle></g>
       <path d="M86 132h18l-3 6H89z" fill="#C2552E"/>
       <path d="M88 138h14c4 6 4 18 0 24H88c-4-6-4-18 0-24z" fill="#F4C430"/>
       <g fill="#C2552E"><circle cx="95" cy="146" r="1.6"/><circle cx="91" cy="152" r="1.4"/><circle cx="99" cy="152" r="1.4"/><circle cx="95" cy="157" r="1.4"/></g>
       <path d="M89 162h12l-6 7z" fill="#C2552E"/>
+    </g>
+    <g><animateTransform attributeName="transform" type="rotate" values="-5 150 0;5 150 0;-5 150 0" dur="4.2s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/>
+      <path d="M150 0V40" stroke="#F4C430" stroke-width="1.2" stroke-opacity=".7"/>
+      <g transform="translate(150 40) scale(.62)">
+        <g class="lglow b"><circle cy="20" r="36" fill="#F4C430" opacity=".14"/><circle cy="20" r="25" fill="#F4C430" opacity=".26"/></g>
+        <path d="M-6 0h12l-3 5h-6z" fill="#C2552E"/><path d="M-9 5h18c5 8 5 22 0 30h-18c-5-8-5-22 0-30z" fill="#F4C430"/>
+        <g fill="#C2552E"><path d="M0 10l2 4-2 4-2-4z"/><circle cx="-5" cy="22" r="1.4"/><circle cx="5" cy="22" r="1.4"/><path d="M0 24l2 4-2 4-2-4z"/></g><path d="M-6 35h12l-6 7z" fill="#C2552E"/>
+      </g>
+    </g>
+    <g><animateTransform attributeName="transform" type="rotate" values="4 176 0;-4 176 0;4 176 0" dur="3.7s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1"/>
+      <path d="M176 0V66" stroke="#F4C430" stroke-width="1.2" stroke-opacity=".7"/>
+      <g transform="translate(176 66) scale(.5)">
+        <g class="lglow c"><circle cy="20" r="36" fill="#F4C430" opacity=".14"/><circle cy="20" r="25" fill="#F4C430" opacity=".26"/></g>
+        <path d="M-6 0h12l-3 5h-6z" fill="#C2552E"/><path d="M-9 5h18c5 8 5 22 0 30h-18c-5-8-5-22 0-30z" fill="#E9A23B"/>
+        <g fill="#C2552E"><path d="M0 10l2 4-2 4-2-4z"/><circle cx="-5" cy="22" r="1.4"/><circle cx="5" cy="22" r="1.4"/><path d="M0 24l2 4-2 4-2-4z"/></g><path d="M-6 35h12l-6 7z" fill="#C2552E"/>
+      </g>
     </g>
     <path d="M0 322h190v8H0z" fill="#162E80"/>
     <g fill="#2E8B5F"><animateTransform attributeName="transform" type="rotate" values="0 25 292;1.6 25 292;0 25 292;-1.2 25 292;0 25 292" dur="6s" repeatCount="indefinite"/>
@@ -376,6 +499,8 @@ details > :not(summary){margin-bottom:16px}
     <p class="count" id="count" aria-live="off">&nbsp;</p>
   </div>
 </header>
+
+<div class="today" id="today" hidden></div>
 
 <nav class="tabbar" aria-label="Sections">
   <div class="in" role="tablist">
@@ -585,6 +710,13 @@ details > :not(summary){margin-bottom:16px}
   </div>
 
   <div class="block">
+    <h3>Call to prayer</h3>
+    <p class="plain" id="prDay"></p>
+    <ol class="prayers" id="prList"></ol>
+    <p class="small">Official Marrakesh times from Morocco's Ministry of Habous. You'll hear the adhan from the Koutoubia and every mosque nearby. The square really gets going after Maghrib as the food stalls fire up, and some stalls shut around Friday's midday prayer. Non-Muslims can't go inside the mosques, but the Koutoubia gardens are open to everyone.</p>
+  </div>
+
+  <div class="block">
     <h3>Weather</h3>
     <ul class="wx" id="wx"></ul>
     <p class="small" id="wxNote">Typical for mid-November. A live forecast replaces this once our dates are within range. Sunset is around 17:35 and the desert gets cold after dark.</p>
@@ -678,7 +810,7 @@ details > :not(summary){margin-bottom:16px}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="12">Version 12, 18 Oct, 18:19</p>
+  <p id="ver" data-v="13">Version 13, 18 Oct, 21:35</p>
 </div>
 
 </main>
@@ -698,8 +830,27 @@ window.coinBurst = function(el){
   }
 };
 
-/* Marrakesh is on GMT in November, same as London */
+/* Marrakesh is on GMT in November, same as London (Morocco went to permanent GMT in Sept 2026) */
 const T = (d, hm) => new Date('2026-11-' + d + 'T' + hm + ':00Z');
+/* Clock. Add ?at=2026-11-13T10:30 to the address to preview the site at that moment */
+const CLOCK = (() => {
+  try {
+    const a = new URLSearchParams(location.search).get('at'); if (!a) return 0;
+    const t = new Date(a.length === 10 ? a + 'T09:00:00Z' : a.length === 16 ? a + ':00Z' : a);
+    return isNaN(t) ? 0 : t - Date.now();
+  } catch (e) { return 0; }
+})();
+const NOW = () => new Date(Date.now() + CLOCK);
+const STILL = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const tripDay = n => (n.getUTCFullYear() === 2026 && n.getUTCMonth() === 10 && n.getUTCDate() >= 12 && n.getUTCDate() <= 15) ? ['Thu', 'Fri', 'Sat', 'Sun'][n.getUTCDate() - 12] : null;
+const hhmm = d => d.toISOString().slice(11, 16);
+const until = ms => {
+  const m = Math.max(1, Math.ceil(ms / 60000));
+  if (m < 60) return m + ' min';
+  const h = Math.floor(m / 60), r = m % 60;
+  if (h < 24) return h + ' hr' + (h > 1 ? 's' : '') + (r ? ' ' + r + ' min' : '');
+  const d = Math.floor(h / 24); return d + ' day' + (d > 1 ? 's' : '') + (h % 24 ? ' ' + (h % 24) + ' hr' + (h % 24 > 1 ? 's' : '') : '');
+};
 const DEPART = T(12, '14:25'), HOME = T(15, '17:00');
 
 /* ---------- Riad door ---------- */
@@ -761,7 +912,7 @@ const DEPART = T(12, '14:25'), HOME = T(15, '17:00');
   const el = document.getElementById('count');
   const plural = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
   function tick(){
-    const now = new Date(), diff = DEPART - now;
+    const now = NOW(), diff = DEPART - now;
     if (diff > 0) {
       const m = Math.floor(diff / 60000), d = Math.floor(m / 1440), h = Math.floor(m % 1440 / 60), mi = m % 60;
       el.textContent = d > 0 ? plural(d, 'day') + ', ' + plural(h, 'hour') + ' to go.' : plural(h, 'hour') + ', ' + plural(mi, 'minute') + ' to go.';
@@ -839,28 +990,59 @@ const ICONS = {
   home: '<path d="M3 11l9-7 9 7"/><path d="M5 10v11h14V10M10 21v-6h4v6"/>'
 };
 const DAYCOL = { Thu: '#2442A8', Fri: '#B8661F', Sat: '#B5473F', Sun: '#2E6B4F' };
+
+/* ---------- Call to prayer: Ministry of Habous times for Marrakesh (GMT) ---------- */
+const PRAYER = {
+  12: ['05:29', '06:54', '12:21', '15:14', '17:40', '18:54'],
+  13: ['05:30', '06:55', '12:21', '15:13', '17:39', '18:53'],
+  14: ['05:30', '06:56', '12:21', '15:13', '17:38', '18:53'],
+  15: ['05:31', '06:57', '12:22', '15:12', '17:38', '18:52']
+};
+const PNAME = ['Fajr', 'Sunrise', 'Dhuhr', 'Asr', 'Maghrib', 'Isha'];
+const DSHORT = ['Thu', 'Fri', 'Sat', 'Sun'];
+const pname = (d, k) => k === 2 && d === 13 ? 'Jumu’ah' : PNAME[k];
+function nextPrayer(now){
+  for (const d of [12, 13, 14, 15]) for (let k = 0; k < 6; k++) {
+    if (k === 1) continue;
+    const at = T(d, PRAYER[d][k]);
+    if (at > now) return { name: pname(d, k), at, t: (tripDay(now) === DSHORT[d - 12] ? '' : DSHORT[d - 12] + ' ') + PRAYER[d][k] };
+  }
+  return null;
+}
+
+/* ---------- Itinerary, with a live Now / Next ---------- */
 (function(){
-  const sw = document.getElementById('dayswitch'), list = document.getElementById('stops');
+  const sw = document.getElementById('dayswitch'), list = document.getElementById('stops'), box = document.getElementById('nextup');
   const label = { ok: '<span class="st ok">Booked</span>', book: '<span class="st book">Needs booking</span>', tap: '<span class="st ok">Tap to pay</span>', '': '' };
   const all = [];
-  DAYS.forEach((day, i) => day.stops.forEach(s => all.push({ i, at: T(day.d, s[0]), s })));
+  DAYS.forEach((day, i) => day.stops.forEach((s, k) => {
+    const at = T(day.d, s[0]);
+    const end = k + 1 < day.stops.length ? T(day.d, day.stops[k + 1][0]) : new Date(Math.min(+at + 2 * 3600e3, +HOME));
+    all.push({ i, at, end, s });
+  }));
+  let cur = 0;
+  function mark(){
+    const now = NOW();
+    list.querySelectorAll('li').forEach(li => {
+      const x = all[+li.dataset.n];
+      li.className = now >= x.end ? 'past' : (now >= x.at && now < HOME ? 'now' : '');
+    });
+  }
   function show(i){
-    const day = DAYS[i], now = new Date();
+    cur = i; const day = DAYS[i], base = all.findIndex(x => x.i === i);
     sw.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-pressed', j === i ? 'true' : 'false'));
     document.getElementById('dayhead').textContent = day.title;
     document.getElementById('banner').innerHTML = BANNERS[day.short];
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { const b = document.querySelector('#banner svg'); if (b && b.pauseAnimations) b.pauseAnimations(); }
+    if (STILL) { const b = document.querySelector('#banner svg'); if (b && b.pauseAnimations) b.pauseAnimations(); }
     document.getElementById('plan').style.setProperty('--day', DAYCOL[day.short]);
     document.getElementById('daynote').textContent = day.note;
     list.innerHTML = '';
     day.stops.forEach((s, k) => {
-      const at = T(day.d, s[0]), nextAt = k + 1 < day.stops.length ? T(day.d, day.stops[k + 1][0]) : null;
-      const li = document.createElement('li');
-      if (nextAt && now >= nextAt) li.className = 'past';
-      else if (now >= at && (!nextAt || now < nextAt) && now < HOME) li.className = 'now';
+      const li = document.createElement('li'); li.dataset.n = base + k;
       li.innerHTML = '<div class="when"><time>' + s[0] + '</time><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[s[4]] || '') + '</g></svg></span></div><div><strong>' + s[1] + '</strong><p>' + s[2] + '</p>' + label[s[3]] + '</div>';
       list.appendChild(li);
     });
+    mark();
   }
   DAYS.forEach((day, i) => {
     const b = document.createElement('button'); b.type = 'button';
@@ -868,13 +1050,333 @@ const DAYCOL = { Thu: '#2442A8', Fri: '#B8661F', Sat: '#B5473F', Sun: '#2E6B4F' 
     b.addEventListener('click', () => show(i));
     sw.appendChild(b);
   });
-  const now = new Date(); let start = 0;
-  if (now < HOME) DAYS.forEach((day, i) => { if (now >= T(day.d, '00:00')) start = i; });
+  const now0 = NOW(); let start = 0;
+  if (now0 < HOME) DAYS.forEach((day, i) => { if (now0 >= T(day.d, '00:00')) start = i; });
   show(start);
 
-  const nx = all.find(x => x.at > now), box = document.getElementById('nextup');
-  if (nx) box.innerHTML = (now < DEPART ? 'First up: ' : 'Next: ') + '<b>' + nx.s[1] + '</b>, ' + DAYS[nx.i].short + ' ' + nx.s[0] + '.';
-  else box.textContent = 'All done. Same again next year?';
+  const pl = (n, w) => n + ' ' + w + (n === 1 ? '' : 's');
+  const row = (tag, title, sub, live) => '<div class="nn-row"><i class="nn-tag' + (live ? ' live' : '') + '">' + tag + '</i><div><b>' + title + '</b>' + (sub ? '<span>' + sub + '</span>' : '') + '</div></div>';
+  const what = x => x.s[4] === 'takeoff' ? 'In the air on ' + (x.s[1].match(/EZY\d+/) || ['the plane'])[0] : x.s[1];
+  function nn(){
+    const now = NOW();
+    if (now >= HOME) {
+      box.innerHTML = '<p class="nn-h">Trip over</p><p class="nn-big">Rug regret begins.</p><p class="nn-s">Anything still owing? <a href="#kitty">Settle the kitty</a>.</p>';
+      return;
+    }
+    if (now < all[0].at) {
+      const m = Math.max(0, Math.floor((DEPART - now) / 60000)), d = Math.floor(m / 1440), h = Math.floor(m % 1440 / 60), mi = m % 60;
+      box.innerHTML = '<p class="nn-h">Trip countdown</p><p class="nn-big">' + (d ? pl(d, 'day') + ', ' : '') + pl(h, 'hr') + ', ' + pl(mi, 'min') + '</p><p class="nn-s">First up: <b>' + all[0].s[1] + '</b>, Thursday at ' + all[0].s[0] + '.</p>';
+      return;
+    }
+    const c = all.find(x => now >= x.at && now < x.end), n = all.find(x => x.at > now);
+    let h = '';
+    if (c) h += row('Now', what(c), 'since ' + c.s[0], true);
+    else h += row('Now', now.getUTCHours() < 7 ? 'Asleep at the riad, hopefully.' : 'Free time. At the riad, or lost.', '', true);
+    if (c && n && n.i === c.i) h += '<div class="nn-bar"><i style="--p:' + Math.min(100, Math.round((now - c.at) / (n.at - c.at) * 100)) + '%"></i></div>';
+    if (n) h += row('Next', n.s[1], (DAYS[n.i].short === tripDay(now) ? '' : DAYS[n.i].short + ' ') + n.s[0] + ' · in ' + until(n.at - now), false);
+    if (now >= T(12, '18:10') && now < T(15, '13:20')) { const p = nextPrayer(now); if (p) h += '<p class="nn-pray">Next call to prayer: <b>' + p.name + '</b> at ' + p.t + '.</p>'; }
+    box.innerHTML = h;
+  }
+  nn();
+  setInterval(() => { nn(); mark(); }, 20000);
+})();
+
+/* ---------- Call to prayer (Toolkit) ---------- */
+(function(){
+  const list = document.getElementById('prList'), lab = document.getElementById('prDay');
+  const DLONG = ['Thursday', 'Friday', 'Saturday', 'Sunday'];
+  function draw(){
+    const now = NOW(), k = tripDay(now);
+    const d = k ? 12 + DSHORT.indexOf(k) : (now < T(12, '00:00') ? 12 : 15);
+    lab.textContent = k ? 'Today, ' + DLONG[d - 12] + ' ' + d + ' November.' : d === 12 ? 'Thursday 12 November, the day we land. The times barely move over the weekend.' : 'Sunday 15 November.';
+    const nx = k ? nextPrayer(now) : null;
+    list.innerHTML = PRAYER[d].map((t, j) => {
+      const at = T(d, t), isNext = nx && +nx.at === +at, past = k && at <= now;
+      return '<li class="' + (isNext ? 'next' : past ? 'past' : '') + '"><b>' + pname(d, j) + '</b><span>' + t + '</span><i>' + (isNext ? 'in ' + until(at - now) : '') + '</i></li>';
+    }).join('');
+  }
+  draw(); setInterval(draw, 30000);
+})();
+
+/* ---------- Night: the lanterns light up after Marrakesh sunset ---------- */
+(function(){
+  const head = document.querySelector('header');
+  function sun(d){
+    const r = Math.PI / 180, lat = 31.63, lng = -7.99;
+    const jd = Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate(), 12) / 864e5 + 2440587.5;
+    const J = Math.round(jd - 2451545 + 0.0008) - lng / 360;
+    const M = (357.5291 + 0.98560028 * J) % 360;
+    const L = (M + 1.9148 * Math.sin(M * r) + 0.02 * Math.sin(2 * M * r) + 0.0003 * Math.sin(3 * M * r) + 282.9372) % 360;
+    const Jt = 2451545 + J + 0.0053 * Math.sin(M * r) - 0.0069 * Math.sin(2 * L * r);
+    const dec = Math.asin(Math.sin(L * r) * Math.sin(23.4397 * r));
+    const w = Math.acos((Math.sin(-0.833 * r) - Math.sin(lat * r) * Math.sin(dec)) / (Math.cos(lat * r) * Math.cos(dec))) / r;
+    const toD = j => new Date((j - 2440587.5) * 864e5);
+    return { rise: toD(Jt - w / 360), set: toD(Jt + w / 360) };
+  }
+  const tick = () => { const n = NOW(), t = sun(n); head.classList.toggle('night', n >= t.set || n < t.rise); };
+  tick(); setTimeout(() => head.classList.add('ready'), 100); setInterval(tick, 60000);
+})();
+
+/* ---------- Visitors: the camel, and friends ---------- */
+const FX = (function(){
+  let busy = false;
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const pick = a => a[Math.floor(Math.random() * a.length)];
+  const vw = () => document.documentElement.clientWidth;
+  const blocked = () => document.hidden || !document.getElementById('home').hidden;
+  function make(cls, html){
+    const w = document.createElement('div'); w.className = 'fx ' + cls; w.setAttribute('aria-hidden', 'true');
+    w.innerHTML = html; document.body.appendChild(w); return w;
+  }
+  function bubble(w, text, ms){
+    let b = w.querySelector('.bub');
+    if (!b) { b = document.createElement('div'); b.className = 'bub'; w.appendChild(b); }
+    b.textContent = text; requestAnimationFrame(() => b.classList.add('on'));
+    clearTimeout(b._t); b._t = setTimeout(() => b.classList.remove('on'), ms || 2400);
+  }
+  /* Walk across the bottom of the screen, stopping once on the way */
+  function walk(w, o){
+    return new Promise(res => {
+      const start = o.dir > 0 ? -o.width - 10 : vw() + 10, end = o.dir > 0 ? vw() + 10 : -o.width - 10;
+      const stopX = start + (end - start) * o.stopAt;
+      let x = start, last = performance.now(), stopped = false, hold = 0;
+      function f(t){
+        const dt = Math.min(64, t - last); last = t;
+        if (hold) { if (t >= hold) { hold = 0; o.onGo && o.onGo(); } }
+        else {
+          x += o.dir * o.speed() * dt / 1000;
+          if (!stopped && (o.dir > 0 ? x >= stopX : x <= stopX)) { stopped = true; hold = t + o.stopFor; o.onStop && o.onStop(); }
+        }
+        w.style.transform = 'translate3d(' + x.toFixed(1) + 'px,0,0)';
+        if (o.dir > 0 ? x < end : x > end) requestAnimationFrame(f); else { w.remove(); res(); }
+      }
+      w.style.transform = 'translate3d(' + start + 'px,0,0)';
+      requestAnimationFrame(f);
+    });
+  }
+
+  /* The camel */
+  const CB = '#D69A5B', CF = '#B57A40', CD = '#2B1A10';
+  const leg = (x, cls, col) => '<g class="lg ' + cls + '"><path d="M' + x + ' 52L' + (x - 1) + ' 69L' + (x + 1) + ' 85" fill="none" stroke="' + col + '" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="' + (x + 2) + '" cy="86" rx="4" ry="1.8" fill="' + col + '"/></g>';
+  const camelTop = suit => '<path d="M25 44C19 46 17 52 19 60" fill="none" stroke="' + CF + '" stroke-width="2.6" stroke-linecap="round"/><path d="M17 58l2 6 3-5z" fill="#8E5A2B"/>'
+    + '<path d="M24 52C20 44 24 36 32 34C36 22 48 16 56 22C60 26 62 32 66 34C72 36 76 40 76 46C76 54 70 58 62 58L34 58C28 58 25 56 24 52Z" fill="' + CB + '"/>'
+    + '<path d="M38 31C41 24 46 20 50 20C54 20 58 23 60 27C61 31 62 36 63 40L36 42C35 38 36 34 38 31Z" fill="#B5473F"/><path d="M36.5 37.5L62.5 35.5" stroke="#F4C430" stroke-width="2.2"/>'
+    + [39, 46, 53, 60].map(x => '<path d="M' + x + ' 41V45.5" stroke="#F4C430" stroke-width="1.2"/><circle cx="' + x + '" cy="47" r="1.6" fill="#F4C430"/>').join('')
+    + (suit ? '<g transform="rotate(-6 50 13)"><path d="M47 9V6.5h6V9" fill="none" stroke="#5E2410" stroke-width="1.6"/><rect x="41" y="9" width="18" height="12" rx="2" fill="#7A3420"/><rect x="41" y="13.5" width="18" height="2.2" fill="#F4C430"/><circle cx="54" cy="18" r="1.6" fill="#2E6B4F"/></g>' : '')
+    + '<path d="M66 42C76 44 82 42 86 32L89 24" fill="none" stroke="' + CB + '" stroke-width="10" stroke-linecap="round"/>'
+    + '<g class="hd"><path d="M88 16L85 10L91 14Z" fill="' + CF + '"/><path d="M84 24C84 16 90 13 96 14C102 15 106 19 106 22C106 25 103 27 99 27L90 27C86 27 84 26 84 24Z" fill="' + CB + '"/>'
+    + '<ellipse class="eye" cx="95" cy="19.5" rx="1.4" ry="1.7" fill="' + CD + '"/><path d="M92.5 16.6L97 16" stroke="' + CD + '" stroke-width=".9" stroke-linecap="round"/>'
+    + '<ellipse cx="103.5" cy="21" rx=".9" ry=".6" fill="' + CD + '"/><path d="M99 25.3Q102 26 105 24.4" fill="none" stroke="' + CD + '" stroke-width=".9" stroke-linecap="round"/></g>';
+  const camelSVG = suit => '<svg class="camel walk hit" width="96" height="77" viewBox="0 0 112 90">' + leg(37, 'p2', CF) + leg(71, 'p2', CF) + '<g class="bd">' + camelTop(suit) + '</g>' + leg(33, 'p1', CB) + leg(67, 'p1 wv', CB) + '</svg>';
+  const SAYS = ['Hrrmph.', 'Taxi? Special price.', 'Lost? Me too.', 'Wrong way. Obviously.', 'Riad’s that way. Probably.', 'One hump. No complaints.', 'Have you tried the mint tea?', 'Rug? Very good quality.'];
+  const POKED = ['Do you mind?', 'Hands off the hump.', 'That’ll be 20 dirhams.', 'I spit, you know.'];
+  function camel(){
+    const sun = tripDay(NOW()) === 'Sun', dir = Math.random() < .5 ? 1 : -1;
+    const w = make('walker', camelSVG(sun)), svg = w.querySelector('svg');
+    if (dir < 0) svg.style.transform = 'scaleX(-1)';
+    let sprint = 1;
+    svg.addEventListener('click', () => { bubble(w, pick(POKED), 1800); sprint = 2.2; });
+    return walk(w, {
+      width: 96, dir, stopAt: rnd(.35, .6), stopFor: sun ? 3600 : 2800, speed: () => Math.max(42, vw() / 22) * sprint,
+      onStop(){ svg.classList.remove('walk'); svg.classList.add('look'); if (sun) svg.classList.add('wave'); bubble(w, sun ? pick(['Bye then!', 'Same time next year?', 'Don’t forget the kitty.']) : pick(SAYS), sun ? 3200 : 2400); },
+      onGo(){ svg.classList.remove('look', 'wave'); svg.classList.add('walk'); }
+    });
+  }
+
+  /* Friday the 13th: a black cat */
+  const CAT = '<svg class="bcat hit" width="68" height="38" viewBox="0 0 60 34">'
+    + '<path d="M10 14c-6-2-9-8-7-12" fill="none" stroke="#2A2A36" stroke-width="3.2" stroke-linecap="round"><animate attributeName="d" values="M10 14c-6-2-9-8-7-12;M10 14c-8 0-10-6-10-11;M10 14c-6-2-9-8-7-12" dur="1.6s" repeatCount="indefinite"/></path>'
+    + '<g stroke="#14141B" stroke-width="3.4" stroke-linecap="round"><path d="M14 22l-2 10"><animateTransform attributeName="transform" type="rotate" values="-18 14 22;18 14 22;-18 14 22" dur=".7s" repeatCount="indefinite"/></path><path d="M36 22l-2 10"><animateTransform attributeName="transform" type="rotate" values="18 36 22;-18 36 22;18 36 22" dur=".7s" repeatCount="indefinite"/></path></g>'
+    + '<ellipse cx="25" cy="18" rx="16" ry="7.5" fill="#2A2A36"/>'
+    + '<g stroke="#2A2A36" stroke-width="3.4" stroke-linecap="round"><path d="M17 22l2 10"><animateTransform attributeName="transform" type="rotate" values="18 17 22;-18 17 22;18 17 22" dur=".7s" repeatCount="indefinite"/></path><path d="M33 22l2 10"><animateTransform attributeName="transform" type="rotate" values="-18 33 22;18 33 22;-18 33 22" dur=".7s" repeatCount="indefinite"/></path></g>'
+    + '<g><animateTransform attributeName="transform" type="translate" values="0 0;0 -1;0 0" dur=".35s" repeatCount="indefinite"/><circle cx="44" cy="12" r="7" fill="#2A2A36"/><path d="M38 8l1-7 5 5zM45 5l5-5 1 7z" fill="#2A2A36"/>'
+    + '<circle class="ceye" cx="47" cy="11" r="1.6" fill="#F4C430"/><rect x="46.6" y="9.7" width=".8" height="2.6" rx=".4" fill="#14141B"/><path d="M50 14l6-1M50 15.6l6 1" stroke="#9A9AB0" stroke-width=".5"/></g></svg>';
+  function cat(manual){
+    const dir = Math.random() < .5 ? 1 : -1, w = make('walker', CAT), svg = w.querySelector('svg');
+    if (dir < 0) svg.style.transform = 'scaleX(-1)';
+    return walk(w, {
+      width: 68, dir, stopAt: rnd(.4, .6), stopFor: 2600, speed: () => Math.max(70, vw() / 12),
+      onStop(){ svg.pauseAnimations && svg.pauseAnimations(); svg.classList.add('stare'); bubble(w, manual ? 'Didn’t help, did it?' : pick(['Meow. Good luck.', 'Bad luck? Never heard of it.', 'Crossed your path. Sorry.', 'Friday the 13th. Purrfect.']), 2300); },
+      onGo(){ svg.unpauseAnimations && svg.unpauseAnimations(); svg.classList.remove('stare'); }
+    });
+  }
+
+  /* Saturday: the camel on a magic carpet */
+  const CARPET = '<svg class="carpet" width="150" height="80" viewBox="0 0 150 80">'
+    + '<g stroke="#fff" stroke-opacity=".7" stroke-width="1.4" stroke-linecap="round"><path d="M0 46h10M3 56h8M0 66h9"><animate attributeName="opacity" values="1;.2;1" dur=".8s" repeatCount="indefinite"/></path></g>'
+    + '<g class="cm"><g transform="translate(36 16) scale(.6)">' + camelTop(false) + '</g></g>'
+    + '<path fill="#B5473F" d="M14 52C44 46 74 58 104 52C120 49 132 50 142 52L142 64C132 62 120 61 104 64C74 70 44 58 14 64Z"><animate attributeName="d" dur="1.1s" repeatCount="indefinite" values="M14 52C44 46 74 58 104 52C120 49 132 50 142 52L142 64C132 62 120 61 104 64C74 70 44 58 14 64Z;M14 54C44 60 74 48 104 54C120 57 132 56 142 52L142 64C132 68 120 69 104 66C74 60 44 72 14 66Z;M14 52C44 46 74 58 104 52C120 49 132 50 142 52L142 64C132 62 120 61 104 64C74 70 44 58 14 64Z"/></path>'
+    + '<path fill="none" stroke="#F4C430" stroke-width="1.6" stroke-dasharray="4 3" d="M18 57C44 52 74 63 104 57C120 54 132 55 138 57"><animate attributeName="d" dur="1.1s" repeatCount="indefinite" values="M18 57C44 52 74 63 104 57C120 54 132 55 138 57;M18 59C44 65 74 54 104 60C120 62 132 61 138 57;M18 57C44 52 74 63 104 57C120 54 132 55 138 57"/></path>'
+    + '<g stroke="#F4C430" stroke-width="1.3" stroke-linecap="round"><path d="M14 54h-5M14 58h-6M14 62h-5M142 54h5M142 58h6M142 62h5"/></g></svg>';
+  function carpet(){
+    const dir = Math.random() < .5 ? 1 : -1, w = make('sky', CARPET), svg = w.querySelector('svg');
+    if (dir < 0) svg.style.transform = 'scaleX(-1)';
+    const top = innerHeight * rnd(.16, .36), W = 150, start = dir > 0 ? -W - 10 : vw() + 10, end = dir > 0 ? vw() + 10 : -W - 10, sp = Math.max(85, vw() / 9);
+    return new Promise(res => {
+      let x = start, last = performance.now(), t0 = last, said = false;
+      function f(t){
+        const dt = Math.min(64, t - last); last = t; x += dir * sp * dt / 1000;
+        w.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + (top + Math.sin((t - t0) / 650) * 14).toFixed(1) + 'px,0)';
+        if (!said && Math.abs(x + W / 2 - vw() / 2) < 50) { said = true; bubble(w, pick(['Wheee!', 'Last full day!', 'Mind the minaret.', 'Better than easyJet.', 'No legroom. Lovely view.']), 2200); }
+        if (dir > 0 ? x < end : x > end) requestAnimationFrame(f); else { w.remove(); res(); }
+      }
+      requestAnimationFrame(f);
+    });
+  }
+
+  /* Thursday: the plane, with a banner */
+  const PLANE = '<svg width="270" height="40" viewBox="0 0 270 40">'
+    + '<path fill="#fff" stroke="#141B3D" stroke-width="1" d="M2 8C30 5 60 11 90 8C120 5 150 11 170 8L170 30C150 33 120 27 90 30C60 33 30 27 2 30Z"><animate attributeName="d" dur=".9s" repeatCount="indefinite" values="M2 8C30 5 60 11 90 8C120 5 150 11 170 8L170 30C150 33 120 27 90 30C60 33 30 27 2 30Z;M2 10C30 13 60 5 90 10C120 13 150 6 170 8L170 30C150 28 120 35 90 32C60 27 30 35 2 32Z;M2 8C30 5 60 11 90 8C120 5 150 11 170 8L170 30C150 33 120 27 90 30C60 33 30 27 2 30Z"/></path>'
+    + '<text x="86" y="23.5" text-anchor="middle" fill="#141B3D" font-family="Karla,system-ui,sans-serif" font-weight="800" font-size="12" letter-spacing=".5">MARRAKESH OR BUST</text>'
+    + '<path d="M170 19L194 18" stroke="#141B3D" stroke-width="1"/>'
+    + '<g transform="translate(190 4)"><path d="M6 12L2 2h8l8 9z" fill="#FF6600"/><path d="M4 16C4 12 10 11 18 11h44c8 0 16 3 16 6 0 2-4 4-12 4H14c-6 0-10-2-10-5z" fill="#FF6600"/>'
+    + '<path d="M68 13c4 0 7 2 8 3h-8z" fill="#CFE3FF"/><g fill="#fff">' + [24, 30, 36, 42, 48, 54, 60].map(x => '<circle cx="' + x + '" cy="14.5" r="1.3"/>').join('') + '</g>'
+    + '<path d="M34 17h12l-8 10h-6z" fill="#D94F00"/><ellipse cx="40" cy="22.5" rx="4" ry="1.8" fill="#B84300"/></g></svg>';
+  function plane(){
+    const w = make('sky', PLANE), W = 270, start = -W - 10, end = vw() + 10, sp = Math.max(110, vw() / 7);
+    const y0 = innerHeight * .3, y1 = innerHeight * .08;
+    return new Promise(res => {
+      let x = start, last = performance.now();
+      function f(t){
+        const dt = Math.min(64, t - last); last = t; x += sp * dt / 1000;
+        const p = (x - start) / (end - start);
+        w.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + (y0 + (y1 - y0) * p).toFixed(1) + 'px,0) rotate(-4deg)';
+        if (x < end) requestAnimationFrame(f); else { w.remove(); res(); }
+      }
+      requestAnimationFrame(f);
+    });
+  }
+
+  /* The snake charmer, once a visit */
+  function pungi(){
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return 0;
+      const ac = new AC(), t0 = ac.currentTime + .05, out = ac.createGain(); out.gain.value = .16; out.connect(ac.destination);
+      const N = { D4: 293.66, Eb4: 311.13, Fs4: 369.99, G4: 392, A4: 440, Bb4: 466.16, C5: 523.25, D5: 587.33 }, q = .22;
+      const tune = [['A4',2],['A4',1],['Bb4',1],['A4',1],['G4',1],['Fs4',1],['G4',1],['A4',4],['Bb4',1],['C5',1],['Bb4',1],['A4',1],['G4',1],['Fs4',1],['Eb4',1],['D4',3],
+        ['D4',1],['Eb4',1],['Fs4',1],['G4',1],['A4',1],['Bb4',1],['A4',1],['G4',1],['Fs4',2],['G4',1],['Fs4',1],['Eb4',2],['D4',5]];
+      const dr = ac.createOscillator(), df = ac.createBiquadFilter(), dg = ac.createGain();
+      dr.type = 'sawtooth'; dr.frequency.value = 146.83; df.type = 'lowpass'; df.frequency.value = 500; dg.gain.value = .22;
+      dr.connect(df).connect(dg).connect(out);
+      const o = ac.createOscillator(), bp = ac.createBiquadFilter(), g = ac.createGain(), lfo = ac.createOscillator(), lg = ac.createGain();
+      o.type = 'sawtooth'; bp.type = 'bandpass'; bp.frequency.value = 1300; bp.Q.value = 1.1; g.gain.value = 0;
+      lfo.frequency.value = 5.6; lg.gain.value = 7; lfo.connect(lg).connect(o.frequency);
+      o.connect(bp).connect(g).connect(out);
+      let t = t0;
+      tune.forEach(([n, b]) => { o.frequency.setTargetAtTime(N[n], t, .02); g.gain.setTargetAtTime(1, t, .02); g.gain.setTargetAtTime(.55, t + b * q * .6, .05); t += b * q; });
+      g.gain.setTargetAtTime(0, t, .08); dg.gain.setTargetAtTime(0, t, .25);
+      [dr, o, lfo].forEach(x => { x.start(t0); x.stop(t + 1.2); });
+      setTimeout(() => ac.close().catch(() => {}), (t - t0 + 2) * 1000);
+      return (t - t0) * 1000;
+    } catch (e) { return 0; }
+  }
+  const NOTE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="6.5" cy="18" r="2.6" fill="currentColor"/><circle cx="17.5" cy="16" r="2.6" fill="currentColor"/></svg>';
+  const SNAKE = '<svg width="140" height="210" viewBox="0 0 140 210">'
+    + '<defs><clipPath id="snkClip"><rect width="140" height="151"/></clipPath></defs>'
+    + '<ellipse cx="70" cy="150" rx="42" ry="8" fill="#9E6B2A"/><ellipse cx="70" cy="150" rx="35" ry="5" fill="#2B1A0C"/>'
+    + '<g clip-path="url(#snkClip)"><g class="sn"><g class="sw hit">'
+    + '<path d="M70 210C70 180 50 168 54 142C58 116 86 104 82 80C79 64 70 58 70 48" fill="none" stroke="#4E6B30" stroke-width="14" stroke-linecap="round"/>'
+    + '<path d="M70 210C70 180 50 168 54 142C58 116 86 104 82 80C79 64 70 58 70 48" fill="none" stroke="#7E9C4A" stroke-width="14" stroke-dasharray="3 7"/>'
+    + '<path d="M70 210C70 180 50 168 54 142C58 116 86 104 82 80C79 64 70 58 70 48" fill="none" stroke="#D8C489" stroke-width="4" opacity=".75"/>'
+    + '<g class="hood"><path d="M70 22C85 24 92 40 88 56C86 64 78 70 70 70C62 70 54 64 52 56C48 40 55 24 70 22Z" fill="#5E7F3A"/><g fill="none" stroke="#E9D9A0" stroke-width="1.6"><circle cx="64" cy="51" r="3.6"/><circle cx="76" cy="51" r="3.6"/><path d="M64 47.4Q70 43 76 47.4"/></g></g>'
+    + '<path d="M70 18C76 18 79.5 22 79.5 27.5C79.5 33 75.5 36 70 36C64.5 36 60.5 33 60.5 27.5C60.5 22 64 18 70 18Z" fill="#4E6B30"/>'
+    + '<circle cx="66" cy="25.5" r="2.3" fill="#F4C430"/><circle cx="74" cy="25.5" r="2.3" fill="#F4C430"/><rect x="65.5" y="23.7" width="1" height="3.6" rx=".5" fill="#141B3D"/><rect x="73.5" y="23.7" width="1" height="3.6" rx=".5" fill="#141B3D"/>'
+    + '<circle cx="68.5" cy="31" r=".7" fill="#141B3D"/><circle cx="71.5" cy="31" r=".7" fill="#141B3D"/>'
+    + '<path class="tg" d="M70 35.5V41M70 41l-2.5 3M70 41l2.5 3" stroke="#D2463A" stroke-width="1.5" stroke-linecap="round" fill="none"/>'
+    + '</g></g></g>'
+    + '<path d="M28 151C30 149 110 149 112 151L103 204C102 207 38 207 37 204Z" fill="#C8923F"/>'
+    + '<g stroke="#B07A33" stroke-width="1.6"><path d="M44 152L46 205M58 153L59 206M72 153V206M86 153L85 206M100 152L97 205"/></g>'
+    + '<g fill="none" stroke="#9E6B2A" stroke-width="2.2"><path d="M30 163Q70 168 110 163"/><path d="M32 176Q70 181 108 176"/><path d="M34 189Q70 194 106 189"/></g>'
+    + '<path d="M28 151C30 157 110 157 112 151" fill="none" stroke="#9E6B2A" stroke-width="3"/>'
+    + '<g class="lid"><ellipse cx="70" cy="147" rx="44" ry="8" fill="#B07A33"/><ellipse cx="70" cy="145" rx="44" ry="7" fill="#C8923F"/><path d="M66 139h8v-3a4 4 0 0 0-8 0z" fill="#9E6B2A"/></g>'
+    + '</svg>';
+  function snake(){
+    const w = make('snake', SNAKE + '<button class="tune" type="button" tabindex="-1">' + NOTE + '<span>Play music</span></button>');
+    return new Promise(res => {
+      let playing = 0, notes = 0;
+      const at = (ms, fn) => setTimeout(fn, ms);
+      const note = () => { const n = document.createElement('span'); n.className = 'note'; n.innerHTML = NOTE; n.style.setProperty('--nx', rnd(-50, 10).toFixed(0) + 'px'); w.appendChild(n); setTimeout(() => n.remove(), 2700); };
+      const play = () => { if (playing > Date.now()) return; const b = w.querySelector('.tune'); b.disabled = true; b.querySelector('span').textContent = 'Playing'; playing = Date.now() + pungi(); };
+      w.querySelector('.tune').addEventListener('click', play);
+      w.querySelector('.sw').addEventListener('click', play);
+      requestAnimationFrame(() => requestAnimationFrame(() => w.classList.add('in')));
+      at(700, () => w.classList.add('open'));
+      at(1000, () => { w.classList.add('up'); notes = setInterval(note, 700); });
+      const finish = () => {
+        clearInterval(notes); w.classList.remove('up');
+        at(1500, () => w.classList.remove('open'));
+        at(2000, () => w.classList.remove('in'));
+        at(2800, () => { w.remove(); res(); });
+      };
+      at(11500, function check(){ const left = playing - Date.now(); if (left > 0) at(left + 600, check); else finish(); });
+    });
+  }
+
+  /* Who turns up, and when */
+  const ACTS = { camel, cat, carpet, plane, snake };
+  function play(kind, manual){
+    if (STILL || (busy && !manual)) return Promise.resolve();
+    busy = true;
+    return (ACTS[kind] || camel)(manual).catch(() => {}).then(() => { busy = false; });
+  }
+  const roamer = () => { const k = tripDay(NOW()); return k === 'Fri' ? (Math.random() < .5 ? 'cat' : 'camel') : k === 'Sat' ? (Math.random() < .6 ? 'carpet' : 'camel') : 'camel'; };
+  if (!STILL) {
+    const demo = new URLSearchParams(location.search).get('demo');
+    if (demo) setTimeout(() => play(demo, true), 1200);
+    else {
+      const loop = first => setTimeout(() => { if (!blocked()) play(roamer()); loop(); }, first || rnd(70e3, 150e3));
+      loop(tripDay(NOW()) ? rnd(40e3, 80e3) : rnd(14e3, 30e3));
+      let snakeDone = false;
+      const trySnake = () => { if (snakeDone) return; if (busy || blocked()) return setTimeout(trySnake, 8000); snakeDone = true; play('snake'); };
+      setTimeout(trySnake, rnd(45e3, 110e3));
+    }
+  }
+  return { play };
+})();
+
+/* ---------- Today is the day ---------- */
+(function(){
+  const el = document.getElementById('today');
+  const ICON = {
+    Thu: '<svg class="ti" viewBox="0 0 24 24" aria-hidden="true" style="color:#141B3D"><use href="#i-plane"/></svg>',
+    Fri: '<svg class="ti" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 12l3-9 7 7M32 12l-3-9-7 7" fill="#E7E9F5"/><circle cx="20" cy="22" r="13" fill="#E7E9F5"/><path d="M10 10l2-6 5 5zM30 10l-2-6-5 5z" fill="#2A2A36"/><circle cx="20" cy="22" r="11" fill="#2A2A36"/><ellipse cx="15.5" cy="20" rx="2.6" ry="3" fill="#F4C430"/><ellipse cx="24.5" cy="20" rx="2.6" ry="3" fill="#F4C430"/><rect x="15" y="17.6" width="1" height="4.8" rx=".5" fill="#141B3D"/><rect x="24" y="17.6" width="1" height="4.8" rx=".5" fill="#141B3D"/><path d="M19 26h2l-1 1.2z" fill="#E78FA0"/></svg>',
+    Sat: '<svg class="ti" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 20c8-3 16 3 24 0 3-1 6-1 8 0v8c-2-1-5-1-8 0-8 3-16-3-24 0z" fill="#FFE7A3"/><path d="M6 24c7-2 15 3 22 0" fill="none" stroke="#B5473F" stroke-width="1.6" stroke-dasharray="3 2"/><path d="M4 21H1M4 24H0M4 27H1M36 21h3M36 24h4M36 27h3" stroke="#FFE7A3" stroke-width="1.2" stroke-linecap="round"/><path d="M14 10l1.2 2.6 2.8.3-2.1 1.9.6 2.8-2.5-1.4-2.5 1.4.6-2.8-2.1-1.9 2.8-.3z" fill="#FFE7A3"/></svg>',
+    Sun: '<svg class="ti" viewBox="0 0 40 40" aria-hidden="true"><rect x="7" y="13" width="26" height="20" rx="3" fill="#F4C430"/><path d="M15 13V9h10v4" fill="none" stroke="#F4C430" stroke-width="2.4"/><rect x="7" y="20" width="26" height="3" fill="#2E6B4F" opacity=".5"/><circle cx="12" cy="35" r="2" fill="#F4C430"/><circle cx="28" cy="35" r="2" fill="#F4C430"/></svg>'
+  };
+  let voted = false; try { voted = localStorage.getItem('souks-vote') === '1'; } catch (e) {}
+  const CARRIED = 'Motion carried, 3 votes to 0.';
+  function content(k, now){
+    const at = hm => T(now.getUTCDate(), hm);
+    if (k === 'Thu') return now < at('14:25') ? ['a', 'Wheels up from Luton!', 'St Pancras at 11:15. Bag drop shuts at 13:25. EZY2623 leaves at 14:25.', 'Wave it off', 'plane']
+      : now < at('18:10') ? ['b', 'Wheels up!', 'In the air. Menara at 18:10, and the clocks match home.', 'Wave it off', 'plane']
+      : ['c', 'Marhaba, Marrakesh!', 'Leila is at the exit with the Laaziri Travel sign. 200 MAD cash for the driver.', 'Fly-past', 'plane'];
+    if (k === 'Fri') return ['a', 'Friday the 13th in the souks.', 'What could possibly go wrong? Stalls pause for Friday prayers, 12:30 to 14:30.', 'Touch wood', 'cat'];
+    if (k === 'Sat') return ['a', 'Magic carpet day.', 'Last full day, so make it count. Agafay sunset is at 17:35, so take a jumper.', 'Summon the carpet', 'carpet'];
+    return now < at('10:30') ? ['a', 'Back to reality.', 'Airport at 10:30. Spend your last dirhams, they can’t leave the country.', 'Same time next year?', 'vote']
+      : now < at('13:20') ? ['b', 'Back to reality.', 'Allow two hours at Menara. EZY2624 leaves at 13:20.', 'Same time next year?', 'vote']
+      : now < HOME ? ['c', 'Back to reality.', 'In the air. Luton at 17:00, then back to work on Monday.', 'Same time next year?', 'vote']
+      : ['d', 'Back to reality.', 'Home again. Settle the kitty before anyone forgets.', 'Same time next year?', 'vote'];
+  }
+  let sig = '';
+  function draw(){
+    const now = NOW(), k = tripDay(now);
+    if (!k) { el.hidden = true; sig = ''; return; }
+    const c = content(k, now);
+    if (k + c[0] === sig) return; sig = k + c[0];
+    el.className = 'today ' + k.toLowerCase(); el.hidden = false;
+    const vote = c[4] === 'vote', btn = vote || !STILL;
+    el.innerHTML = '<div class="wrap">' + ICON[k] + '<div class="tx"><b>' + c[1] + '</b><span>' + c[2] + '</span></div>'
+      + (btn ? '<button class="tb" type="button"' + (vote && voted ? ' disabled' : '') + '>' + (vote && voted ? CARRIED : c[3]) + '</button>' : '') + '</div>';
+    const b = el.querySelector('.tb');
+    if (b) b.addEventListener('click', () => {
+      if (!vote) { FX.play(c[4], true); return; }
+      voted = true; try { localStorage.setItem('souks-vote', '1'); } catch (e) {}
+      b.textContent = CARRIED; b.disabled = true; window.coinBurst(b);
+    });
+  }
+  draw(); setInterval(draw, 30000);
+  const k = tripDay(NOW());
+  if (k && !STILL && !new URLSearchParams(location.search).get('demo')) setTimeout(() => FX.play({ Thu: 'plane', Fri: 'cat', Sat: 'carpet', Sun: 'camel' }[k], true), 3500);
 })();
 
 /* ---------- Exchange rate ---------- */
