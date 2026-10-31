@@ -151,7 +151,9 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .stops strong{font-size:17.5px;font-weight:800;display:block;line-height:1.3}
 .stops p{margin:4px 0 0;color:var(--muted);font-size:15.5px}
 .stops .st{display:inline-block;font-size:13.5px;font-weight:700;margin-top:6px}
-.st.ok{color:var(--cactus)}
+.st.ok{display:inline-flex;align-items:center;gap:5px;background:var(--cactus);color:var(--paper);font-weight:800;font-size:14px;letter-spacing:.02em;text-transform:uppercase;padding:4px 10px 4px 8px;border-radius:99px}
+.st.ok svg{width:14px;height:14px;flex:none}
+.st.tap{color:var(--cactus)}
 .st.book{color:var(--rose)}
 .st.tbc{color:var(--muted)}
 .stops li.past{opacity:.5}
@@ -1024,7 +1026,7 @@ function nextPrayer(now){
 /* ---------- Itinerary, with a live Now / Next ---------- */
 (function(){
   const sw = document.getElementById('dayswitch'), list = document.getElementById('stops'), box = document.getElementById('nextup');
-  const label = { ok: '<span class="st ok">Booked</span>', tbc: '<span class="st tbc">Provisional</span>', book: '<span class="st book">Needs booking</span>', tap: '<span class="st ok">Tap to pay</span>', '': '' };
+  const label = { ok: '<span class="st ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Booked</span>', tbc: '<span class="st tbc">Provisional</span>', book: '<span class="st book">Needs booking</span>', tap: '<span class="st tap">Tap to pay</span>', '': '' };
   const all = [];
   DAYS.forEach((day, i) => day.stops.forEach((s, k) => {
     const at = T(day.d, s[0]);
