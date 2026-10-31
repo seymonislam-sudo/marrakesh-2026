@@ -153,6 +153,7 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .stops .st{display:inline-block;font-size:13.5px;font-weight:700;margin-top:6px}
 .st.ok{color:var(--cactus)}
 .st.book{color:var(--rose)}
+.st.tbc{color:var(--muted)}
 .stops li.past{opacity:.5}
 .stops li.now strong::after{content:" — happening now";color:var(--cactus);font-weight:700;font-size:14px}
 
@@ -947,19 +948,18 @@ const DAYS = [
     ['21:00', 'Dinner at Terrasse des Épices', 'Booked for 9pm. An open-air roof in the middle of the medina, looking toward the Koutoubia. Easy first night.', 'ok', 'dine'],
     ['23:00', 'Nightcap at La Mamounia', 'Five minutes from the door. The Churchill Bar, and they mean it about no shorts or trainers.', '', 'cocktail']
   ]},
-  { d: 13, short: 'Fri', title: 'Friday, the souks', note: 'The getting-lost day. Breakfast runs until 11:30.', stops: [
+  { d: 13, short: 'Fri', title: 'Friday, souks and desert', note: 'The souks in the morning, the Agafay for sunset. Breakfast runs until 11:30.', stops: [
     ['08:30', 'Breakfast on the roof', 'Soumia cooks. Pace yourselves.', 'ok', 'cup'],
-    ['10:00', 'The souks with a licensed guide', 'Half a day: the souks, Ben Youssef Madrasa, Le Jardin Secret and the spice square. Ask the riad to book a proper guide. Some stalls close for Friday prayers, 12:30 to 14:30.', 'book', 'lantern'],
+    ['10:00', 'The souks with a licensed guide', 'The souks, Ben Youssef Madrasa and the spice square. Ask the riad to book a proper guide. Some stalls close for Friday prayers, 12:30 to 14:30.', 'book', 'lantern'],
     ['13:00', 'Lunch at Nomad', 'Modern Moroccan on a roof above the spice square. Ask for a terrace table.', 'book', 'dine'],
-    ['15:00', 'Bahia Palace and the Mellah', 'Courtyards and tilework, then back through the old Jewish quarter.', '', 'arch'],
-    ['17:00', 'Hammam and massage at the riad', 'There\'s a hammam and massage room in the house. Book times with the hosts.', 'book', 'steam'],
-    ['20:30', 'Dinner at Dar Yacout', 'The full Moroccan feast in a grand old riad, drinks on the roof first. Go hungry.', 'book', 'tagine']
+    ['14:30', 'Bahia Palace and the Mellah', 'Courtyards and tilework, then back through the old Jewish quarter. Be back for the 16:00 pick-up.', '', 'arch'],
+    ['16:00', 'Pick-up for the Agafay Desert', 'GetYourGuide tour, about £20 each. About 45 minutes out, in time for sunset around 17:35.', 'tbc', 'jeep'],
+    ['18:00', 'Dinner at a desert camp', 'Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', 'tbc', 'fire']
   ]},
-  { d: 14, short: 'Sat', title: 'Saturday, pool and desert', note: 'A lie-in, the roof, then the Agafay for sunset.', stops: [
+  { d: 14, short: 'Sat', title: 'Saturday, wander and feast', note: 'A lie-in, the medina at your own pace, then the big dinner.', stops: [
     ['09:30', 'Lie-in, then breakfast', 'No alarms. Breakfast runs until 11:30.', '', 'bed'],
-    ['11:00', 'Nothing at all', 'Pool, roof, book, nap. Or a second go at the souks if anyone found something on Friday they can\'t stop thinking about.', '', 'pool'],
-    ['14:30', 'Pick-up for the Agafay Desert', 'About 45 minutes out. Quads or buggies over the stony desert, then sunset around 17:35.', 'book', 'jeep'],
-    ['18:00', 'Dinner at a desert camp', 'Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', 'book', 'fire'],
+    ['11:00', 'Get lost on purpose', 'Pool, roof, or a second go at the souks if anyone found something on Friday they can\'t stop thinking about.', '', 'pool'],
+    ['20:30', 'Dinner at Dar Yacout', 'The full Moroccan feast in a grand old riad, drinks on the roof first. Go hungry.', 'book', 'tagine'],
     ['22:30', 'Jemaa el-Fnaa after dark', 'Only if anyone is still upright. The square is at its maddest at night.', '', 'stars']
   ]},
   { d: 15, short: 'Sun', title: 'Sunday, home', note: 'A slow start and an early exit.', stops: [
@@ -1023,7 +1023,7 @@ function nextPrayer(now){
 /* ---------- Itinerary, with a live Now / Next ---------- */
 (function(){
   const sw = document.getElementById('dayswitch'), list = document.getElementById('stops'), box = document.getElementById('nextup');
-  const label = { ok: '<span class="st ok">Booked</span>', book: '<span class="st book">Needs booking</span>', tap: '<span class="st ok">Tap to pay</span>', '': '' };
+  const label = { ok: '<span class="st ok">Booked</span>', tbc: '<span class="st tbc">Provisional</span>', book: '<span class="st book">Needs booking</span>', tap: '<span class="st ok">Tap to pay</span>', '': '' };
   const all = [];
   DAYS.forEach((day, i) => day.stops.forEach((s, k) => {
     const at = T(day.d, s[0]);
@@ -1362,8 +1362,8 @@ const FX = (function(){
     if (k === 'Thu') return now < at('14:25') ? ['a', 'Wheels up from Luton!', 'St Pancras at 11:15. Bag drop shuts at 13:25. EZY2623 leaves at 14:25.', 'Wave it off', 'plane']
       : now < at('18:10') ? ['b', 'Wheels up!', 'In the air. Menara at 18:10, and the clocks match home.', 'Wave it off', 'plane']
       : ['c', 'Marhaba, Marrakesh!', 'Leila is at the exit with the Laaziri Travel sign. 200 MAD cash for the driver.', 'Fly-past', 'plane'];
-    if (k === 'Fri') return ['a', 'Friday the 13th in the souks.', 'What could possibly go wrong? Stalls pause for Friday prayers, 12:30 to 14:30.', 'Touch wood', 'cat'];
-    if (k === 'Sat') return ['a', 'Magic carpet day.', 'Last full day, so make it count. Agafay sunset is at 17:35, so take a jumper.', 'Summon the carpet', 'carpet'];
+    if (k === 'Fri') return ['a', 'Friday the 13th in the souks.', 'What could possibly go wrong? Stalls pause for prayers 12:30 to 14:30, and the desert pick-up is at 16:00. Take a jumper.', 'Touch wood', 'cat'];
+    if (k === 'Sat') return ['a', 'Magic carpet day.', 'Last full day, so make it count. Dar Yacout at 20:30, so go hungry.', 'Summon the carpet', 'carpet'];
     return now < at('10:30') ? ['a', 'Back to reality.', 'Airport at 10:30. Spend your last dirhams, they can’t leave the country.', 'Same time next year?', 'vote']
       : now < at('13:20') ? ['b', 'Back to reality.', 'Allow two hours at Menara. EZY2624 leaves at 13:20.', 'Same time next year?', 'vote']
       : now < HOME ? ['c', 'Back to reality.', 'In the air. Luton at 17:00, then back to work on Monday.', 'Same time next year?', 'vote']
