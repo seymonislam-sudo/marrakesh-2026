@@ -158,6 +158,9 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .st.tap{color:var(--cactus)}
 .st.book{color:var(--rose)}
 .st.tbc{color:var(--muted)}
+.st.opt{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 7px;border-radius:99px;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;color:#7A5FB0;background:color-mix(in srgb,#7A5FB0 12%,var(--surface));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,#7A5FB0 45%,transparent)}
+.st.opt svg{width:16px;height:16px;flex:none}
+@media (prefers-color-scheme: dark){.st.opt{color:#C3B2EC}}
 .taxichip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:99px;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;background:#F4C430;color:#3A2A05}
 .taxichip svg{width:16px;height:16px;flex:none}
 .maplink{display:inline-flex;align-items:center;padding:4px 12px;border-radius:99px;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;color:var(--day,var(--blue-text));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--day,#2442A8) 45%,transparent)}
@@ -930,7 +933,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="25">Version 25, 1 Nov, 15:28</p>
+  <p id="ver" data-v="26">Version 26, 1 Nov, 15:30</p>
 </div>
 
 </main>
@@ -1062,8 +1065,8 @@ const DAYS = [
     ['11:45', 'Wander up to lunch', 'About 30 minutes on foot: past the Koutoubia, across Jemaa el-Fnaa, then up Souk Semmarine to the spice square. No guide needed. If someone says the way is closed, it isn\'t.', '', 'lantern'],
     ['12:30', 'Lunch at Nomad', 'Booked for 12:30, table for 3 (ref B63H9HHV). Modern Moroccan on a roof above the spice square, covering the prayer-time lull.', 'ok', 'dine', ['Nomad Marrakech', 'ChIJCU9KCULurw0RUA4KjdtDOdc']],
     ['14:15', 'The souks, at your own pace', 'Stalls reopen after Friday prayers around 14:30. Keep going north to Ben Youssef Madrasa if anyone\'s keen, or drift back through the dyers\' souk. Be at the riad for the 16:00 pick-up.', '', 'arch'],
-    ['16:00', 'Pick-up for the Agafay Desert', 'GetYourGuide tour, about £20 each. About 45 minutes out, in time for sunset around 17:35.', 'tbc', 'jeep'],
-    ['18:00', 'Dinner at a desert camp', 'Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', 'tbc', 'fire'],
+    ['16:00', 'Pick-up for the Agafay Desert', 'GetYourGuide tour, about £20 each. About 45 minutes out, in time for sunset around 17:35. Not decided yet.', 'opt', 'jeep'],
+    ['18:00', 'Dinner at a desert camp', 'Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', 'opt', 'fire'],
     ['23:00', 'Drinks at Kabana', 'Rooftop table for 3, confirmed (ref RV-261031-SN8D). Next to the Koutoubia, a few minutes from the riad. Open till 2am.', 'ok', 'cocktail', ['Kabana Rooftop Marrakech', 'ChIJ2VSV76Tvrw0Rk_saDiwILnU']]
   ]},
   { d: 14, short: 'Sat', title: 'Saturday, wander and feast', note: 'A lie-in, the medina at your own pace, then the big dinner.', stops: [
@@ -1134,7 +1137,7 @@ function nextPrayer(now){
 /* ---------- Itinerary, with a live Now / Next ---------- */
 (function(){
   const sw = document.getElementById('dayswitch'), list = document.getElementById('stops'), box = document.getElementById('nextup');
-  const label = { ok: '<span class="st ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Booked</span>', tbc: '<span class="st tbc">Provisional</span>', book: '<span class="st book">Needs booking</span>', tap: '<span class="st tap">Tap to pay</span>', '': '' };
+  const label = { ok: '<span class="st ok"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Booked</span>', tbc: '<span class="st tbc">Provisional</span>', opt: '<span class="st opt"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-dasharray="3.2 3"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.3" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="16.6" r="1.3" fill="currentColor"/></svg>Optional</span>', book: '<span class="st book">Needs booking</span>', tap: '<span class="st tap">Tap to pay</span>', '': '' };
   const all = [];
   DAYS.forEach((day, i) => day.stops.forEach((s, k) => {
     const at = T(day.d, s[0]);
