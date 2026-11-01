@@ -2,12 +2,15 @@
 // Site files and the Firebase library are cached on first visit.
 // Exchange rate and weather use the network first, falling back to the last copy.
 // The kitty's own data is handled by Firebase's offline cache, not here.
-const V = 'souks-v21';
+const V = 'souks-v22';
+const TILES = 'souks-tiles';
 const CORE = [
   './',
   'index.html',
   'apple-touch-icon.png',
   'laaziri-sign.jpg',
+  'leaflet/leaflet.js',
+  'leaflet/leaflet.css',
   'fonts/karla-latin-400-normal.woff2',
   'fonts/karla-latin-400-italic.woff2',
   'fonts/karla-latin-500-normal.woff2',
@@ -23,7 +26,7 @@ self.addEventListener('install', e => {
 });
 
 self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k)))).then(() => self.clients.claim()));
+  e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k !== V && k !== TILES).map(k => caches.delete(k)))).then(() => self.clients.claim()));
 });
 
 const keep = (req, res) => { if (res && res.ok) caches.open(V).then(c => c.put(req, res.clone())); return res; };
@@ -36,6 +39,12 @@ self.addEventListener('fetch', e => {
   // Live data: network first, last copy if offline
   if (url.hostname === 'open.er-api.com' || url.hostname === 'api.open-meteo.com') {
     e.respondWith(fetch(req).then(r => keep(req, r)).catch(() => caches.match(req)));
+    return;
+  }
+
+  // Map tiles: keep a copy forever, so the riad map works offline
+  if (url.hostname.endsWith('basemaps.cartocdn.com')) {
+    e.respondWith(caches.open(TILES).then(c => c.match(req).then(hit => hit || fetch(req).then(r => { if (r && (r.ok || r.type === 'opaque')) c.put(req, r.clone()); return r; }))));
     return;
   }
 
