@@ -869,7 +869,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="19">Version 19, 1 Nov, 10:55</p>
+  <p id="ver" data-v="20">Version 20, 1 Nov, 10:58</p>
 </div>
 
 </main>
@@ -1311,7 +1311,9 @@ const FX = (function(){
   function pungi(){
     try {
       const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return 0;
-      const ac = new AC(), t0 = ac.currentTime + .05, out = ac.createGain(); out.gain.value = .16; out.connect(ac.destination);
+      try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+      const ac = new AC(); if (ac.state !== 'running') ac.resume().catch(() => {});
+      const t0 = ac.currentTime + .05, out = ac.createGain(); out.gain.value = .32; out.connect(ac.destination);
       const N = { D4: 293.66, Eb4: 311.13, Fs4: 369.99, G4: 392, A4: 440, Bb4: 466.16, C5: 523.25, D5: 587.33 }, q = .22;
       const tune = [['A4',2],['A4',1],['Bb4',1],['A4',1],['G4',1],['Fs4',1],['G4',1],['A4',4],['Bb4',1],['C5',1],['Bb4',1],['A4',1],['G4',1],['Fs4',1],['Eb4',1],['D4',3],
         ['D4',1],['Eb4',1],['Fs4',1],['G4',1],['A4',1],['Bb4',1],['A4',1],['G4',1],['Fs4',2],['G4',1],['Fs4',1],['Eb4',2],['D4',5]];
