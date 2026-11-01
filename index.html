@@ -156,6 +156,8 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .st.tap{color:var(--cactus)}
 .st.book{color:var(--rose)}
 .st.tbc{color:var(--muted)}
+.taxichip{display:inline-flex;align-items:center;gap:5px;margin-left:8px;padding:4px 10px 4px 8px;border-radius:99px;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;background:#F4C430;color:#3A2A05}
+.taxichip svg{width:16px;height:16px;flex:none}
 .maplink{display:inline-flex;align-items:center;margin-left:8px;padding:4px 12px;border-radius:99px;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;color:var(--day,var(--blue-text));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--day,#2442A8) 45%,transparent)}
 .maplink::before{content:'\1F4CD';margin-right:5px;font-size:12px}
 .stops li.past{opacity:.5}
@@ -865,7 +867,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="17">Version 17, 1 Nov, 10:47</p>
+  <p id="ver" data-v="18">Version 18, 1 Nov, 10:52</p>
 </div>
 
 </main>
@@ -989,7 +991,7 @@ const DAYS = [
     ['14:25', 'EZY2623 takes off', 'Just under four hours. Last decent pint for a while.', 'ok', 'takeoff'],
     ['18:10', 'Land at Menara', 'Passport control can be slow. Get dirhams from an ATM in arrivals before leaving the terminal.', 'ok', 'landing'],
     ['19:00', 'Transfer to the riad', 'Leila, the hosts\' assistant, meets us at the airport exit holding a Laaziri Travel sign (photo in the Riad tab). About 20 minutes to the riad. Pay the driver 200 MAD in cash (euros also fine).', 'ok', 'car'],
-    ['21:00', 'Dinner at Terrasse des Épices', 'Booked for 9pm. An open-air roof in the middle of the medina, looking toward the Koutoubia. Easy first night.', 'ok', 'dine', ['Terrasse des Epices Marrakech', 'ChIJS7Cf7kTvrw0RJwNokYlEI_g']],
+    ['21:00', 'Dinner at Terrasse des Épices', 'Booked for 9pm. An open-air roof in the middle of the medina, looking toward the Koutoubia. Easy first night.', 'ok', 'dine', ['Terrasse des Epices Marrakech', 'ChIJS7Cf7kTvrw0RJwNokYlEI_g'], 'taxi'],
     ['23:00', 'Nightcap at the Churchill Bar, La Mamounia', 'Five minutes from the door. The Churchill Bar, and they mean it about no shorts or trainers.', '', 'cocktail', ['Churchill Bar La Mamounia', 'ChIJqfSQep_vrw0R658ar3gwnnc']]
   ]},
   { d: 13, short: 'Fri', title: 'Friday, souks and desert', note: 'The souks in the morning, the Agafay for sunset. Breakfast runs until 11:30.', stops: [
@@ -1005,7 +1007,7 @@ const DAYS = [
     ['09:30', 'Lie-in, then breakfast', 'No alarms. Breakfast runs until 11:30.', '', 'bed'],
     ['11:00', 'Get lost on purpose', 'Pool, roof, or a second go at the souks if anyone found something on Friday they can\'t stop thinking about.', '', 'pool'],
     ['16:30', 'Sundowner at the Nobu Rooftop Garden (optional)', 'Cocktails over Hivernage as the sun goes down around 17:40. About 15 minutes\' walk from the riad. Book a table, and expect a minimum spend of around 500 MAD a head.', 'book', 'cocktail', ['Rooftop Garden Nobu Hotel Marrakech', 'ChIJtxQ1NoLvrw0RS4wWDgbJeq8']],
-    ['20:30', 'Dinner at Dar Yacout', 'The full Moroccan feast in a grand old riad, drinks on the roof first. Go hungry.', 'book', 'tagine', ['Dar Yacout Marrakech', 'ChIJuXAbl2Xurw0R9pfGiHPcnso']],
+    ['20:30', 'Dinner at Dar Yacout', 'The full Moroccan feast in a grand old riad, drinks on the roof first. Go hungry.', 'book', 'tagine', ['Dar Yacout Marrakech', 'ChIJuXAbl2Xurw0R9pfGiHPcnso'], 'taxi'],
     ['22:30', 'Jemaa el-Fnaa after dark', 'Only if anyone is still upright. The square is at its maddest at night.', '', 'stars']
   ]},
   { d: 15, short: 'Sun', title: 'Sunday, home', note: 'A slow start and an early exit.', stops: [
@@ -1095,7 +1097,7 @@ function nextPrayer(now){
     list.innerHTML = '';
     day.stops.forEach((s, k) => {
       const li = document.createElement('li'); li.dataset.n = base + k;
-      li.innerHTML = '<div class="when"><time>' + s[0] + '</time><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[s[4]] || '') + '</g></svg></span></div><div><strong>' + s[1] + '</strong><p>' + s[2] + '</p>' + label[s[3]] + (s[5] ? ' <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s[5][0]) + '&query_place_id=' + s[5][1] + '" target="_blank" rel="noopener">Map</a>' : '') + '</div>';
+      li.innerHTML = '<div class="when"><time>' + s[0] + '</time><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[s[4]] || '') + '</g></svg></span></div><div><strong>' + s[1] + '</strong><p>' + s[2] + '</p>' + label[s[3]] + (s[6] === 'taxi' ? ' <span class="taxichip" title="You\'ll probably want a taxi for this one"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4h4v2"/>' + ICONS.car + '</g></svg>Taxi</span>' : '') + (s[5] ? ' <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s[5][0]) + '&query_place_id=' + s[5][1] + '" target="_blank" rel="noopener">Map</a>' : '') + '</div>';
       list.appendChild(li);
     });
     mark();
