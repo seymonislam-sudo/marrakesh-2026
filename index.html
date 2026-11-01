@@ -696,7 +696,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
       <g transform="translate(18 18)" class="mm-n"><path d="M0 -10L6 6 0 2-6 6z"/><text y="22" text-anchor="middle">N</text></g>
       <g transform="translate(16 270)" class="mm-scale"><path d="M0 0v6h42.2v-6"/><text x="48" y="7">200 m</text></g>
     </svg>
-    <figcaption id="mapcap">Pinch to zoom. The blue pin is the riad, in the lanes off Rue Saâdiens, just north of Palais Royal. Once you've opened this tab with signal, the map is saved on your phone and works offline.</figcaption>
+    <figcaption id="mapcap">Pinch to zoom. The blue pin is the riad, in the lanes off Rue Saâdiens, just north of Palais Royal. Whatever you look at here with signal is saved on your phone, so zoom in and out around the riad once before you fly and it'll work offline.</figcaption>
   </figure>
 
   <div class="links">
@@ -930,7 +930,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="23">Version 23, 1 Nov, 13:58</p>
+  <p id="ver" data-v="24">Version 24, 1 Nov, 13:44</p>
 </div>
 
 </main>
@@ -1788,7 +1788,7 @@ try {
 </script>
 <script src="leaflet/leaflet.js" defer></script>
 <script>
-/* ---------- Riad street map (Leaflet + CARTO tiles, cached for offline) ---------- */
+/* ---------- Riad street map (Leaflet + OpenStreetMap tiles; tiles you view are kept for offline) ---------- */
 window.addEventListener('load', () => {
   const box = document.getElementById('riadmap');
   if (!box) return;
@@ -1797,10 +1797,9 @@ window.addEventListener('load', () => {
   if (!window.L) return fallback();
   const RIAD = [31.6197783, -7.9933975];
   const map = L.map(box, { zoomControl: true, attributionControl: false, minZoom: 14, maxZoom: 19, tap: true });
-  const URL_T = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
   L.control.attribution({ prefix: false }).addTo(map);
-  L.tileLayer(URL_T, { subdomains: 'abcd', maxZoom: 19, maxNativeZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>' }).addTo(map);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
   const pin = L.divIcon({ className: 'rm-pin', iconSize: [34, 44], iconAnchor: [17, 43],
     html: '<svg viewBox="0 0 34 44"><path d="M17 43C8 32 2 25 2 16a15 15 0 0 1 30 0c0 9-6 16-15 27z" fill="#2442A8" stroke="#fff" stroke-width="2.5"/><circle cx="17" cy="16" r="5.5" fill="#F4C430"/></svg><span class="rm-tag">Riad M</span>' });
   L.marker(RIAD, { icon: pin, zIndexOffset: 1000, keyboard: false }).addTo(map);
@@ -1817,23 +1816,6 @@ window.addEventListener('load', () => {
   if (window.ResizeObserver) new ResizeObserver(fix).observe(box);
   window.addEventListener('hashchange', () => setTimeout(fix, 50));
 
-  /* Save the tiles around the riad so the map works with no signal (once, with a connection) */
-  const warm = () => {
-    let done = false; try { done = localStorage.getItem('riadTiles') === 'v1'; } catch (e) {}
-    if (done || !navigator.onLine || !navigator.serviceWorker || !navigator.serviceWorker.controller) return;
-    const r = (window.devicePixelRatio || 1) > 1 ? '@2x' : '', subs = 'abcd', urls = [];
-    const tx = (lo, z) => Math.floor((lo + 180) / 360 * 2 ** z);
-    const ty = (la, z) => { const t = la * Math.PI / 180; return Math.floor((1 - Math.log(Math.tan(t) + 1 / Math.cos(t)) / Math.PI) / 2 * 2 ** z); };
-    const ZB = { 15: [31.6120, -8.0080, 31.6300, -7.9830], 16: [31.6140, -8.0060, 31.6290, -7.9840], 17: [31.6160, -8.0030, 31.6275, -7.9860], 18: [31.6175, -7.9990, 31.6250, -7.9880] };
-    for (const z in ZB) { const [s, w, n, e] = ZB[z];
-      for (let x = tx(w, +z); x <= tx(e, +z); x++) for (let y = ty(n, +z); y <= ty(s, +z); y++)
-        urls.push('https://' + subs[(x + y) % 4] + '.basemaps.cartocdn.com/rastertiles/voyager/' + z + '/' + x + '/' + y + r + '.png'); }
-    let i = 0, ok = 0;
-    const next = () => { if (i >= urls.length) { if (ok > urls.length * .9) try { localStorage.setItem('riadTiles', 'v1'); } catch (e) {} return; }
-      fetch(urls[i++], { mode: 'no-cors' }).then(res => { if (res.ok || res.type === 'opaque') ok++; }).catch(() => {}).finally(next); };
-    for (let k = 0; k < 4; k++) next();
-  };
-  setTimeout(warm, 4000);
 });
 </script>
 <script>

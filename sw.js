@@ -2,8 +2,8 @@
 // Site files and the Firebase library are cached on first visit.
 // Exchange rate and weather use the network first, falling back to the last copy.
 // The kitty's own data is handled by Firebase's offline cache, not here.
-const V = 'souks-v22';
-const TILES = 'souks-tiles';
+const V = 'souks-v23';
+const TILES = 'souks-osm';
 const CORE = [
   './',
   'index.html',
@@ -43,7 +43,7 @@ self.addEventListener('fetch', e => {
   }
 
   // Map tiles: keep a copy forever, so the riad map works offline
-  if (url.hostname.endsWith('basemaps.cartocdn.com')) {
+  if (url.hostname === 'tile.openstreetmap.org') {
     e.respondWith(caches.open(TILES).then(c => c.match(req).then(hit => hit || fetch(req).then(r => { if (r && (r.ok || r.type === 'opaque')) c.put(req, r.clone()); return r; }))));
     return;
   }
