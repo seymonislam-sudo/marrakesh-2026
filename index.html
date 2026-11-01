@@ -150,15 +150,17 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .stops time{font-family:var(--serif);font-size:18px;color:var(--blue-text);font-variant-numeric:tabular-nums;line-height:1.35}
 .stops strong{font-size:17.5px;font-weight:800;display:block;line-height:1.3}
 .stops p{margin:4px 0 0;color:var(--muted);font-size:15.5px}
-.stops .st{display:inline-block;font-size:13.5px;font-weight:700;margin-top:6px}
+.stops .st{display:inline-block;font-size:13.5px;font-weight:700}
+.stops .tags{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:6px}
+.stops .tags:empty{display:none}
 .st.ok{display:inline-flex;align-items:center;gap:5px;background:var(--cactus);color:var(--paper);font-weight:800;font-size:14px;letter-spacing:.02em;text-transform:uppercase;padding:4px 10px 4px 8px;border-radius:99px}
 .st.ok svg{width:14px;height:14px;flex:none}
 .st.tap{color:var(--cactus)}
 .st.book{color:var(--rose)}
 .st.tbc{color:var(--muted)}
-.taxichip{display:inline-flex;align-items:center;gap:5px;margin-left:8px;padding:4px 10px 4px 8px;border-radius:99px;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;background:#F4C430;color:#3A2A05}
+.taxichip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px 4px 8px;border-radius:99px;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;background:#F4C430;color:#3A2A05}
 .taxichip svg{width:16px;height:16px;flex:none}
-.maplink{display:inline-flex;align-items:center;margin-left:8px;padding:4px 12px;border-radius:99px;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;color:var(--day,var(--blue-text));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--day,#2442A8) 45%,transparent)}
+.maplink{display:inline-flex;align-items:center;padding:4px 12px;border-radius:99px;font-size:14px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;text-decoration:none;color:var(--day,var(--blue-text));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--day,#2442A8) 45%,transparent)}
 .maplink::before{content:'\1F4CD';margin-right:5px;font-size:12px}
 .stops li.past{opacity:.5}
 .stops li.now strong::after{content:" — happening now";color:var(--cactus);font-weight:700;font-size:14px}
@@ -867,7 +869,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="18">Version 18, 1 Nov, 10:52</p>
+  <p id="ver" data-v="19">Version 19, 1 Nov, 10:55</p>
 </div>
 
 </main>
@@ -1097,7 +1099,7 @@ function nextPrayer(now){
     list.innerHTML = '';
     day.stops.forEach((s, k) => {
       const li = document.createElement('li'); li.dataset.n = base + k;
-      li.innerHTML = '<div class="when"><time>' + s[0] + '</time><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[s[4]] || '') + '</g></svg></span></div><div><strong>' + s[1] + '</strong><p>' + s[2] + '</p>' + label[s[3]] + (s[6] === 'taxi' ? ' <span class="taxichip" title="You\'ll probably want a taxi for this one"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4h4v2"/>' + ICONS.car + '</g></svg>Taxi</span>' : '') + (s[5] ? ' <a class="maplink" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s[5][0]) + '&query_place_id=' + s[5][1] + '" target="_blank" rel="noopener">Map</a>' : '') + '</div>';
+      li.innerHTML = '<div class="when"><time>' + s[0] + '</time><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[s[4]] || '') + '</g></svg></span></div><div><strong>' + s[1] + '</strong><p>' + s[2] + '</p>' + '<div class="tags">' + label[s[3]] + (s[6] === 'taxi' ? '<span class="taxichip" title="You\'ll probably want a taxi for this one"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4h4v2"/>' + ICONS.car + '</g></svg>Taxi</span>' : '') + (s[5] ? '<a class="maplink" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s[5][0]) + '&query_place_id=' + s[5][1] + '" target="_blank" rel="noopener">Map</a>' : '') + '</div></div>';
       list.appendChild(li);
     });
     mark();
