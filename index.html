@@ -734,7 +734,9 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
       <tr><td>The souks</td><td>20 min walk</td></tr>
       <tr><td>Nomad (spice square)</td><td>25 min walk</td></tr>
       <tr><td>Terrasse des Épices</td><td>25 min walk</td></tr>
-      <tr><td>Dar Yacout</td><td>10 min taxi</td></tr>
+      <tr><td>El Fenn</td><td>15 min walk</td></tr>
+      <tr><td>DarDar and La Pergola</td><td>10 min walk</td></tr>
+      <tr><td>Nobu</td><td>10 min taxi</td></tr>
       <tr><td>Airport</td><td>20 min drive</td></tr>
       <tr><td>Agafay Desert</td><td>45 min drive</td></tr>
     </table>
@@ -1069,12 +1071,13 @@ const DAYS = [
     ['18:00', 'Dinner at a desert camp', 'Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', 'opt', 'fire'],
     ['23:00', 'Drinks at Kabana', 'Rooftop table for 3, confirmed (ref RV-261031-SN8D). Next to the Koutoubia, a few minutes from the riad. Open till 2am.', 'ok', 'cocktail', ['Kabana Rooftop Marrakech', 'ChIJ2VSV76Tvrw0Rk_saDiwILnU']]
   ]},
-  { d: 14, short: 'Sat', title: 'Saturday, wander and feast', note: 'A lie-in, the medina at your own pace, then the big dinner.', stops: [
+  { d: 14, short: 'Sat', title: 'Saturday, rooftops and the square', note: 'A lie-in, the medina at your own pace, sunset on the best roof in town, then dinner across the square.', stops: [
     ['09:30', 'Lie-in, then breakfast', 'No alarms. Breakfast runs until 11:30.', '', 'bed'],
     ['11:00', 'Get lost on purpose', 'Pool, roof, or a second go at the souks if anyone found something on Friday they can\'t stop thinking about.', '', 'pool'],
-    ['16:30', 'Sundowner at the Nobu Rooftop Garden (optional)', 'Cocktails over Hivernage as the sun goes down around 17:40. About 15 minutes\' walk from the riad. Book a table, and expect a minimum spend of around 500 MAD a head.', 'book', 'cocktail', ['Rooftop Garden Nobu Hotel Marrakech', 'ChIJtxQ1NoLvrw0RS4wWDgbJeq8']],
-    ['20:30', 'Dinner at Dar Yacout', 'The full Moroccan feast in a grand old riad, drinks on the roof first. Go hungry.', 'book', 'tagine', ['Dar Yacout Marrakech', 'ChIJuXAbl2Xurw0R9pfGiHPcnso'], 'taxi'],
-    ['22:30', 'Jemaa el-Fnaa after dark', 'Only if anyone is still upright. The square is at its maddest at night.', '', 'stars']
+    ['17:00', 'Sundowner at El Fenn', 'The big rooftop by Bab El Ksour, looking straight at the Koutoubia as the sun goes down around 17:40. About 15 minutes\' walk from the riad. Drinks only, so no table needed, but get there early: Saturday is busy. Not cheap, so it comes out of the kitty.', '', 'cocktail', ['El Fenn Marrakech']],
+    ['19:00', 'Walk across Jemaa el-Fnaa', 'About 10 to 15 minutes, straight through the square just as it lights up. Smoke, drums, snail stalls. Keep walking.', '', 'stars'],
+    ['19:30', 'Dinner at DarDar', 'Rooftop on Riad Zitoun Lakdim, off the square. Moroccan fusion and sharing plates, proper cocktails, a DJ and belly dancers as the night builds. Book a table. Plan B if the quad bikes have finished everyone off: La Pergola, a few doors down, with live jazz and draft beer.', 'book', 'dine', ['DarDar Rooftop Marrakech']],
+    ['23:00', 'Nightcap at Nobu (optional)', 'Only if anyone is still upright. It\'s out in Hivernage, about 10 minutes by taxi, so agree the fare before getting in. Otherwise it\'s a 10-minute walk home from DarDar.', 'opt', 'cocktail', ['Nobu Hotel Marrakech', 'ChIJtxQ1NoLvrw0RS4wWDgbJeq8'], 'taxi']
   ]},
   { d: 15, short: 'Sun', title: 'Sunday, home', note: 'A slow start and an early exit.', stops: [
     ['08:00', 'Last breakfast', 'Settle the kitty and leave a tip for Soumia and the team.', '', 'cup'],
@@ -1163,7 +1166,7 @@ function nextPrayer(now){
     list.innerHTML = '';
     day.stops.forEach((s, k) => {
       const li = document.createElement('li'); li.dataset.n = base + k;
-      li.innerHTML = '<div class="when"><time>' + s[0] + '</time><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[s[4]] || '') + '</g></svg></span></div><div><strong>' + s[1] + '</strong><p>' + s[2] + '</p>' + '<div class="tags">' + label[s[3]] + (s[6] === 'taxi' ? '<span class="taxichip" title="You\'ll probably want a taxi for this one"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4h4v2"/>' + ICONS.car + '</g></svg>Taxi</span>' : '') + (s[5] ? '<a class="maplink" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s[5][0]) + '&query_place_id=' + s[5][1] + '" target="_blank" rel="noopener">Map</a>' : '') + '</div></div>';
+      li.innerHTML = '<div class="when"><time>' + s[0] + '</time><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[s[4]] || '') + '</g></svg></span></div><div><strong>' + s[1] + '</strong><p>' + s[2] + '</p>' + '<div class="tags">' + label[s[3]] + (s[6] === 'taxi' ? '<span class="taxichip" title="You\'ll probably want a taxi for this one"><svg viewBox="0 0 24 24" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4h4v2"/>' + ICONS.car + '</g></svg>Taxi</span>' : '') + (s[5] ? '<a class="maplink" href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(s[5][0]) + (s[5][1] ? '&query_place_id=' + s[5][1] : '') + '" target="_blank" rel="noopener">Map</a>' : '') + '</div></div>';
       list.appendChild(li);
     });
     mark();
@@ -1479,7 +1482,7 @@ const FX = (function(){
       : now < at('18:10') ? ['b', 'Wheels up!', 'In the air. Menara at 18:10, and the clocks match home.', 'Wave it off', 'plane']
       : ['c', 'Marhaba, Marrakesh!', 'Leila is at the exit with the Laaziri Travel sign. 200 MAD cash for the driver.', 'Fly-past', 'plane'];
     if (k === 'Fri') return ['a', 'Friday the 13th in the souks.', 'What could possibly go wrong? Stalls pause for prayers 12:30 to 14:30, and the desert pick-up is at 16:00. Take a jumper.', 'Touch wood', 'cat'];
-    if (k === 'Sat') return ['a', 'Magic carpet day.', 'Last full day, so make it count. Dar Yacout at 20:30, so go hungry.', 'Summon the carpet', 'carpet'];
+    if (k === 'Sat') return ['a', 'Magic carpet day.', 'Last full day, so make it count. El Fenn for sunset at 17:00, then DarDar.', 'Summon the carpet', 'carpet'];
     return now < at('10:30') ? ['a', 'Back to reality.', 'Airport at 10:30. Spend your last dirhams, they can’t leave the country.', 'Same time next year?', 'vote']
       : now < at('13:20') ? ['b', 'Back to reality.', 'Allow two hours at Menara. EZY2624 leaves at 13:20.', 'Same time next year?', 'vote']
       : now < HOME ? ['c', 'Back to reality.', 'In the air. Luton at 17:00, then back to work on Monday.', 'Same time next year?', 'vote']
@@ -1636,7 +1639,7 @@ window.souksRateReady = fetch('https://open.er-api.com/v6/latest/GBP')
     ['A warm layer', 'For the desert and the roof at night.'],
     ['Swimmers', 'Pool and hammam.'],
     ['Comfortable shoes', 'Cobbles and dust.'],
-    ['Something smart', 'For La Mamounia and Dar Yacout.'],
+    ['Something smart', 'For La Mamounia, El Fenn and DarDar.'],
     ['Offline map of the medina', 'Download it in Google Maps before you fly.'],
     ['Roaming sorted', 'Morocco often isn\'t in UK bundles. Check your plan or get an eSIM.']
   ];
