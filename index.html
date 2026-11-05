@@ -735,7 +735,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
       <tr><td>Nomad (spice square)</td><td>25 min walk</td></tr>
       <tr><td>Terrasse des Épices</td><td>25 min walk</td></tr>
       <tr><td>El Fenn</td><td>15 min walk</td></tr>
-      <tr><td>DarDar and La Pergola</td><td>10 min walk</td></tr>
+      <tr><td>La Pergola</td><td>15 min walk</td></tr>
       <tr><td>Nobu</td><td>10 min taxi</td></tr>
       <tr><td>Airport</td><td>20 min drive</td></tr>
       <tr><td>Agafay Desert</td><td>45 min drive</td></tr>
@@ -935,7 +935,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="28">Version 28, 5 Nov, 13:15</p>
+  <p id="ver" data-v="29">Version 29, 5 Nov, 13:25</p>
 </div>
 
 </main>
@@ -1071,13 +1071,13 @@ const DAYS = [
     ['18:30', 'Dinner and a show at the desert camp', 'Included in the trip. Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', '', 'fire'],
     ['23:00', 'Drinks at Kabana', 'Rooftop table for 3, confirmed (ref RV-261031-SN8D). Drinks, and food for anyone still hungry after the camp dinner. Next to the Koutoubia, a few minutes from the riad. Open till 2am.', 'ok', 'cocktail', ['Kabana Rooftop Marrakech', 'ChIJ2VSV76Tvrw0Rk_saDiwILnU']]
   ]},
-  { d: 14, short: 'Sat', title: 'Saturday, rooftops and the square', note: 'A lie-in, the medina at your own pace, sunset on the best roof in town, then dinner across the square.', stops: [
+  { d: 14, short: 'Sat', title: 'Saturday, rooftops and jazz', note: 'A lie-in, the medina at your own pace, sunset on the best roof in town, then dinner and jazz across the square.', stops: [
     ['09:30', 'Lie-in, then breakfast', 'No alarms. Breakfast runs until 11:30.', '', 'bed'],
     ['11:00', 'Get lost on purpose', 'Pool, roof, or a second go at the souks if anyone found something on Friday they can\'t stop thinking about.', '', 'pool'],
     ['17:00', 'Sundowner at El Fenn', 'The big rooftop by Bab El Ksour, looking straight at the Koutoubia as the sun goes down around 17:40. About 15 minutes\' walk from the riad. Drinks only, so no table needed, but get there early: Saturday is busy. Not cheap, so it comes out of the kitty.', '', 'cocktail', ['El Fenn Marrakech']],
-    ['19:00', 'Walk across Jemaa el-Fnaa', 'About 10 to 15 minutes, straight through the square just as it lights up. Smoke, drums, snail stalls. Keep walking.', '', 'stars'],
-    ['19:30', 'Dinner at DarDar', 'Rooftop on Riad Zitoun Lakdim, off the square. Moroccan fusion and sharing plates, proper cocktails, a DJ and belly dancers as the night builds. Book a table. Plan B if the quad bikes have finished everyone off: La Pergola, a few doors down, with live jazz and draft beer.', 'book', 'dine', ['DarDar Rooftop Marrakech']],
-    ['23:00', 'Nightcap at Nobu (optional)', 'Only if anyone is still upright. It\'s out in Hivernage, about 10 minutes by taxi, so agree the fare before getting in. Otherwise it\'s a 10-minute walk home from DarDar.', 'opt', 'cocktail', ['Nobu Hotel Marrakech', 'ChIJtxQ1NoLvrw0RS4wWDgbJeq8'], 'taxi']
+    ['18:45', 'Walk across Jemaa el-Fnaa', 'About 10 to 15 minutes, straight through the square just as it lights up. Smoke, drums, snail stalls. Keep walking: the table won\'t be held if we\'re more than 15 minutes late.', '', 'stars'],
+    ['19:15', 'Dinner at La Pergola', 'Booked for 19:15, table for 3. Rooftop garden on Riad Monceau, Riad Zitoun Lakdim, 100 m off the square. Moroccan and Mediterranean tapas, draft beer, cocktails and Moroccan wine, with live jazz from 20:00. They run two sittings, so we may be asked to give the table up after the meal.', 'ok', 'dine', ['La Pergola Riad Monceau Marrakech']],
+    ['23:00', 'Nightcap at Nobu (optional)', 'Only if anyone is still upright. It\'s out in Hivernage, about 10 minutes by taxi, so agree the fare before getting in. Otherwise it\'s a 15-minute walk home from La Pergola.', 'opt', 'cocktail', ['Nobu Hotel Marrakech', 'ChIJtxQ1NoLvrw0RS4wWDgbJeq8'], 'taxi']
   ]},
   { d: 15, short: 'Sun', title: 'Sunday, home', note: 'A slow start and an early exit.', stops: [
     ['08:00', 'Last breakfast', 'Settle the kitty and leave a tip for Soumia and the team.', '', 'cup'],
@@ -1482,7 +1482,7 @@ const FX = (function(){
       : now < at('18:10') ? ['b', 'Wheels up!', 'In the air. Menara at 18:10, and the clocks match home.', 'Wave it off', 'plane']
       : ['c', 'Marhaba, Marrakesh!', 'Leila is at the exit with the Laaziri Travel sign. 200 MAD cash for the driver.', 'Fly-past', 'plane'];
     if (k === 'Fri') return ['a', 'Friday the 13th in the souks.', 'What could possibly go wrong? Stalls pause for prayers 12:30 to 14:30, and the desert pick-up is 16:00 at La Mamounia. Take a jumper.', 'Touch wood', 'cat'];
-    if (k === 'Sat') return ['a', 'Magic carpet day.', 'Last full day, so make it count. El Fenn for sunset at 17:00, then DarDar.', 'Summon the carpet', 'carpet'];
+    if (k === 'Sat') return ['a', 'Magic carpet day.', 'Last full day, so make it count. El Fenn for sunset at 17:00, then La Pergola at 19:15.', 'Summon the carpet', 'carpet'];
     return now < at('10:30') ? ['a', 'Back to reality.', 'Airport at 10:30. Spend your last dirhams, they can’t leave the country.', 'Same time next year?', 'vote']
       : now < at('13:20') ? ['b', 'Back to reality.', 'Allow two hours at Menara. EZY2624 leaves at 13:20.', 'Same time next year?', 'vote']
       : now < HOME ? ['c', 'Back to reality.', 'In the air. Luton at 17:00, then back to work on Monday.', 'Same time next year?', 'vote']
@@ -1639,7 +1639,7 @@ window.souksRateReady = fetch('https://open.er-api.com/v6/latest/GBP')
     ['A warm layer', 'For the desert and the roof at night.'],
     ['Swimmers', 'Pool and hammam.'],
     ['Comfortable shoes', 'Cobbles and dust.'],
-    ['Something smart', 'For La Mamounia, El Fenn and DarDar.'],
+    ['Something smart', 'For La Mamounia, El Fenn and La Pergola.'],
     ['Offline map of the medina', 'Download it in Google Maps before you fly.'],
     ['Roaming sorted', 'Morocco often isn\'t in UK bundles. Check your plan or get an eSIM.']
   ];
