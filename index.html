@@ -935,7 +935,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="27">Version 27, 4 Nov, 12:05</p>
+  <p id="ver" data-v="28">Version 28, 5 Nov, 13:15</p>
 </div>
 
 </main>
@@ -1067,8 +1067,8 @@ const DAYS = [
     ['11:45', 'Wander up to lunch', 'About 30 minutes on foot: past the Koutoubia, across Jemaa el-Fnaa, then up Souk Semmarine to the spice square. No guide needed. If someone says the way is closed, it isn\'t.', '', 'lantern'],
     ['12:30', 'Lunch at Nomad', 'Booked for 12:30, table for 3 (ref B63H9HHV). Modern Moroccan on a roof above the spice square, covering the prayer-time lull.', 'ok', 'dine', ['Nomad Marrakech', 'ChIJCU9KCULurw0RUA4KjdtDOdc']],
     ['14:15', 'The souks, at your own pace', 'Stalls reopen after Friday prayers around 14:30. Keep going north to Ben Youssef Madrasa if anyone\'s keen, or drift back through the dyers\' souk. Be at the riad for the 16:00 pick-up.', '', 'arch'],
-    ['16:00', 'Agafay Desert: quad bikes and dinner', 'GetYourGuide trip, about £20 each, roughly 6 hours with dinner included. About 45 minutes out, riding into sunset around 17:35. Not booked yet, so confirm the pick-up time when it is. Sunglasses and a scarf for the dust.', 'book', 'jeep'],
-    ['18:30', 'Dinner at the desert camp', 'Included in the trip. Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', '', 'fire'],
+    ['16:00', 'Agafay Desert: quads, camels, dinner and a show', 'Booked, 3 adults (GetYourGuide ref GYG32LV24F5F, £71.16 in total, about £23.72 each). Pick-up at La Mamounia\'s main entrance on Avenue Bab Jdid, 5 minutes\' walk from the riad, so leave by 15:50. Tickets are in the GetYourGuide app and work offline. About 45 minutes out, riding into sunset around 17:35. Sunglasses and a scarf for the dust.', 'ok', 'jeep', ['La Mamounia Marrakech', 'ChIJqfSQep_vrw0R658ar3gwnnc']],
+    ['18:30', 'Dinner and a show at the desert camp', 'Included in the trip. Fire pits, lanterns, tagine and a lot of sky. It gets cold fast, so take a jumper. Back about 22:00.', '', 'fire'],
     ['23:00', 'Drinks at Kabana', 'Rooftop table for 3, confirmed (ref RV-261031-SN8D). Drinks, and food for anyone still hungry after the camp dinner. Next to the Koutoubia, a few minutes from the riad. Open till 2am.', 'ok', 'cocktail', ['Kabana Rooftop Marrakech', 'ChIJ2VSV76Tvrw0Rk_saDiwILnU']]
   ]},
   { d: 14, short: 'Sat', title: 'Saturday, rooftops and the square', note: 'A lie-in, the medina at your own pace, sunset on the best roof in town, then dinner across the square.', stops: [
@@ -1481,7 +1481,7 @@ const FX = (function(){
     if (k === 'Thu') return now < at('14:25') ? ['a', 'Wheels up from Luton!', 'St Pancras at 11:15. Bag drop shuts at 13:25. EZY2623 leaves at 14:25.', 'Wave it off', 'plane']
       : now < at('18:10') ? ['b', 'Wheels up!', 'In the air. Menara at 18:10, and the clocks match home.', 'Wave it off', 'plane']
       : ['c', 'Marhaba, Marrakesh!', 'Leila is at the exit with the Laaziri Travel sign. 200 MAD cash for the driver.', 'Fly-past', 'plane'];
-    if (k === 'Fri') return ['a', 'Friday the 13th in the souks.', 'What could possibly go wrong? Stalls pause for prayers 12:30 to 14:30, and the desert pick-up is at 16:00. Take a jumper.', 'Touch wood', 'cat'];
+    if (k === 'Fri') return ['a', 'Friday the 13th in the souks.', 'What could possibly go wrong? Stalls pause for prayers 12:30 to 14:30, and the desert pick-up is 16:00 at La Mamounia. Take a jumper.', 'Touch wood', 'cat'];
     if (k === 'Sat') return ['a', 'Magic carpet day.', 'Last full day, so make it count. El Fenn for sunset at 17:00, then DarDar.', 'Summon the carpet', 'carpet'];
     return now < at('10:30') ? ['a', 'Back to reality.', 'Airport at 10:30. Spend your last dirhams, they can’t leave the country.', 'Same time next year?', 'vote']
       : now < at('13:20') ? ['b', 'Back to reality.', 'Allow two hours at Menara. EZY2624 leaves at 13:20.', 'Same time next year?', 'vote']
