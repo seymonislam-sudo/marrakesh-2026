@@ -733,7 +733,6 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
       <tr><td>Jemaa el-Fnaa</td><td>15 min walk</td></tr>
       <tr><td>Bahia Palace</td><td>20 min walk</td></tr>
       <tr><td>The souks</td><td>20 min walk</td></tr>
-      <tr><td>Nomad (spice square)</td><td>25 min walk</td></tr>
       <tr><td>Terrasse des Épices</td><td>25 min walk</td></tr>
       <tr><td>El Fenn</td><td>15 min walk</td></tr>
       <tr><td>La Pergola</td><td>15 min walk</td></tr>
@@ -1076,12 +1075,11 @@ const DAYS = [
     ['21:00', 'Dinner at Terrasse des Épices', 'Booked for 9pm, second sitting, so no rush. A big open-air roof terrace above the souks at 15 Souk Cherifia, 3 minutes\' walk from the Dar El Bacha drop. Licensed, with a DJ or live music every evening. If lost, call +212 5 24 37 59 04 and they\'ll guide us in. Getting back: walk to Dar El Bacha (or ask them to call a taxi), say "La Mamounia", agree about 50 MAD.', 'ok', 'dine', ['Terrasse des Epices Marrakech', 'ChIJS7Cf7kTvrw0RJwNokYlEI_g'], 'taxi'],
     ['23:00', 'Nightcap at the Churchill Bar, La Mamounia', 'Five minutes from the door. The Churchill Bar, and they mean it about no shorts or trainers.', '', 'cocktail', ['Churchill Bar La Mamounia', 'ChIJqfSQep_vrw0R658ar3gwnnc']]
   ]},
-  { d: 13, short: 'Fri', title: 'Friday, souks and desert', note: 'A slow start, lunch above the spice square, the souks after, then quad bikes in the Agafay at sunset. Breakfast runs until 11:30.', stops: [
-    ['10:30', 'Late breakfast on the roof', 'Soumia cooks. Last orders 11:30, so no later than that.', 'ok', 'cup'],
-    ['11:45', 'Wander up to lunch', 'About 30 minutes on foot: past the Koutoubia, across Jemaa el-Fnaa, then up Souk Semmarine to the spice square. No guide needed. If someone says the way is closed, it isn\'t.', '', 'lantern'],
-    ['12:30', 'Lunch at Nomad', 'Booked for 12:30, table for 3 (ref B63H9HHV). Modern Moroccan on a roof above the spice square, covering the prayer-time lull.', 'ok', 'dine', ['Nomad Marrakech', 'ChIJCU9KCULurw0RUA4KjdtDOdc']],
-    ['14:15', 'The souks, at your own pace', 'Stalls reopen after Friday prayers around 14:30. Skip Ben Youssef, it\'s too far north for the time we have. Drift back through the dyers\' souk and head home by 15:15 to drop shopping and change into clothes that can take the dust. Leave the riad at 15:50 for the 16:00 pick-up at La Mamounia.', '', 'arch'],
-    ['16:00', 'Agafay Desert: quads, camels, dinner and a show', 'Booked, 3 adults (GetYourGuide ref GYG32LV24F5F, £71.16 in total, about £23.72 each). Pick-up at La Mamounia\'s main entrance on Avenue Bab Jdid, 5 minutes\' walk from the riad, so leave by 15:50. Tickets are in the GetYourGuide app and work offline. About 45 minutes out, riding into sunset around 17:35. Quads first, then camels, then dinner and a show at the camp under the stars. Back about 22:00. Sunglasses and a scarf for the dust, and a jumper for after dark.', 'ok', 'jeep', ['La Mamounia Marrakech', 'ChIJqfSQep_vrw0R658ar3gwnnc']],
+  { d: 13, short: 'Fri', title: 'Friday, souks and desert', note: 'A slow start, the souks and the spice square, then quad bikes in the Agafay at sunset.', stops: [
+    ['11:00', 'Late breakfast on the roof', 'Soumia cooks. A big one, as there\'s no lunch booked: the camp feeds us tonight.', 'ok', 'cup'],
+    ['12:00', 'The souks and the spice square', 'About 30 minutes on foot: past the Koutoubia, across Jemaa el-Fnaa, then up Souk Semmarine to the spice square. No guide needed. If someone says the way is closed, it isn\'t. Some stalls shut over Friday prayers, roughly 12:30 to 14:30, so it\'ll be quieter than usual. Mint tea on a roof terrace if anyone needs a break: Café des Épices on the spice square needs no booking.', '', 'lantern'],
+    ['14:15', 'Back to the riad', 'Drop the shopping and change into clothes that can take the dust. Leave the riad at 14:50 for the 15:00 pick-up at La Mamounia.', '', 'arch'],
+    ['15:00', 'Agafay Desert: quads, camels, dinner and a show', 'Booked, 3 adults (GetYourGuide ref GYG32LV24F5F, £71.16 in total, about £23.72 each). Now a 15:00 pick-up at La Mamounia\'s main entrance on Avenue Bab Jdid, 5 minutes\' walk from the riad, so leave by 14:50. Tickets are in the GetYourGuide app and work offline. About 45 minutes out. Quads first, then camels, riding into sunset around 17:35, then dinner and a show at the camp under the stars. Back earlier than first planned: check the app for the drop-off time. Sunglasses and a scarf for the dust, and a jumper for after dark.', 'ok', 'jeep', ['La Mamounia Marrakech', 'ChIJqfSQep_vrw0R658ar3gwnnc']],
     ['23:00', 'Drinks at Kabana', 'Rooftop table for 3, confirmed (ref RV-261031-SN8D). Drinks, and food for anyone still hungry after the camp dinner. Next to the Koutoubia, a few minutes from the riad. Open till 2am.', 'ok', 'cocktail', ['Kabana Rooftop Marrakech', 'ChIJ2VSV76Tvrw0Rk_saDiwILnU']]
   ]},
   { d: 14, short: 'Sat', title: 'Saturday, rooftops and jazz', note: 'A lie-in, the medina at your own pace, sunset on the best roof in town, then dinner and jazz across the square.', stops: [
@@ -1494,7 +1492,7 @@ const FX = (function(){
     if (k === 'Thu') return now < at('14:25') ? ['a', 'Wheels up from Luton!', 'Betjeman statue, St Pancras, 11:30. Train at 11:45. Bag drop shuts at 13:25. EZY2623 leaves at 14:25.', 'Wave it off', 'plane']
       : now < at('18:10') ? ['b', 'Wheels up!', 'In the air. Menara at 18:10, and the clocks match home.', 'Wave it off', 'plane']
       : ['c', 'Marhaba, Marrakesh!', 'Leila is at the exit with the Laaziri Travel sign. 200 MAD cash for the driver.', 'Fly-past', 'plane'];
-    if (k === 'Fri') return ['a', 'Friday the 13th in the souks.', 'What could possibly go wrong? Stalls pause for prayers 12:30 to 14:30, and the desert pick-up is 16:00 at La Mamounia. Take a jumper.', 'Touch wood', 'cat'];
+    if (k === 'Fri') return ['a', 'Friday the 13th in the souks.', 'What could possibly go wrong? Stalls pause for prayers 12:30 to 14:30, and the desert pick-up is 15:00 at La Mamounia. Take a jumper.', 'Touch wood', 'cat'];
     if (k === 'Sat') return ['a', 'Magic carpet day.', 'Last full day, so make it count. El Fenn from 16:30 for sunset, then La Pergola at 19:15.', 'Summon the carpet', 'carpet'];
     return now < at('10:30') ? ['a', 'Back to reality.', 'Airport at 10:30. Spend your last dirhams, they can’t leave the country.', 'Same time next year?', 'vote']
       : now < at('13:20') ? ['b', 'Back to reality.', 'Allow two hours at Menara. EZY2624 leaves at 13:20.', 'Same time next year?', 'vote']
