@@ -213,6 +213,14 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .rm-lm{display:flex;align-items:center;gap:5px;white-space:nowrap;font:700 12.5px var(--sans);color:#141B3D;text-shadow:0 0 3px #fff,0 0 3px #fff,0 0 3px #fff}
 .rm-lm i{flex:none;width:11px;height:11px;border-radius:50%;background:#B5473F;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.35)}
 .rm-lm.pal i{background:#2E6B4F}
+.rm-lm.taxi i{background:#F4C430;border-color:#141B3D}
+.homemap{height:240px;border-radius:12px;overflow:hidden;background:#EDEAE4;margin:10px 0 8px;z-index:0}
+.homemap .rm-pin svg{width:30px;height:39px;max-width:none;display:block}
+.homemap .leaflet-control-attribution{font-size:10px}
+.sheet .taxirank{background:rgba(255,255,255,.08);border-radius:14px;padding:14px 14px 10px;margin-bottom:18px}
+.sheet .taxirank h3{margin:0 0 4px;color:#fff;font-size:17px}
+.sheet .taxirank p{margin:0;color:#DCE2FA;font-size:15px}
+.sheet .taxirank .walk{color:#F4C430;font-weight:800}
 .minimap figcaption{margin:8px 6px 0;font-size:14.5px;color:var(--muted);line-height:1.45}
 .mm-bg{fill:color-mix(in srgb,var(--rose) 6%,var(--surface))}
 .mm-grid{stroke:var(--rule);stroke-width:.6}
@@ -726,21 +734,22 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
   <div class="block">
     <h3>How far is everything</h3>
-    <table class="dist">
-      <tr><td>La Mamounia and the Churchill Bar</td><td>5 min walk</td></tr>
-      <tr><td>Koutoubia Mosque</td><td>5–10 min walk</td></tr>
-      <tr><td>Kabana</td><td>10 min walk</td></tr>
-      <tr><td>Jemaa el-Fnaa</td><td>15 min walk</td></tr>
-      <tr><td>Bahia Palace</td><td>20 min walk</td></tr>
-      <tr><td>The souks</td><td>20 min walk</td></tr>
-      <tr><td>Terrasse des Épices</td><td>25 min walk</td></tr>
-      <tr><td>El Fenn</td><td>15 min walk</td></tr>
-      <tr><td>La Pergola</td><td>15 min walk</td></tr>
+    <table class="dist" id="distT">
+      <tr data-ll="31.6196405,-7.9894086"><td>Taxi rank, Rue Ibn Rochd</td><td>5–10 min walk</td></tr>
+      <tr data-ll="31.6228,-7.9972"><td>La Mamounia gate and the Churchill Bar</td><td>15 min walk</td></tr>
+      <tr data-ll="31.6237205,-7.9936196"><td>Koutoubia Mosque</td><td>10 min walk</td></tr>
+      <tr data-ll="31.6261794,-7.9930986"><td>Kabana</td><td>15 min walk</td></tr>
+      <tr data-ll="31.6259521,-7.9890491"><td>Jemaa el-Fnaa</td><td>15–20 min walk</td></tr>
+      <tr data-ll="31.6269525,-7.9931709"><td>El Fenn</td><td>15–20 min walk</td></tr>
+      <tr data-ll="31.6247012,-7.9872118"><td>La Pergola</td><td>15–20 min walk</td></tr>
+      <tr data-ll="31.6217067,-7.9819688"><td>Bahia Palace</td><td>20 min walk</td></tr>
+      <tr data-ll="31.6279711,-7.9880702"><td>The souks (Souk Semmarine)</td><td>20–25 min walk</td></tr>
+      <tr data-ll="31.6312246,-7.9888194"><td>Terrasse des Épices</td><td>25–30 min walk</td></tr>
       <tr><td>Nobu</td><td>10 min taxi</td></tr>
       <tr><td>Airport</td><td>20 min drive</td></tr>
       <tr><td>Agafay Desert</td><td>45 min drive</td></tr>
     </table>
-    <p class="small">Roughly. The medina has its own idea of distance.</p>
+    <p class="small" id="distNote">Walking times from the riad along the streets, not as the crow flies. They update from OpenStreetMap routing whenever you have signal and are then saved for offline.</p>
   </div>
 </section>
 
@@ -850,10 +859,10 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
   <div class="block">
     <h3>Taxis around town</h3>
     <ul class="rules">
-      <li><b>Where to get one:</b> cars can't reach the riad, so walk 5 minutes to La Mamounia's main entrance on Avenue Bab Jdid. Petit taxis queue there, and it's where to ask to be dropped coming back.</li>
+      <li><b>Where to get one:</b> cars can't reach the riad. The nearest taxis are at the rank on Rue Ibn Rochd (Arset el Maach), east of the riad; the map is on the Home button. La Mamounia's gate on Avenue Bab Jdid also has taxis but is about 15 minutes' walk.</li>
       <li><b>Which taxi:</b> the small beige petit taxis. They take up to 3 passengers, so one does all of us.</li>
       <li><b>Agree the fare first.</b> Most drivers won't use the meter for tourists, and fares go up after 20:00. Around 50 MAD for a hop across the medina is fair. If they ask 100 or more, try the next one.</li>
-      <li><b>Name a landmark,</b> not the restaurant: Dar El Bacha for Terrasse des Épices, Jemaa el-Fnaa for the square, La Mamounia for home.</li>
+      <li><b>Name a landmark,</b> not the restaurant: Dar El Bacha for Terrasse des Épices, Jemaa el-Fnaa for the square, "Arset el Maach, Rue Ibn Rochd" for home.</li>
       <li><b>Carry small notes.</b> Drivers rarely have change for a 200.</li>
       <li><b>Easy option:</b> WhatsApp Youssef a day ahead with both legs and agree one price.</li>
     </ul>
@@ -928,18 +937,25 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
   <div class="wrap">
     <h2 id="homeT">Get me back to the riad</h2>
     <div class="driver">
-      <p class="ar" lang="ar" dir="rtl">من فضلك، خذني إلى 34 سيدي ميمون، قرب فندق المامونية</p>
-      <p class="fr" lang="fr">S'il vous plaît, emmenez-moi au 34 Sidi Mimoun, près de l'hôtel La Mamounia.</p>
-      <p class="en">Show this to the driver: Riad M, 34 Sidi Mimoun, by La Mamounia hotel. If the car can't get down the lane, walk the last bit.</p>
+      <p class="ar" lang="ar" dir="rtl">من فضلك، خذني إلى محطة الطاكسيات، شارع ابن رشد، عرصة المعاش</p>
+      <p class="fr" lang="fr">S'il vous plaît, emmenez-moi à la station de taxis, rue Ibn Rochd (Arset el Maach).</p>
+      <p class="en">Show this to the driver: the taxi rank on Rue Ibn Rochd (Arset el Maach). It's the closest place a taxi can stop; the riad (34 Sidi Mimoun, off Rue Saâdiens) is a short walk west, see the map below.</p>
+    </div>
+    <div class="taxirank">
+      <h3>Nearest taxis: Rue Ibn Rochd rank</h3>
+      <p>Petit taxis drop off and pick up here. <span class="walk" id="rankWalk">About 5–10 minutes on foot</span> to the riad, along the streets.</p>
+      <div id="homemap" class="homemap" role="region" aria-label="Walking route from the riad to the taxi rank"></div>
+      <p class="small" id="rankNote">Blue pin: the riad. Yellow: the taxi rank. The walking route is drawn along the streets once you've had signal; it's then saved for offline.</p>
     </div>
     <div class="acts">
       <a href="https://www.google.com/maps/dir/?api=1&amp;destination=31.6197783%2C-7.9933975&amp;travelmode=walking" target="_blank" rel="noopener">Walk me back</a>
+      <a class="ghost" href="https://www.google.com/maps/dir/?api=1&amp;origin=31.6197783%2C-7.9933975&amp;destination=31.6196405%2C-7.9894086&amp;travelmode=walking" target="_blank" rel="noopener">Walk me to the taxis</a>
       <a class="ghost" href="https://www.airbnb.co.uk/guest/inbox" target="_blank" rel="noopener">Message Julie and Anas</a>
     </div>
     <ul class="tipsb">
-      <li><b>From Jemaa el-Fnaa</b> it's about 15 minutes on foot. Walk towards the Koutoubia minaret; the riad is just beyond it, by La Mamounia.</li>
+      <li><b>From Jemaa el-Fnaa</b> it's about 15–20 minutes on foot. Walk past the Koutoubia minaret and on south; the riad is in the lanes off Rue Saâdiens.</li>
       <li><b>Agree the fare before you get in</b>, or insist on the meter. Across the old town should be a short, cheap ride, so don't pay over the odds.</li>
-      <li><b>Lost in the lanes?</b> Ask a shopkeeper for La Mamounia, not a passer-by offering to guide you.</li>
+      <li><b>Lost in the lanes?</b> Ask a shopkeeper for Rue Saâdiens or Arset el Maach, not a passer-by offering to guide you.</li>
       <li><b>Emergency:</b> police 19, ambulance 15, or 112 from any mobile.</li>
     </ul>
   </div>
@@ -947,7 +963,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="41">Version 41, 13 Nov, 10:05</p>
+  <p id="ver" data-v="42">Version 42, 13 Nov, 10:30</p>
 </div>
 
 </main>
@@ -1079,9 +1095,9 @@ const DAYS = [
     ['11:00', 'Late breakfast on the roof', 'Soumia cooks. Then out into the medina.', 'ok', 'cup'],
     ['12:00', 'The souks and the spice square', 'About 30 minutes on foot: past the Koutoubia, across Jemaa el-Fnaa, then up Souk Semmarine to the spice square. No guide needed. If someone says the way is closed, it isn\'t. Some stalls shut over Friday prayers, roughly 12:30 to 14:30, so it\'ll be quieter than usual.', '', 'lantern'],
     ['13:30', 'Lunch near the square', 'Nothing booked, just pick one. All cheap, well reviewed and open Friday lunchtime. La Cantine des Gazelles (6 Rue Kennaria, just off Jemaa el-Fnaa): home-style tagines, the top pick. Café des Épices: rooftop on the spice square, popular so there may be a wait. Café Kessabine: terrace over Jemaa el-Fnaa, cash only. El Bahja (Rue Bani Marine): simple and very cheap, on the way home. Keep it to about 45 minutes.', '', 'dine', ['La Cantine des Gazelles Marrakech', 'ChIJz_MnlkHurw0RDz08J2IGzjM']],
-    ['14:30', 'Back to the riad', 'About 15 minutes on foot from Jemaa el-Fnaa. Drop the shopping and change into clothes that can take the dust. Leave the riad at 14:50 for the 15:00 pick-up at La Mamounia.', '', 'arch'],
-    ['15:00', 'Agafay Desert: quads, camels, dinner and a show', 'Booked, 3 adults (GetYourGuide ref GYG32LV24F5F, £71.16 in total, about £23.72 each). Now a 15:00 pick-up at La Mamounia\'s main entrance on Avenue Bab Jdid, 5 minutes\' walk from the riad, so leave by 14:50. Tickets are in the GetYourGuide app and work offline. About 45 minutes out. Quads first, then camels, riding into sunset around 17:35, then dinner and a show at the camp under the stars. Back earlier than first planned: check the app for the drop-off time. Sunglasses and a scarf for the dust, and a jumper for after dark.', 'ok', 'jeep', ['La Mamounia Marrakech', 'ChIJqfSQep_vrw0R658ar3gwnnc']],
-    ['22:00', 'Warm-up drink before Kabana', 'Optional, once we\'re back and changed. No booking needed. Churchill Bar at La Mamounia: 5 minutes from the riad, classic cocktails, only about 12 seats, smart clothes (no shorts or flip-flops). Sky Bar at Les Jardins de la Koutoubia (26 Rue Koutoubia): hotel rooftop facing the minaret, fair prices, open till midnight, a couple of minutes from Kabana. Mabrouka Rooftop: views and Casablanca beer, open till 2am. Walk on to Kabana for 23:00.', '', 'cocktail', ['Churchill Bar La Mamounia', 'ChIJqfSQep_vrw0R658ar3gwnnc']],
+    ['14:30', 'Back to the riad', 'About 15–20 minutes on foot from Jemaa el-Fnaa. Drop the shopping and change into clothes that can take the dust. Leave the riad at 14:40 for the 15:00 pick-up at La Mamounia, about 15 minutes\' walk.', '', 'arch'],
+    ['15:00', 'Agafay Desert: quads, camels, dinner and a show', 'Booked, 3 adults (GetYourGuide ref GYG32LV24F5F, £71.16 in total, about £23.72 each). Now a 15:00 pick-up at La Mamounia\'s main entrance on Avenue Bab Jdid, about 15 minutes\' walk from the riad, so leave by 14:40. Worth asking the operator in the GetYourGuide app whether they can collect from the Rue Ibn Rochd taxi rank instead, which is closer. Tickets are in the GetYourGuide app and work offline. About 45 minutes out. Quads first, then camels, riding into sunset around 17:35, then dinner and a show at the camp under the stars. Back earlier than first planned: check the app for the drop-off time. Sunglasses and a scarf for the dust, and a jumper for after dark.', 'ok', 'jeep', ['La Mamounia Marrakech', 'ChIJqfSQep_vrw0R658ar3gwnnc']],
+    ['22:00', 'Warm-up drink before Kabana', 'Optional, once we\'re back and changed. No booking needed. Churchill Bar at La Mamounia: about 15 minutes from the riad, classic cocktails, only about 12 seats, smart clothes (no shorts or flip-flops). Sky Bar at Les Jardins de la Koutoubia (26 Rue Koutoubia): hotel rooftop facing the minaret, fair prices, open till midnight, a couple of minutes from Kabana. Mabrouka Rooftop: views and Casablanca beer, open till 2am. Walk on to Kabana for 23:00.', '', 'cocktail', ['Churchill Bar La Mamounia', 'ChIJqfSQep_vrw0R658ar3gwnnc']],
     ['23:00', 'Drinks at Kabana', 'Rooftop table for 3, confirmed (ref RV-261031-SN8D). Drinks, and food for anyone still hungry after the camp dinner. Next to the Koutoubia, a few minutes from the riad. Open till 2am.', 'ok', 'cocktail', ['Kabana Rooftop Marrakech', 'ChIJ2VSV76Tvrw0Rk_saDiwILnU']]
   ]},
   { d: 14, short: 'Sat', title: 'Saturday, rooftops and jazz', note: 'A lie-in, the medina at your own pace, sunset on the best roof in town, then dinner and jazz across the square.', stops: [
@@ -1839,6 +1855,59 @@ window.addEventListener('load', () => {
 </script>
 <script>
 if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+</script>
+<script>
+/* ---------- Walking routes along the streets (OSRM foot profile on OpenStreetMap data; results saved for offline) ---------- */
+(function(){
+  const RIAD = [31.6197783, -7.9933975], RANK = [31.6196405, -7.9894086];
+  const OSRM = 'https://routing.openstreetmap.de/routed-foot/';
+  const ll = p => p[1] + ',' + p[0];
+  const get = k => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
+  const put = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+  const mins = sec => Math.max(1, Math.round(sec / 60));
+  const metres = m => m < 1000 ? Math.round(m / 10) * 10 + ' m' : (m / 1000).toFixed(1) + ' km';
+
+  // Distance table: one request for every row
+  const rows = [...document.querySelectorAll('#distT tr[data-ll]')];
+  const pts = rows.map(r => r.dataset.ll.split(',').map(Number));
+  const paint = t => { if (!t) return; rows.forEach((r, i) => { const d = t.d[i], m = t.m[i]; if (d != null && m != null) r.cells[1].textContent = mins(d) + ' min walk · ' + metres(m); }); };
+  const TK = 'walk-table-v1';
+  paint(get(TK));
+  fetch(OSRM + 'table/v1/foot/' + [RIAD].concat(pts).map(ll).join(';') + '?sources=0&annotations=duration,distance')
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(j => { if (j.code !== 'Ok') return; const t = { d: j.durations[0].slice(1), m: j.distances[0].slice(1) }; put(TK, t); paint(t); })
+    .catch(() => {});
+
+  // Home sheet: mini map from the riad to the taxi rank
+  const box = document.getElementById('homemap');
+  if (!box) return;
+  let map, line, done = false;
+  const RK = 'walk-rank-v1';
+  const showRoute = r => {
+    if (!r) return;
+    document.getElementById('rankWalk').textContent = 'About ' + mins(r.d) + ' minutes on foot (' + metres(r.m) + ')';
+    if (map) { if (line) line.remove(); line = L.polyline(r.g, { color: '#2442A8', weight: 5, opacity: .85, dashArray: '2 8', lineCap: 'round' }).addTo(map); map.fitBounds(line.getBounds(), { paddingTopLeft: [30, 40], paddingBottomRight: [90, 40], maxZoom: 18 }); }
+  };
+  const init = () => {
+    if (done || !window.L || !box.offsetWidth) return; done = true;
+    map = L.map(box, { zoomControl: false, attributionControl: false, minZoom: 14, maxZoom: 19 });
+    L.control.attribution({ prefix: false }).addTo(map);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+    L.marker(RIAD, { keyboard: false, icon: L.divIcon({ className: 'rm-pin', iconSize: [30, 39], iconAnchor: [15, 38],
+      html: '<svg viewBox="0 0 34 44"><path d="M17 43C8 32 2 25 2 16a15 15 0 0 1 30 0c0 9-6 16-15 27z" fill="#2442A8" stroke="#fff" stroke-width="2.5"/><circle cx="17" cy="16" r="5.5" fill="#F4C430"/></svg><span class="rm-tag">Riad M</span>' }) }).addTo(map);
+    L.marker(RANK, { keyboard: false, interactive: false, icon: L.divIcon({ className: '', iconSize: null, iconAnchor: [7, 7], html: '<div class="rm-lm taxi"><i></i>Taxi rank</div>' }) }).addTo(map);
+    map.fitBounds([RIAD, RANK], { paddingTopLeft: [30, 40], paddingBottomRight: [90, 40], maxZoom: 18 });
+    showRoute(get(RK));
+    fetch(OSRM + 'route/v1/foot/' + ll(RIAD) + ';' + ll(RANK) + '?overview=full&geometries=geojson')
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(j => { if (j.code !== 'Ok' || !j.routes[0]) return; const rt = j.routes[0];
+        const r = { d: rt.duration, m: rt.distance, g: rt.geometry.coordinates.map(c => [c[1], c[0]]) }; put(RK, r); showRoute(r); })
+      .catch(() => {});
+  };
+  const sheet = document.getElementById('home');
+  new MutationObserver(() => { if (!sheet.hidden) setTimeout(() => { init(); if (map) map.invalidateSize(); }, 60); }).observe(sheet, { attributes: true, attributeFilter: ['hidden'] });
+  showRoute(get(RK));
+})();
 </script>
 <script>
 (() => {

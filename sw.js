@@ -2,7 +2,7 @@
 // Site files and the Firebase library are cached on first visit.
 // Exchange rate and weather use the network first, falling back to the last copy.
 // The kitty's own data is handled by Firebase's offline cache, not here.
-const V = 'souks-v42';
+const V = 'souks-v43';
 const TILES = 'souks-osm';
 const CORE = [
   './',
@@ -38,7 +38,7 @@ self.addEventListener('fetch', e => {
   const url = new URL(req.url);
 
   // Live data: network first, last copy if offline
-  if (url.hostname === 'open.er-api.com' || url.hostname === 'api.open-meteo.com') {
+  if (url.hostname === 'open.er-api.com' || url.hostname === 'api.open-meteo.com' || url.hostname === 'routing.openstreetmap.de') {
     e.respondWith(fetch(req).then(r => keep(req, r)).catch(() => caches.match(req)));
     return;
   }
