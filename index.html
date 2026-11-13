@@ -214,6 +214,7 @@ header .count{margin:14px 0 0;font-size:19px;font-weight:700;position:relative;f
 .rm-lm i{flex:none;width:11px;height:11px;border-radius:50%;background:#B5473F;border:2px solid #fff;box-shadow:0 1px 2px rgba(0,0,0,.35)}
 .rm-lm.pal i{background:#2E6B4F}
 .rm-lm.taxi i{background:#F4C430;border-color:#141B3D}
+.rm-lm.hosp i{background:#D2453A;border-color:#fff}
 .homemap{height:240px;border-radius:12px;overflow:hidden;background:#EDEAE4;margin:10px 0 8px;z-index:0}
 .homemap .rm-pin svg{width:30px;height:39px;max-width:none;display:block}
 .homemap .leaflet-control-attribution{font-size:10px}
@@ -735,7 +736,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
   <div class="block">
     <h3>How far is everything</h3>
     <table class="dist" id="distT">
-      <tr data-ll="31.6196405,-7.9894086"><td>Taxi rank, Rue Ibn Rochd</td><td>5–10 min walk</td></tr>
+      <tr data-ll="31.6196405,-7.9894086"><td>Taxi rank, Rue Ibn Rochd</td><td>8 min walk</td></tr>
       <tr data-ll="31.6228,-7.9972"><td>La Mamounia gate and the Churchill Bar</td><td>15 min walk</td></tr>
       <tr data-ll="31.6237205,-7.9936196"><td>Koutoubia Mosque</td><td>10 min walk</td></tr>
       <tr data-ll="31.6261794,-7.9930986"><td>Kabana</td><td>15 min walk</td></tr>
@@ -859,10 +860,10 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
   <div class="block">
     <h3>Taxis around town</h3>
     <ul class="rules">
-      <li><b>Where to get one:</b> cars can't reach the riad. The nearest taxis are at the rank on Rue Ibn Rochd (Arset el Maach), east of the riad; the map is on the Home button. La Mamounia's gate on Avenue Bab Jdid also has taxis but is about 15 minutes' walk.</li>
+      <li><b>Where to get one:</b> cars can't reach the riad. To get home, ask for Hôpital Ibn Zohr (the Mamounia hospital), just down the road. To find a taxi, the rank on Rue Ibn Rochd (Arset el Maach) is about 8 minutes' walk east; the map is on the Home button. La Mamounia's gate on Avenue Bab Jdid also has taxis but is about 15 minutes' walk.</li>
       <li><b>Which taxi:</b> the small beige petit taxis. They take up to 3 passengers, so one does all of us.</li>
       <li><b>Agree the fare first.</b> Most drivers won't use the meter for tourists, and fares go up after 20:00. Around 50 MAD for a hop across the medina is fair. If they ask 100 or more, try the next one.</li>
-      <li><b>Name a landmark,</b> not the restaurant: Dar El Bacha for Terrasse des Épices, Jemaa el-Fnaa for the square, "Arset el Maach, Rue Ibn Rochd" for home.</li>
+      <li><b>Name a landmark,</b> not the restaurant: Dar El Bacha for Terrasse des Épices, Jemaa el-Fnaa for the square, "Hôpital Ibn Zohr" for home.</li>
       <li><b>Carry small notes.</b> Drivers rarely have change for a 200.</li>
       <li><b>Easy option:</b> WhatsApp Youssef a day ahead with both legs and agree one price.</li>
     </ul>
@@ -937,15 +938,15 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
   <div class="wrap">
     <h2 id="homeT">Get me back to the riad</h2>
     <div class="driver">
-      <p class="ar" lang="ar" dir="rtl">من فضلك، خذني إلى محطة الطاكسيات، شارع ابن رشد، عرصة المعاش</p>
-      <p class="fr" lang="fr">S'il vous plaît, emmenez-moi à la station de taxis, rue Ibn Rochd (Arset el Maach).</p>
-      <p class="en">Show this to the driver: the taxi rank on Rue Ibn Rochd (Arset el Maach). It's the closest place a taxi can stop; the riad (34 Sidi Mimoun, off Rue Saâdiens) is a short walk west, see the map below.</p>
+      <p class="ar" lang="ar" dir="rtl">من فضلك، خذني إلى مستشفى ابن زهر (المامونية)</p>
+      <p class="fr" lang="fr">S'il vous plaît, emmenez-moi à l'hôpital Ibn Zohr (Mamounia).</p>
+      <p class="en">Show this to the driver: Hôpital Ibn Zohr, the Mamounia hospital. Every driver knows it, and it's just down the road from the riad (34 Sidi Mimoun, off Rue Saâdiens). <b>Getting out at the hospital is right</b>: cars can't reach the riad, so walk the last bit using the map below.</p>
     </div>
     <div class="taxirank">
-      <h3>Nearest taxis: Rue Ibn Rochd rank</h3>
-      <p>Petit taxis drop off and pick up here. <span class="walk" id="rankWalk">About 5–10 minutes on foot</span> to the riad, along the streets.</p>
-      <div id="homemap" class="homemap" role="region" aria-label="Walking route from the riad to the taxi rank"></div>
-      <p class="small" id="rankNote">Blue pin: the riad. Yellow: the taxi rank. The walking route is drawn along the streets once you've had signal; it's then saved for offline.</p>
+      <h3>Taxi drop-off: Hôpital Ibn Zohr</h3>
+      <p>Our landmark: the hospital is just down the road from the riad. <span class="walk" id="rankWalk">A short walk</span> to the door. To <i>find</i> a taxi, the rank on Rue Ibn Rochd (Arset el Maach) is about 8 minutes' walk.</p>
+      <div id="homemap" class="homemap" role="region" aria-label="Walking route from the hospital to the riad"></div>
+      <p class="small" id="rankNote">Blue pin: the riad. Red: Hôpital Ibn Zohr, where the taxi drops you. Yellow: the taxi rank. The walking route is drawn along the streets once you've had signal; it's then saved for offline.</p>
     </div>
     <div class="acts">
       <a href="https://www.google.com/maps/dir/?api=1&amp;destination=31.6197783%2C-7.9933975&amp;travelmode=walking" target="_blank" rel="noopener">Walk me back</a>
@@ -963,7 +964,7 @@ header .stars circle:nth-child(3n+1){animation-delay:-2.1s}
 
 <div class="colophon">
   <p>No photos of the three of us, by request, and the site is hidden from search engines.</p>
-  <p id="ver" data-v="42">Version 42, 13 Nov, 10:30</p>
+  <p id="ver" data-v="43">Version 43, 13 Nov, 21:15</p>
 </div>
 
 </main>
@@ -1859,7 +1860,7 @@ if ('serviceWorker' in navigator) window.addEventListener('load', () => navigato
 <script>
 /* ---------- Walking routes along the streets (OSRM foot profile on OpenStreetMap data; results saved for offline) ---------- */
 (function(){
-  const RIAD = [31.6197783, -7.9933975], RANK = [31.6196405, -7.9894086];
+  const RIAD = [31.6197783, -7.9933975], RANK = [31.6196405, -7.9894086], HOSP = [31.6183251, -7.9950524];
   const OSRM = 'https://routing.openstreetmap.de/routed-foot/';
   const ll = p => p[1] + ',' + p[0];
   const get = k => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
@@ -1878,14 +1879,14 @@ if ('serviceWorker' in navigator) window.addEventListener('load', () => navigato
     .then(j => { if (j.code !== 'Ok') return; const t = { d: j.durations[0].slice(1), m: j.distances[0].slice(1) }; put(TK, t); paint(t); })
     .catch(() => {});
 
-  // Home sheet: mini map from the riad to the taxi rank
+  // Home sheet: mini map, walking route from the hospital drop-off to the riad
   const box = document.getElementById('homemap');
   if (!box) return;
   let map, line, done = false;
-  const RK = 'walk-rank-v1';
+  const RK = 'walk-hosp-v1';
   const showRoute = r => {
     if (!r) return;
-    document.getElementById('rankWalk').textContent = 'About ' + mins(r.d) + ' minutes on foot (' + metres(r.m) + ')';
+    document.getElementById('rankWalk').textContent = 'About ' + mins(r.d) + ' min on foot';
     if (map) { if (line) line.remove(); line = L.polyline(r.g, { color: '#2442A8', weight: 5, opacity: .85, dashArray: '2 8', lineCap: 'round' }).addTo(map); map.fitBounds(line.getBounds(), { paddingTopLeft: [30, 40], paddingBottomRight: [90, 40], maxZoom: 18 }); }
   };
   const init = () => {
@@ -1896,9 +1897,10 @@ if ('serviceWorker' in navigator) window.addEventListener('load', () => navigato
     L.marker(RIAD, { keyboard: false, icon: L.divIcon({ className: 'rm-pin', iconSize: [30, 39], iconAnchor: [15, 38],
       html: '<svg viewBox="0 0 34 44"><path d="M17 43C8 32 2 25 2 16a15 15 0 0 1 30 0c0 9-6 16-15 27z" fill="#2442A8" stroke="#fff" stroke-width="2.5"/><circle cx="17" cy="16" r="5.5" fill="#F4C430"/></svg><span class="rm-tag">Riad M</span>' }) }).addTo(map);
     L.marker(RANK, { keyboard: false, interactive: false, icon: L.divIcon({ className: '', iconSize: null, iconAnchor: [7, 7], html: '<div class="rm-lm taxi"><i></i>Taxi rank</div>' }) }).addTo(map);
-    map.fitBounds([RIAD, RANK], { paddingTopLeft: [30, 40], paddingBottomRight: [90, 40], maxZoom: 18 });
+    L.marker(HOSP, { keyboard: false, interactive: false, icon: L.divIcon({ className: '', iconSize: null, iconAnchor: [7, 7], html: '<div class="rm-lm hosp"><i></i>Hôpital Ibn Zohr</div>' }) }).addTo(map);
+    map.fitBounds([RIAD, RANK, HOSP], { paddingTopLeft: [30, 40], paddingBottomRight: [90, 40], maxZoom: 18 });
     showRoute(get(RK));
-    fetch(OSRM + 'route/v1/foot/' + ll(RIAD) + ';' + ll(RANK) + '?overview=full&geometries=geojson')
+    fetch(OSRM + 'route/v1/foot/' + ll(HOSP) + ';' + ll(RIAD) + '?overview=full&geometries=geojson')
       .then(r => r.ok ? r.json() : Promise.reject())
       .then(j => { if (j.code !== 'Ok' || !j.routes[0]) return; const rt = j.routes[0];
         const r = { d: rt.duration, m: rt.distance, g: rt.geometry.coordinates.map(c => [c[1], c[0]]) }; put(RK, r); showRoute(r); })
